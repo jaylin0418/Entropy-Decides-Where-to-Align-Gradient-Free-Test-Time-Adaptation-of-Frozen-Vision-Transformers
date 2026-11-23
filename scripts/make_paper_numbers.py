@@ -173,9 +173,9 @@ def rule():
     views = {k: fo(n) for k, n in (('inc', 'forward_only_heldout4_vitb_rule_views'), ('cbar', 'forward_only_heldout4_vitb_cbar_rule_views'))}   # the main path on three views of the same unsure images (after the review)
     streams = pick(load('streams_heldout4_vitb_rule'), ('table',)) if (SCORES / 'streams_heldout4_vitb_rule.json').exists() else None
     streams_eta = pick(load('streams_heldout4_vitb_eta'), ('table',)) if (SCORES / 'streams_heldout4_vitb_eta.json').exists() else None   # ETA and SAR on the same streams, after the review
-    # the timing run with every row of the report's first table (NEO, the pixel map alone, the base path, blocks 5/9, the calibrated
-    # stack, each second opinion alone, random routing, ETA, SAR) replaces the four-arm run of the calibrated stack when it exists
-    timing = next((load(n) for n in ('timing_design_vitb_ablations', 'timing_design_vitb_rule') if (SCORES / f'{n}.json').exists()), None)
+    # the timing run with every row of the report's first table (NEO, TokAlign alone, the main path, blocks 5/9, the calibrated
+    # cascade, each branch alone, random images, ETA, SAR)
+    timing = load('timing_design_vitb_ablations')
     others = load('timing_design_vitb_others') if (SCORES / 'timing_design_vitb_others.json').exists() else None
     # one calibration per shift from its first K design batches (64, 192 or 640 images), held out (addendum 5 for K=3): one scored file
     # per cell, the picks of that cell's first K design batches run on its heldout4 images; NEO per cell from the heldout4 exit file

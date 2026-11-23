@@ -25,3 +25,4 @@ paper/*.fls
 *.out
 *.fls
 *.fdb_latexmk
+.pytest_cache/

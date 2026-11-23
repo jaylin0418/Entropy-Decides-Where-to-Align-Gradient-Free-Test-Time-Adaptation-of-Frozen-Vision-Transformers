@@ -1,0 +1,24 @@
+# File names at the time of the runs
+
+The run and score scripts were ported from the research codebase with their computation unchanged. The run records and
+the documents in `docs/` use the names on the right; the arm names in the code keep the prefixes `exit_` (the
+labelled-search cascade) and `rule_` (the calibrated cascade), and `trunk` in the score files means the main block.
+
+| now | at the time of the runs (research codebase) |
+|---|---|
+| `tokalign/aligner.py` | `scripts/spa/probe_online.py` (`Aligner`, `Running`, `sqrt_psd`, `load_source`) |
+| `scripts/episodic/run_forward_only.py`, `score_forward_only.py` | `scripts/spa/probe_online.py`, `score_probe.py` |
+| `scripts/episodic/run_gradient_host.py`, `score_gradient_host.py` | `scripts/spa/probe_eta.py`, `score_eta.py` |
+| `scripts/episodic/run_foa.py`, `score_foa.py`, `run_pea.py`, `score_pea.py` | `scripts/spa/probe_foa.py`, `score_foa.py`, `probe_pea.py`, `score_pea.py` |
+| `scripts/streams/run_streams.py`, `score_streams.py` | `scripts/spa/probe_streams.py`, `score_streams.py` |
+| `scripts/cost/time_batches.py`, `score_timing.py` | `scripts/spa/bench_wallclock.py`, `score_bench.py` |
+| `scripts/compute_source_stats.py` (`--blocks`) | `scripts/spa/source_stats.py` |
+| `scripts/block_alignment/{run_block_alignment,score_block_alignment}.py` | `scripts/regprobe/{probe_a,score_a}.py` |
+| `results/scores/forward_only_design_vitb`, `eta_design_vitb`, `sar_design_vitb` | `results/spa/spa1.json`, `spa2.json`, `spa2_sar.json` |
+| `results/scores/foa_design_vitb`, `foa_design_extended_vitb` | `results/spa/spa3.json`, `spa3_n6000.json` |
+| `results/scores/pea_design_vitb{,_src20k}` | `results/spa/spa2_pea{,_src20k}.json` |
+| `results/scores/timing_design_vitb` | `results/spa/bench_summary_e5c.json` |
+| `results/scores/forward_only_design_vitb_ablations`, `patch_filters_design_vitb` | `results/spa/spa1_e6.json`, `results/wiener/wr1.json` |
+| `results/scores/block_alignment_design_vitb` | `results/regprobe/probe_a.json` |
+| the where-to-align, labelled-search, calibrated-cascade and model-dataset runs | made with this repository's scripts (research job scripts `scripts/cvpr/course*.sh`), outputs under `data/derived/course_two_site/` |
+| `--split heldout` / `heldout2` / `heldout3` / `heldout4` | the first to fourth held-out sets of the report |

@@ -79,7 +79,6 @@ python scripts/episodic/run_forward_only.py --split design --arms $EXIT --cells 
 python scripts/episodic/run_forward_only.py --split heldout4 --arms $EXIT4 --stats $SB --tag _exit $D                        # E38 (heldout4, scored once)
 python scripts/episodic/run_forward_only.py --split heldout4 --arms $EXIT4 --cells clean $CBARCELLS --stats $SB --tag _cbar_exit $DBAR  # E39 (heldout4, scored once)
 python scripts/cost/time_batches.py --arms neo pair_k16_fp32_stats32 branch_k16_fp32_stats32 exit_b9_k16_fp32_stats32 exit_b5b9_k16_fp32_stats32 --stats $SB --tag _exit $D  # C3 (early-exit timing)
-python scripts/cost/time_batches.py --arms neo pair_k16_fp32_stats32 exit_b5b9_k16_fp32_stats32 rule_t6_b4b11_k16_fp32_stats32 --stats $SB --tag _rule $D  # C5 (timing of the calibrated stack)
 for sl in heldout heldout2 heldout3; do                                                                                       # E44 E45 E46 (the gated early-exit arms on the earlier held-out slices, after the heldout4 verdict)
   python scripts/episodic/run_forward_only.py --split $sl --arms pair_gated exit_b9_gated exit_b5b9_gated --stats $SB --tag _exit $D
 done
@@ -97,7 +96,11 @@ python scripts/episodic/run_forward_only.py --split heldout4 --arms rule_t6_b4_g
 python scripts/episodic/run_forward_only.py --split heldout4 --arms rule_t5_b3b7_gated tok+place_b5 --stats $SB --tag _rule_small $D                       # E56 (R4, the small-sample calibration)
 python scripts/episodic/run_forward_only.py --split heldout4 --arms rule_t7_b5b9_gated --cells clean $CBARCELLS --stats $SB --tag _cbar_rule_small --imagenet-val $IMAGENET_VAL --imagenet-c $IMAGENET_C_BAR --cache-dir cache --out-dir runs  # E57 (R5)
 python scripts/episodic/run_forward_only.py --model vits --split design --arms neo tok place_b6 tok+place_b6 tok+place_b1 tok+place_b2 tok+place_b3 tok+place_b4 tok+place_b5 tok+place_b7 tok+place_b8 tok+place_b9 tok+place_b10 tok+place_b11 tok+place_b12 --stats $SS --tag _rule_sweep $D  # E58 (ViT-S/16 sweep for its own calibration)
-python scripts/episodic/run_forward_only.py --model vits --split heldout3 --arms $VITS_RULE_ARMS --stats $SS --tag _rule $D                               # E59 (R3; the arm names come from A11 A12, see the job script)
+python scripts/analysis/site_choice.py --logits runs/logits --base forward_only_design_vits_rule_sweep --blocks forward_only_design_vits_rule_sweep $V --cells inc --trunk 6 --out $O/site_choice_design_vits_rule_t6.json  # A11 (ViT-S/16: the trunk pick)
+VITS_TRUNK=$(python -c "import json; print(json.load(open('$O/site_choice_design_vits_rule_t6.json'))['label_free']['trunk_pick_by_entropy'][4:])")
+python scripts/analysis/site_choice.py --logits runs/logits --base forward_only_design_vits_rule_sweep --blocks forward_only_design_vits_rule_sweep $V --cells inc --trunk $VITS_TRUNK --out $O/site_choice_design_vits_rule.json  # A12 (ViT-S/16: the two branch blocks given that trunk)
+read -r VT VA1 VA2 < <(python -c "import json; d=json.load(open('$O/site_choice_design_vits_rule.json')); lo, hi = (a[4:] for a in d['label_free']['second_opinion_pick_pair'].split('|')); print(d['trunk'][4:], lo, hi)")
+python scripts/episodic/run_forward_only.py --model vits --split heldout3 --arms rule_t${VT}_b${VA1}b${VA2}_gated rule_t${VT}_b${VA1}_gated rule_t${VT}_b${VA2}_gated --exit-theta 1.5 --stats $SS --tag _rule $D   # E59 (R3: the picks of A11 A12, blocks 6 / 4, 11, theta 1.5 nat as on ViT-B/16)
 for s in heldout heldout2 heldout3; do python scripts/episodic/run_forward_only.py --split $s --arms rule_t6_b4b11_gated --stats $SB --tag _rule $D; done   # E60 E61 E62 (the other slices)
 python scripts/episodic/run_forward_only.py --split heldout3 --arms rule_t6_b4b11_gated --cells clean $CBARCELLS --stats $SB --tag _cbar_rule --imagenet-val $IMAGENET_VAL --imagenet-c $IMAGENET_C_BAR --cache-dir cache --out-dir runs  # E63
 python scripts/episodic/run_forward_only.py --split heldout4 --arms rule_t6_b4b11_random_gated --stats $SB --tag _rule_random $D                          # E64 (random-routing control)
@@ -190,7 +193,6 @@ python scripts/episodic/score_forward_only.py --runs runs/forward_only_heldout4_
 python scripts/streams/score_streams.py --runs runs/streams_heldout4_vitb_eta.json $V --out $O/streams_heldout4_vitb_eta.json    # R68 (ETA and SAR scored alone and with NEO on the recorded head input)
 python scripts/episodic/score_forward_only.py --runs runs/forward_only_heldout4_vitb_rule_views.json $V --neo-from $O/forward_only_heldout4_vitb_exit.json --out $O/forward_only_heldout4_vitb_rule_views.json  # R69
 python scripts/episodic/score_forward_only.py --runs runs/forward_only_heldout4_vitb_cbar_rule_views.json $V --neo-from $O/forward_only_heldout4_vitb_cbar_exit.json --out $O/forward_only_heldout4_vitb_cbar_rule_views.json  # R70
-python scripts/cost/score_timing.py --runs runs/timing_design_vitb_rule.json $V --out $O/timing_design_vitb_rule.json             # R52
 python scripts/episodic/score_forward_only.py --runs runs/forward_only_heldout4_vitb_cbar_exitctl.json $V --neo-from $O/forward_only_heldout4_vitb_cbar_exit.json --out $O/forward_only_heldout4_vitb_cbar_exitctl.json
 python scripts/episodic/score_forward_only.py --runs runs/forward_only_design_vits_exit.json $V --out $O/forward_only_design_vits_exit.json
 python scripts/episodic/score_forward_only.py --runs runs/forward_only_heldout3_vits_exit.json $V --neo-from $O/forward_only_heldout3_vits.json --out $O/forward_only_heldout3_vits_exit.json
@@ -200,8 +202,6 @@ python scripts/analysis/site_choice.py --logits runs/logits --base forward_only_
 python scripts/analysis/site_choice.py --logits runs/logits --base forward_only_design_vitb_cbar --blocks forward_only_design_vitb_cbar_select $V --cells cbar --trunk 7 --out $O/site_choice_design_vitb_cbar_t7.json  # A8 (the rule's own trunk on ImageNet-C-bar)
 python scripts/analysis/rule_sample_size.py --logits runs/logits --base forward_only_design_vitb_two_site --blocks forward_only_design_vitb_select $V --cells inc --out $O/rule_sample_size_design_vitb.json        # A9 (how many unlabeled images the rule needs)
 python scripts/analysis/rule_sample_size.py --logits runs/logits --base forward_only_design_vitb_cbar --blocks forward_only_design_vitb_cbar_select $V --cells cbar --out $O/rule_sample_size_design_vitb_cbar.json  # A10
-python scripts/analysis/site_choice.py --logits runs/logits --base forward_only_design_vits_rule_sweep --blocks forward_only_design_vits_rule_sweep $V --cells inc --trunk 6 --out $O/site_choice_design_vits_rule_t6.json  # A11 (ViT-S/16: the trunk pick)
-python scripts/analysis/site_choice.py --logits runs/logits --base forward_only_design_vits_rule_sweep --blocks forward_only_design_vits_rule_sweep $V --cells inc --trunk $VITS_TRUNK --out $O/site_choice_design_vits_rule.json  # A12 (ViT-S/16: the two branch blocks given that trunk)
 python scripts/episodic/score_gradient_host.py --runs runs/eta_design_vitb_sweep.json --stats $SB $V --out $O/eta_design_vitb_sweep.json  # R25
 python scripts/analysis/score_drift_by_depth.py --runs runs/drift_by_depth_design_vitb.json --out $O/drift_by_depth_design_vitb.json  # R26
 python scripts/analysis/site_selection.py --two-site $O/forward_only_design_vitb_two_site.json --sweep $O/forward_only_design_vitb_sweep.json \
@@ -305,7 +305,7 @@ for bench in inc cbar; do
     python -c "
 import json
 for cell, (t, e, l) in json.load(open('$ss'))['per_cell_first_k_batches']['$K']['picks'].items(): print(cell, t[4:], e[4:], l[4:])" | while read -r cell T E L; do
-      python scripts/episodic/run_forward_only.py --split heldout4 --cells $cell --arms tok+place_b$T rule_t${T}_b${A1}b${A2}_gated --exit-theta 1.5 --stats $SB --tag _${suffix}_$cell \
+      python scripts/episodic/run_forward_only.py --split heldout4 --cells $cell --arms tok+place_b$T rule_t${T}_b${E}b${L}_gated --exit-theta 1.5 --stats $SB --tag _${suffix}_$cell \
           --imagenet-val $IMAGENET_VAL --imagenet-c $root --cache-dir cache --out-dir runs                                           # E69 (one run per cell and K)
       python scripts/episodic/score_forward_only.py --runs runs/forward_only_heldout4_vitb_${suffix}_$cell.json $V --neo-from $neo --out $O/forward_only_heldout4_vitb_${suffix}_$cell.json   # R56
     done
@@ -327,6 +327,6 @@ python scripts/cost/score_timing.py --runs runs/timing_design_vitb_others.json $
 python scripts/make_paper_numbers.py                                                                            # P1
 python paper/make_numbers.py && python paper/make_figures.py                                                    # P2
 python paper/make_example_figures.py --imagenet-val $IMAGENET_VAL --imagenet-c $IMAGENET_C --cache-dir cache --stats stats/vitb.pt --logits runs/logits  # P5 (CPU, model-free; Figure S1 from the design images)
-python scripts/analysis/review_checks.py --logits runs/logits --imagenet-val $IMAGENET_VAL --scores results/scores --out results/scores/review_checks.json  # A13 (CPU, labels only to score: intervals of the held-out gains, the correlation without blocks 1-3, the threshold, every pair of branch blocks, Table S5)
-python scripts/analysis/number_inventory.py                                                                     # P2 (results/number_inventory.csv)
+python scripts/analysis/review_checks.py --logits runs/logits --imagenet-val $IMAGENET_VAL --scores results/scores --out results/scores/review_checks.json  # A15 (CPU, labels only to score: intervals of the held-out gains, the correlation without blocks 1-3, the threshold, every pair of branch blocks, Table S5)
+python scripts/analysis/number_inventory.py                                                                     # P3 (results/number_inventory.csv)
 (cd paper/report && pdflatex report && bibtex report && pdflatex report && pdflatex report)                     # P4

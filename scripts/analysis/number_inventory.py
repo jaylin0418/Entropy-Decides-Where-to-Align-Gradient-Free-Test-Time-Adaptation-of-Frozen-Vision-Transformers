@@ -93,7 +93,7 @@ TS = [  # (key prefix, value path or formula, scored files, run commands, steps,
      'run_forward_only.py --split heldout4 --arms rule_t7_b5b8_gated --exit-theta 1.5 (ImageNet-C-bar cells)', 'S5 E70 R57 P1 P2', 'run with this repository\'s scripts (GPU, 2026-11-12, data/derived/course_two_site, tag _cbar_rule_p192); scored file committed'),
     ('rc.', 'rule/review: paired bootstrap of the held-out gains over images and over cells, the Spearman correlation without blocks 1 to 3, the entropy the pick saves against TokAlign alone, the threshold sweep and the gated gain of every pair of branch blocks on the ViT-B/16 dev predictions, all from the saved logits of the runs above (scripts/analysis/review_checks.py, CPU, labels only to score)',
      'review_checks',
-     'scripts/analysis/review_checks.py --logits runs/logits (the held-out and design logits of the runs above)', 'A13 P1 P2', 'run with this repository\'s scripts (CPU, 2026-11-22, from the saved logits in data/derived/course_two_site/runs/logits); scored file committed'),
+     'scripts/analysis/review_checks.py --logits runs/logits (the held-out and design logits of the runs above)', 'A15 P1 P2', 'run with this repository\'s scripts (CPU, 2026-11-22, from the saved logits in data/derived/course_two_site/runs/logits); scored file committed'),
     ('ex.sl.', 'exit/slices/{heldout,heldout2,heldout3,cbar_heldout3} and exit/held4: the gated early-exit arms on the four ImageNet-C held-out slices and two ImageNet-C-bar slices, each scored once',
      'forward_only_{heldout,heldout2,heldout3}_vitb_exit, forward_only_heldout3_vitb_cbar_exit, forward_only_heldout4_vitb_exit, forward_only_heldout4_vitb_cbar_exit',
      'run_forward_only.py --split heldout|heldout2|heldout3 --arms pair_gated exit_b9_gated exit_b5b9_gated --tag _exit (| --cells clean <ImageNet-C-bar cells> --tag _cbar_exit); score_forward_only.py --neo-from', 'S5 E44 E45 E46 E47 R42 P1 P2',
@@ -226,7 +226,10 @@ def rows_of(paper, path, M, prov):
         if '\\caption' in line and tf == '':
             tf = 'caption'
         for key in re.findall(r'\\pn\{([^}]*)\}', line):
-            p = prov.get(key) or ts_provenance(key)
+            try:
+                p = ts_provenance(key)                                        # the table above first, the committed file for the keys it does not cover
+            except KeyError:
+                p = prov[key]
             rows.append({'paper': paper, 'line': n, 'section': section, 'table_or_figure': tf, 'printed': M[key], 'macro_key': key,
                          **{f: p[f] for f in FIELDS[6:]}})
         text = re.sub(r'\\pn\{[^}]*\}', ' ', line)
