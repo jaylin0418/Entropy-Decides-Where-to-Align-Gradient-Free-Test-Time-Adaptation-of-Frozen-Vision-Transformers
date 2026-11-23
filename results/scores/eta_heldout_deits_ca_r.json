@@ -1,0 +1,61 @@
+{
+ "n_cells": 3,
+ "mean_30_cells": {
+  "eta": 42.416666666666664,
+  "eta+neo": 42.76666666666667,
+  "eta+headcov": 42.35,
+  "tok+eta+place_b6": 44.21666666666667,
+  "tok+eta+place_b6+neo": 44.20000000000001,
+  "tok+eta+place_b6+headcov": 43.15
+ },
+ "clean": {
+  "eta": 80.0,
+  "eta+neo": 80.2,
+  "eta+headcov": 79.14999999999999,
+  "tok+eta+place_b6": 79.95,
+  "tok+eta+place_b6+neo": 80.45,
+  "tok+eta+place_b6+headcov": 79.14999999999999
+ },
+ "forward_only_reference": {},
+ "eta_updated_samples_mean": 377.5,
+ "per_family_vs_eta_neo": {},
+ "routed_fraction_mean": {},
+ "per_cell": {
+  "eta": {
+   "clean": 80.0,
+   "r-h1": 40.849999999999994,
+   "r-h2": 42.1,
+   "r-h3": 44.3
+  },
+  "eta+neo": {
+   "clean": 80.2,
+   "r-h1": 41.55,
+   "r-h2": 42.1,
+   "r-h3": 44.65
+  },
+  "eta+headcov": {
+   "clean": 79.14999999999999,
+   "r-h1": 41.85,
+   "r-h2": 41.65,
+   "r-h3": 43.55
+  },
+  "tok+eta+place_b6": {
+   "clean": 79.95,
+   "r-h1": 43.95,
+   "r-h2": 42.4,
+   "r-h3": 46.300000000000004
+  },
+  "tok+eta+place_b6+neo": {
+   "clean": 80.45,
+   "r-h1": 43.85,
+   "r-h2": 42.6,
+   "r-h3": 46.150000000000006
+  },
+  "tok+eta+place_b6+headcov": {
+   "clean": 79.14999999999999,
+   "r-h1": 42.6,
+   "r-h2": 41.9,
+   "r-h3": 44.95
+  }
+ }
+}

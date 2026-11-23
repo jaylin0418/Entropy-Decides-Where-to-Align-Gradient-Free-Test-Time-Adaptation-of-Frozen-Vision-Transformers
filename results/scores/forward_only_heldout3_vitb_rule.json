@@ -1,0 +1,174 @@
+{
+ "gate": {
+  "best": "rule_t6_b4b11_gated",
+  "gain_over_neo": 6.168333333333322,
+  "clean_harm_best": 0.0,
+  "verdict": "PASS"
+ },
+ "reference": "neo from forward_only_heldout3_vitb.json",
+ "n_cells": 30,
+ "cells": [
+  "gaussian_noise-3",
+  "gaussian_noise-5",
+  "shot_noise-3",
+  "shot_noise-5",
+  "impulse_noise-3",
+  "impulse_noise-5",
+  "defocus_blur-3",
+  "defocus_blur-5",
+  "glass_blur-3",
+  "glass_blur-5",
+  "motion_blur-3",
+  "motion_blur-5",
+  "zoom_blur-3",
+  "zoom_blur-5",
+  "snow-3",
+  "snow-5",
+  "frost-3",
+  "frost-5",
+  "fog-3",
+  "fog-5",
+  "brightness-3",
+  "brightness-5",
+  "contrast-3",
+  "contrast-5",
+  "elastic_transform-3",
+  "elastic_transform-5",
+  "pixelate-3",
+  "pixelate-5",
+  "jpeg_compression-3",
+  "jpeg_compression-5"
+ ],
+ "mean_30_cells": {
+  "rule_t6_b4b11_gated": 69.27499999999999
+ },
+ "clean": {
+  "rule_t6_b4b11_gated": 85.7
+ },
+ "clean_harm": {
+  "rule_t6_b4b11_gated": 0.0
+ },
+ "warmup_first640": {
+  "rule_t6_b4b11_gated": 65.921875
+ },
+ "per_family_vs_neo": {
+  "gaussian_noise": {
+   "rule_t6_b4b11_gated": 2.999999999999993
+  },
+  "shot_noise": {
+   "rule_t6_b4b11_gated": 3.125
+  },
+  "impulse_noise": {
+   "rule_t6_b4b11_gated": 3.3000000000000114
+  },
+  "defocus_blur": {
+   "rule_t6_b4b11_gated": 4.374999999999986
+  },
+  "glass_blur": {
+   "rule_t6_b4b11_gated": 11.0
+  },
+  "motion_blur": {
+   "rule_t6_b4b11_gated": 5.975000000000001
+  },
+  "zoom_blur": {
+   "rule_t6_b4b11_gated": 8.274999999999999
+  },
+  "snow": {
+   "rule_t6_b4b11_gated": 5.4750000000000085
+  },
+  "frost": {
+   "rule_t6_b4b11_gated": 5.775000000000006
+  },
+  "fog": {
+   "rule_t6_b4b11_gated": 7.75
+  },
+  "brightness": {
+   "rule_t6_b4b11_gated": 2.0250000000000057
+  },
+  "contrast": {
+   "rule_t6_b4b11_gated": 15.275000000000006
+  },
+  "elastic_transform": {
+   "rule_t6_b4b11_gated": 10.225000000000009
+  },
+  "pixelate": {
+   "rule_t6_b4b11_gated": 5.275000000000006
+  },
+  "jpeg_compression": {
+   "rule_t6_b4b11_gated": 1.674999999999983
+  }
+ },
+ "per_cell": {
+  "rule_t6_b4b11_gated": {
+   "clean": 85.7,
+   "gaussian_noise-3": 75.2,
+   "gaussian_noise-5": 56.25,
+   "shot_noise-3": 73.95,
+   "shot_noise-5": 57.9,
+   "impulse_noise-3": 74.4,
+   "impulse_noise-5": 56.89999999999999,
+   "defocus_blur-3": 68.85,
+   "defocus_blur-5": 53.1,
+   "glass_blur-3": 65.9,
+   "glass_blur-5": 48.9,
+   "motion_blur-3": 75.3,
+   "motion_blur-5": 61.25000000000001,
+   "zoom_blur-3": 69.39999999999999,
+   "zoom_blur-5": 60.6,
+   "snow-3": 74.2,
+   "snow-5": 66.10000000000001,
+   "frost-3": 67.9,
+   "frost-5": 62.0,
+   "fog-3": 76.9,
+   "fog-5": 69.35,
+   "brightness-3": 83.8,
+   "brightness-5": 80.30000000000001,
+   "contrast-3": 80.2,
+   "contrast-5": 63.2,
+   "elastic_transform-3": 81.35,
+   "elastic_transform-5": 68.45,
+   "pixelate-3": 81.6,
+   "pixelate-5": 75.6,
+   "jpeg_compression-3": 79.0,
+   "jpeg_compression-5": 70.39999999999999
+  }
+ },
+ "routed_fraction": {
+  "rule_t6_b4b11_gated": {
+   "clean": 0.0,
+   "gaussian_noise-3": 0.26708984375,
+   "gaussian_noise-5": 0.5439453125,
+   "shot_noise-3": 0.28125,
+   "shot_noise-5": 0.50732421875,
+   "impulse_noise-3": 0.265625,
+   "impulse_noise-5": 0.54833984375,
+   "defocus_blur-3": 0.3271484375,
+   "defocus_blur-5": 0.58740234375,
+   "glass_blur-3": 0.3896484375,
+   "glass_blur-5": 0.59521484375,
+   "motion_blur-3": 0.26416015625,
+   "motion_blur-5": 0.49853515625,
+   "zoom_blur-3": 0.32763671875,
+   "zoom_blur-5": 0.4580078125,
+   "snow-3": 0.28466796875,
+   "snow-5": 0.384765625,
+   "frost-3": 0.35693359375,
+   "frost-5": 0.4267578125,
+   "fog-3": 0.23193359375,
+   "fog-5": 0.37451171875,
+   "brightness-3": 0.14404296875,
+   "brightness-5": 0.1845703125,
+   "contrast-3": 0.18115234375,
+   "contrast-5": 0.46435546875,
+   "elastic_transform-3": 0.17236328125,
+   "elastic_transform-5": 0.3720703125,
+   "pixelate-3": 0.15966796875,
+   "pixelate-5": 0.2509765625,
+   "jpeg_compression-3": 0.21923828125,
+   "jpeg_compression-5": 0.37353515625
+  }
+ },
+ "routed_fraction_mean": {
+  "rule_t6_b4b11_gated": 0.348095703125
+ }
+}

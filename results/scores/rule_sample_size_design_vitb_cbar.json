@@ -1,0 +1,679 @@
+{
+ "cells": [
+  "blue_noise_sample-3",
+  "blue_noise_sample-5",
+  "brownish_noise-3",
+  "brownish_noise-5",
+  "caustic_refraction-3",
+  "caustic_refraction-5",
+  "checkerboard_cutout-3",
+  "checkerboard_cutout-5",
+  "cocentric_sine_waves-3",
+  "cocentric_sine_waves-5",
+  "inverse_sparkles-3",
+  "inverse_sparkles-5",
+  "perlin_noise-3",
+  "perlin_noise-5",
+  "plasma_noise-3",
+  "plasma_noise-5",
+  "single_frequency_greyscale-3",
+  "single_frequency_greyscale-5",
+  "sparkles-3",
+  "sparkles-5"
+ ],
+ "theta": 1.5,
+ "pair": 68.72749999999999,
+ "full_rule": {
+  "trunk": "px+b7",
+  "shallower": "px+b5",
+  "deeper": "px+b11",
+  "gain_over_pair": 1.8400000000000318
+ },
+ "pooled_first_n_per_cell": {
+  "64": {
+   "trunk": "px+b7",
+   "shallower": "px+b4",
+   "deeper": "px+b6",
+   "gain_over_pair": 1.3400000000000176,
+   "same_as_full": false,
+   "images_used": 1280
+  },
+  "128": {
+   "trunk": "px+b7",
+   "shallower": "px+b3",
+   "deeper": "px+b5",
+   "gain_over_pair": 1.490000000000009,
+   "same_as_full": false,
+   "images_used": 2560
+  },
+  "192": {
+   "trunk": "px+b7",
+   "shallower": "px+b5",
+   "deeper": "px+b8",
+   "gain_over_pair": 1.7199999999999989,
+   "same_as_full": false,
+   "images_used": 3840
+  },
+  "320": {
+   "trunk": "px+b7",
+   "shallower": "px+b5",
+   "deeper": "px+b9",
+   "gain_over_pair": 1.907500000000013,
+   "same_as_full": false,
+   "images_used": 6400
+  },
+  "640": {
+   "trunk": "px+b7",
+   "shallower": "px+b5",
+   "deeper": "px+b11",
+   "gain_over_pair": 1.8400000000000318,
+   "same_as_full": true,
+   "images_used": 12800
+  },
+  "1280": {
+   "trunk": "px+b7",
+   "shallower": "px+b5",
+   "deeper": "px+b11",
+   "gain_over_pair": 1.8400000000000318,
+   "same_as_full": true,
+   "images_used": 25600
+  },
+  "2000": {
+   "trunk": "px+b7",
+   "shallower": "px+b5",
+   "deeper": "px+b11",
+   "gain_over_pair": 1.8400000000000318,
+   "same_as_full": true,
+   "images_used": 40000
+  }
+ },
+ "per_cell_first_k_batches": {
+  "1": {
+   "images_per_cell": 64,
+   "gain_over_pair": 1.7050000000000125,
+   "routed_fraction_after_warmup": 0.3129132231404959,
+   "trunk_counts": {
+    "px+b11": 1,
+    "px+b12": 1,
+    "px+b3": 1,
+    "px+b4": 2,
+    "px+b5": 3,
+    "px+b6": 4,
+    "px+b7": 6,
+    "px+b9": 2
+   },
+   "picks": {
+    "blue_noise_sample-3": [
+     "px+b5",
+     "px+b3",
+     "px+b12"
+    ],
+    "blue_noise_sample-5": [
+     "px+b7",
+     "px+b3",
+     "px+b5"
+    ],
+    "brownish_noise-3": [
+     "px+b7",
+     "px+b2",
+     "px+b4"
+    ],
+    "brownish_noise-5": [
+     "px+b6",
+     "px+b3",
+     "px+b5"
+    ],
+    "caustic_refraction-3": [
+     "px+b5",
+     "px+b2",
+     "px+b7"
+    ],
+    "caustic_refraction-5": [
+     "px+b6",
+     "px+b7",
+     "px+b11"
+    ],
+    "checkerboard_cutout-3": [
+     "px+b7",
+     "px+b5",
+     "px+b6"
+    ],
+    "checkerboard_cutout-5": [
+     "px+b9",
+     "px+b6",
+     "px+b7"
+    ],
+    "cocentric_sine_waves-3": [
+     "px+b7",
+     "px+b4",
+     "px+b5"
+    ],
+    "cocentric_sine_waves-5": [
+     "px+b7",
+     "px+b5",
+     "px+b11"
+    ],
+    "inverse_sparkles-3": [
+     "px+b6",
+     "px+b7",
+     "px+b8"
+    ],
+    "inverse_sparkles-5": [
+     "px+b6",
+     "px+b5",
+     "px+b7"
+    ],
+    "perlin_noise-3": [
+     "px+b3",
+     "px+b7",
+     "px+b8"
+    ],
+    "perlin_noise-5": [
+     "px+b4",
+     "px+b8",
+     "px+b9"
+    ],
+    "plasma_noise-3": [
+     "px+b12",
+     "px+b6",
+     "px+b11"
+    ],
+    "plasma_noise-5": [
+     "px+b11",
+     "px+b3",
+     "px+b4"
+    ],
+    "single_frequency_greyscale-3": [
+     "px+b5",
+     "px+b3",
+     "px+b7"
+    ],
+    "single_frequency_greyscale-5": [
+     "px+b4",
+     "px+b1",
+     "px+b6"
+    ],
+    "sparkles-3": [
+     "px+b7",
+     "px+b3",
+     "px+b4"
+    ],
+    "sparkles-5": [
+     "px+b9",
+     "px+b6",
+     "px+b11"
+    ]
+   },
+   "same_trunk_as_full": 0.3
+  },
+  "2": {
+   "images_per_cell": 128,
+   "gain_over_pair": 1.7225000000000108,
+   "routed_fraction_after_warmup": 0.30934829059829066,
+   "trunk_counts": {
+    "px+b1": 1,
+    "px+b11": 1,
+    "px+b3": 1,
+    "px+b5": 4,
+    "px+b6": 4,
+    "px+b7": 6,
+    "px+b8": 2,
+    "px+b9": 1
+   },
+   "picks": {
+    "blue_noise_sample-3": [
+     "px+b7",
+     "px+b3",
+     "px+b4"
+    ],
+    "blue_noise_sample-5": [
+     "px+b5",
+     "px+b7",
+     "px+b8"
+    ],
+    "brownish_noise-3": [
+     "px+b5",
+     "px+b7",
+     "px+b8"
+    ],
+    "brownish_noise-5": [
+     "px+b5",
+     "px+b3",
+     "px+b6"
+    ],
+    "caustic_refraction-3": [
+     "px+b7",
+     "px+b3",
+     "px+b12"
+    ],
+    "caustic_refraction-5": [
+     "px+b7",
+     "px+b6",
+     "px+b11"
+    ],
+    "checkerboard_cutout-3": [
+     "px+b9",
+     "px+b7",
+     "px+b11"
+    ],
+    "checkerboard_cutout-5": [
+     "px+b8",
+     "px+b6",
+     "px+b11"
+    ],
+    "cocentric_sine_waves-3": [
+     "px+b7",
+     "px+b5",
+     "px+b6"
+    ],
+    "cocentric_sine_waves-5": [
+     "px+b7",
+     "px+b4",
+     "px+b11"
+    ],
+    "inverse_sparkles-3": [
+     "px+b6",
+     "px+b2",
+     "px+b7"
+    ],
+    "inverse_sparkles-5": [
+     "px+b6",
+     "px+b7",
+     "px+b11"
+    ],
+    "perlin_noise-3": [
+     "px+b3",
+     "px+b8",
+     "px+b9"
+    ],
+    "perlin_noise-5": [
+     "px+b1",
+     "px+b4",
+     "px+b7"
+    ],
+    "plasma_noise-3": [
+     "px+b11",
+     "px+b6",
+     "px+b12"
+    ],
+    "plasma_noise-5": [
+     "px+b5",
+     "px+b9",
+     "px+b11"
+    ],
+    "single_frequency_greyscale-3": [
+     "px+b6",
+     "px+b5",
+     "px+b8"
+    ],
+    "single_frequency_greyscale-5": [
+     "px+b6",
+     "px+b1",
+     "px+b2"
+    ],
+    "sparkles-3": [
+     "px+b7",
+     "px+b1",
+     "px+b4"
+    ],
+    "sparkles-5": [
+     "px+b8",
+     "px+b6",
+     "px+b9"
+    ]
+   },
+   "same_trunk_as_full": 0.3
+  },
+  "3": {
+   "images_per_cell": 192,
+   "gain_over_pair": 1.6125000000000256,
+   "routed_fraction_after_warmup": 0.3060564159292036,
+   "trunk_counts": {
+    "px+b11": 2,
+    "px+b3": 2,
+    "px+b5": 2,
+    "px+b6": 3,
+    "px+b7": 8,
+    "px+b8": 3
+   },
+   "picks": {
+    "blue_noise_sample-3": [
+     "px+b7",
+     "px+b3",
+     "px+b4"
+    ],
+    "blue_noise_sample-5": [
+     "px+b6",
+     "px+b5",
+     "px+b8"
+    ],
+    "brownish_noise-3": [
+     "px+b7",
+     "px+b3",
+     "px+b4"
+    ],
+    "brownish_noise-5": [
+     "px+b5",
+     "px+b6",
+     "px+b8"
+    ],
+    "caustic_refraction-3": [
+     "px+b5",
+     "px+b8",
+     "px+b12"
+    ],
+    "caustic_refraction-5": [
+     "px+b7",
+     "px+b6",
+     "px+b11"
+    ],
+    "checkerboard_cutout-3": [
+     "px+b8",
+     "px+b7",
+     "px+b9"
+    ],
+    "checkerboard_cutout-5": [
+     "px+b8",
+     "px+b6",
+     "px+b7"
+    ],
+    "cocentric_sine_waves-3": [
+     "px+b7",
+     "px+b5",
+     "px+b6"
+    ],
+    "cocentric_sine_waves-5": [
+     "px+b7",
+     "px+b4",
+     "px+b11"
+    ],
+    "inverse_sparkles-3": [
+     "px+b6",
+     "px+b2",
+     "px+b7"
+    ],
+    "inverse_sparkles-5": [
+     "px+b7",
+     "px+b6",
+     "px+b11"
+    ],
+    "perlin_noise-3": [
+     "px+b3",
+     "px+b8",
+     "px+b9"
+    ],
+    "perlin_noise-5": [
+     "px+b3",
+     "px+b1",
+     "px+b7"
+    ],
+    "plasma_noise-3": [
+     "px+b11",
+     "px+b6",
+     "px+b12"
+    ],
+    "plasma_noise-5": [
+     "px+b11",
+     "px+b1",
+     "px+b5"
+    ],
+    "single_frequency_greyscale-3": [
+     "px+b7",
+     "px+b3",
+     "px+b5"
+    ],
+    "single_frequency_greyscale-5": [
+     "px+b6",
+     "px+b2",
+     "px+b8"
+    ],
+    "sparkles-3": [
+     "px+b7",
+     "px+b1",
+     "px+b4"
+    ],
+    "sparkles-5": [
+     "px+b8",
+     "px+b4",
+     "px+b9"
+    ]
+   },
+   "same_trunk_as_full": 0.4
+  },
+  "5": {
+   "images_per_cell": 320,
+   "gain_over_pair": 1.6325000000000074,
+   "routed_fraction_after_warmup": 0.3050892857142858,
+   "trunk_counts": {
+    "px+b11": 2,
+    "px+b2": 1,
+    "px+b3": 1,
+    "px+b4": 1,
+    "px+b5": 1,
+    "px+b6": 1,
+    "px+b7": 8,
+    "px+b8": 5
+   },
+   "picks": {
+    "blue_noise_sample-3": [
+     "px+b7",
+     "px+b3",
+     "px+b4"
+    ],
+    "blue_noise_sample-5": [
+     "px+b7",
+     "px+b5",
+     "px+b8"
+    ],
+    "brownish_noise-3": [
+     "px+b4",
+     "px+b7",
+     "px+b9"
+    ],
+    "brownish_noise-5": [
+     "px+b5",
+     "px+b6",
+     "px+b8"
+    ],
+    "caustic_refraction-3": [
+     "px+b8",
+     "px+b2",
+     "px+b5"
+    ],
+    "caustic_refraction-5": [
+     "px+b7",
+     "px+b5",
+     "px+b11"
+    ],
+    "checkerboard_cutout-3": [
+     "px+b8",
+     "px+b7",
+     "px+b9"
+    ],
+    "checkerboard_cutout-5": [
+     "px+b8",
+     "px+b5",
+     "px+b11"
+    ],
+    "cocentric_sine_waves-3": [
+     "px+b7",
+     "px+b6",
+     "px+b8"
+    ],
+    "cocentric_sine_waves-5": [
+     "px+b8",
+     "px+b5",
+     "px+b11"
+    ],
+    "inverse_sparkles-3": [
+     "px+b6",
+     "px+b3",
+     "px+b7"
+    ],
+    "inverse_sparkles-5": [
+     "px+b7",
+     "px+b5",
+     "px+b6"
+    ],
+    "perlin_noise-3": [
+     "px+b3",
+     "px+b1",
+     "px+b8"
+    ],
+    "perlin_noise-5": [
+     "px+b2",
+     "px+b5",
+     "px+b7"
+    ],
+    "plasma_noise-3": [
+     "px+b11",
+     "px+b6",
+     "px+b9"
+    ],
+    "plasma_noise-5": [
+     "px+b11",
+     "px+b5",
+     "px+b7"
+    ],
+    "single_frequency_greyscale-3": [
+     "px+b7",
+     "px+b1",
+     "px+b5"
+    ],
+    "single_frequency_greyscale-5": [
+     "px+b7",
+     "px+b1",
+     "px+b2"
+    ],
+    "sparkles-3": [
+     "px+b7",
+     "px+b4",
+     "px+b8"
+    ],
+    "sparkles-5": [
+     "px+b8",
+     "px+b4",
+     "px+b7"
+    ]
+   },
+   "same_trunk_as_full": 0.4
+  },
+  "10": {
+   "images_per_cell": 640,
+   "gain_over_pair": 1.232500000000016,
+   "routed_fraction_after_warmup": 0.3049632352941176,
+   "trunk_counts": {
+    "px+b11": 2,
+    "px+b4": 3,
+    "px+b5": 2,
+    "px+b7": 10,
+    "px+b8": 2,
+    "px+b9": 1
+   },
+   "picks": {
+    "blue_noise_sample-3": [
+     "px+b7",
+     "px+b4",
+     "px+b8"
+    ],
+    "blue_noise_sample-5": [
+     "px+b7",
+     "px+b5",
+     "px+b8"
+    ],
+    "brownish_noise-3": [
+     "px+b4",
+     "px+b7",
+     "px+b9"
+    ],
+    "brownish_noise-5": [
+     "px+b5",
+     "px+b4",
+     "px+b6"
+    ],
+    "caustic_refraction-3": [
+     "px+b7",
+     "px+b2",
+     "px+b5"
+    ],
+    "caustic_refraction-5": [
+     "px+b5",
+     "px+b8",
+     "px+b11"
+    ],
+    "checkerboard_cutout-3": [
+     "px+b9",
+     "px+b7",
+     "px+b11"
+    ],
+    "checkerboard_cutout-5": [
+     "px+b8",
+     "px+b7",
+     "px+b11"
+    ],
+    "cocentric_sine_waves-3": [
+     "px+b7",
+     "px+b6",
+     "px+b11"
+    ],
+    "cocentric_sine_waves-5": [
+     "px+b7",
+     "px+b6",
+     "px+b11"
+    ],
+    "inverse_sparkles-3": [
+     "px+b7",
+     "px+b5",
+     "px+b6"
+    ],
+    "inverse_sparkles-5": [
+     "px+b7",
+     "px+b5",
+     "px+b6"
+    ],
+    "perlin_noise-3": [
+     "px+b4",
+     "px+b7",
+     "px+b8"
+    ],
+    "perlin_noise-5": [
+     "px+b4",
+     "px+b1",
+     "px+b7"
+    ],
+    "plasma_noise-3": [
+     "px+b11",
+     "px+b6",
+     "px+b7"
+    ],
+    "plasma_noise-5": [
+     "px+b11",
+     "px+b5",
+     "px+b7"
+    ],
+    "single_frequency_greyscale-3": [
+     "px+b7",
+     "px+b1",
+     "px+b5"
+    ],
+    "single_frequency_greyscale-5": [
+     "px+b7",
+     "px+b2",
+     "px+b5"
+    ],
+    "sparkles-3": [
+     "px+b7",
+     "px+b4",
+     "px+b9"
+    ],
+    "sparkles-5": [
+     "px+b8",
+     "px+b4",
+     "px+b7"
+    ]
+   },
+   "same_trunk_as_full": 0.5
+  }
+ },
+ "note": "labels are used only to score; the rule sees logits only. The selection pass costs 12 extra forward passes on the sample (one per candidate block)."
+}

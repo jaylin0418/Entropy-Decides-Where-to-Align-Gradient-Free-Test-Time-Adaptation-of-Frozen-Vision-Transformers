@@ -1,0 +1,43 @@
+{
+ "gate": {
+  "best": "rule_t2_b4b7_gated",
+  "gain_over_neo": 9.699999999999996,
+  "clean_harm_best": 0.0,
+  "verdict": "PASS"
+ },
+ "reference": "neo from forward_only_heldout4_vitb_exit.json",
+ "n_cells": 1,
+ "cells": [
+  "fog-5"
+ ],
+ "mean_30_cells": {
+  "tok+place_b2": 68.65,
+  "rule_t2_b4b7_gated": 69.25
+ },
+ "clean": {
+  "tok+place_b2": null,
+  "rule_t2_b4b7_gated": null
+ },
+ "clean_harm": {},
+ "warmup_first640": {
+  "tok+place_b2": 70.46875,
+  "rule_t2_b4b7_gated": 70.15625
+ },
+ "per_family_vs_neo": {},
+ "per_cell": {
+  "tok+place_b2": {
+   "fog-5": 68.65
+  },
+  "rule_t2_b4b7_gated": {
+   "fog-5": 69.25
+  }
+ },
+ "routed_fraction": {
+  "rule_t2_b4b7_gated": {
+   "fog-5": 0.3330078125
+  }
+ },
+ "routed_fraction_mean": {
+  "rule_t2_b4b7_gated": 0.3330078125
+ }
+}

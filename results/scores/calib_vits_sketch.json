@@ -1,0 +1,12 @@
+{
+ "model": "vits",
+ "dataset": "sketch",
+ "trunk": 6,
+ "shallower": 8,
+ "deeper": 11,
+ "theta": 3.221022367477417,
+ "theta_rule": "0.65 quantile of the base path entropy on the design images",
+ "trunk_best_by_accuracy": "px+b11",
+ "routed_share_at_1.5": 0.6806666666666666,
+ "arm": "rule_t6_b8b11_gated"
+}

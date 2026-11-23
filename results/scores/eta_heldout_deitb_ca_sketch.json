@@ -1,0 +1,60 @@
+{
+ "n_cells": 3,
+ "mean_30_cells": {
+  "eta": 32.61666666666667,
+  "eta+neo": 33.73333333333334,
+  "eta+headcov": 35.98333333333333,
+  "tok+eta+place_b7": 35.666666666666664,
+  "tok+eta+place_b7+neo": 36.04999999999999,
+  "tok+eta+place_b7+headcov": 35.63333333333333
+ },
+ "clean": {
+  "eta": 81.89999999999999,
+  "eta+neo": 81.6,
+  "eta+headcov": 80.75,
+  "tok+eta+place_b7": 81.6,
+  "tok+eta+place_b7+neo": 81.95,
+  "tok+eta+place_b7+headcov": 80.45
+ },
+ "forward_only_reference": {},
+ "eta_updated_samples_mean": 855.0,
+ "per_family_vs_eta_neo": {},
+ "per_cell": {
+  "eta": {
+   "clean": 81.89999999999999,
+   "sketch-h1": 33.300000000000004,
+   "sketch-h2": 33.050000000000004,
+   "sketch-h3": 31.5
+  },
+  "eta+neo": {
+   "clean": 81.6,
+   "sketch-h1": 34.300000000000004,
+   "sketch-h2": 34.0,
+   "sketch-h3": 32.9
+  },
+  "eta+headcov": {
+   "clean": 80.75,
+   "sketch-h1": 36.75,
+   "sketch-h2": 36.449999999999996,
+   "sketch-h3": 34.75
+  },
+  "tok+eta+place_b7": {
+   "clean": 81.6,
+   "sketch-h1": 36.199999999999996,
+   "sketch-h2": 36.05,
+   "sketch-h3": 34.75
+  },
+  "tok+eta+place_b7+neo": {
+   "clean": 81.95,
+   "sketch-h1": 36.8,
+   "sketch-h2": 36.65,
+   "sketch-h3": 34.699999999999996
+  },
+  "tok+eta+place_b7+headcov": {
+   "clean": 80.45,
+   "sketch-h1": 35.75,
+   "sketch-h2": 36.65,
+   "sketch-h3": 34.5
+  }
+ }
+}

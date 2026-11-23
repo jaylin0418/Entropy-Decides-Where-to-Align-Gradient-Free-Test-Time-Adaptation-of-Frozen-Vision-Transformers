@@ -1,0 +1,939 @@
+{
+ "cells": [
+  "gaussian_noise-3",
+  "gaussian_noise-5",
+  "shot_noise-3",
+  "shot_noise-5",
+  "impulse_noise-3",
+  "impulse_noise-5",
+  "defocus_blur-3",
+  "defocus_blur-5",
+  "glass_blur-3",
+  "glass_blur-5",
+  "motion_blur-3",
+  "motion_blur-5",
+  "zoom_blur-3",
+  "zoom_blur-5",
+  "snow-3",
+  "snow-5",
+  "frost-3",
+  "frost-5",
+  "fog-3",
+  "fog-5",
+  "brightness-3",
+  "brightness-5",
+  "contrast-3",
+  "contrast-5",
+  "elastic_transform-3",
+  "elastic_transform-5",
+  "pixelate-3",
+  "pixelate-5",
+  "jpeg_compression-3",
+  "jpeg_compression-5"
+ ],
+ "theta": 1.5,
+ "pair": 67.47,
+ "full_rule": {
+  "trunk": "px+b6",
+  "shallower": "px+b4",
+  "deeper": "px+b11",
+  "gain_over_pair": 1.210000000000008
+ },
+ "pooled_first_n_per_cell": {
+  "64": {
+   "trunk": "px+b5",
+   "shallower": "px+b3",
+   "deeper": "px+b7",
+   "gain_over_pair": 1.0916666666666686,
+   "same_as_full": false,
+   "images_used": 1920
+  },
+  "128": {
+   "trunk": "px+b5",
+   "shallower": "px+b2",
+   "deeper": "px+b7",
+   "gain_over_pair": 0.9283333333333275,
+   "same_as_full": false,
+   "images_used": 3840
+  },
+  "192": {
+   "trunk": "px+b5",
+   "shallower": "px+b3",
+   "deeper": "px+b7",
+   "gain_over_pair": 1.0916666666666686,
+   "same_as_full": false,
+   "images_used": 5760
+  },
+  "320": {
+   "trunk": "px+b5",
+   "shallower": "px+b3",
+   "deeper": "px+b7",
+   "gain_over_pair": 1.0916666666666686,
+   "same_as_full": false,
+   "images_used": 9600
+  },
+  "640": {
+   "trunk": "px+b5",
+   "shallower": "px+b3",
+   "deeper": "px+b7",
+   "gain_over_pair": 1.0916666666666686,
+   "same_as_full": false,
+   "images_used": 19200
+  },
+  "1280": {
+   "trunk": "px+b6",
+   "shallower": "px+b4",
+   "deeper": "px+b11",
+   "gain_over_pair": 1.210000000000008,
+   "same_as_full": true,
+   "images_used": 38400
+  },
+  "2000": {
+   "trunk": "px+b6",
+   "shallower": "px+b4",
+   "deeper": "px+b11",
+   "gain_over_pair": 1.210000000000008,
+   "same_as_full": true,
+   "images_used": 60000
+  }
+ },
+ "per_cell_first_k_batches": {
+  "1": {
+   "images_per_cell": 64,
+   "gain_over_pair": 1.1033333333333246,
+   "routed_fraction_after_warmup": 0.3474690082644629,
+   "trunk_counts": {
+    "px+b1": 2,
+    "px+b2": 2,
+    "px+b3": 4,
+    "px+b4": 2,
+    "px+b5": 11,
+    "px+b6": 5,
+    "px+b7": 2,
+    "px+b8": 2
+   },
+   "picks": {
+    "gaussian_noise-3": [
+     "px+b5",
+     "px+b6",
+     "px+b12"
+    ],
+    "gaussian_noise-5": [
+     "px+b7",
+     "px+b3",
+     "px+b8"
+    ],
+    "shot_noise-3": [
+     "px+b5",
+     "px+b4",
+     "px+b7"
+    ],
+    "shot_noise-5": [
+     "px+b6",
+     "px+b5",
+     "px+b12"
+    ],
+    "impulse_noise-3": [
+     "px+b5",
+     "px+b1",
+     "px+b6"
+    ],
+    "impulse_noise-5": [
+     "px+b5",
+     "px+b7",
+     "px+b12"
+    ],
+    "defocus_blur-3": [
+     "px+b3",
+     "px+b4",
+     "px+b9"
+    ],
+    "defocus_blur-5": [
+     "px+b8",
+     "px+b4",
+     "px+b7"
+    ],
+    "glass_blur-3": [
+     "px+b7",
+     "px+b3",
+     "px+b4"
+    ],
+    "glass_blur-5": [
+     "px+b5",
+     "px+b2",
+     "px+b9"
+    ],
+    "motion_blur-3": [
+     "px+b2",
+     "px+b4",
+     "px+b6"
+    ],
+    "motion_blur-5": [
+     "px+b3",
+     "px+b5",
+     "px+b12"
+    ],
+    "zoom_blur-3": [
+     "px+b3",
+     "px+b5",
+     "px+b12"
+    ],
+    "zoom_blur-5": [
+     "px+b4",
+     "px+b5",
+     "px+b6"
+    ],
+    "snow-3": [
+     "px+b8",
+     "px+b1",
+     "px+b11"
+    ],
+    "snow-5": [
+     "px+b6",
+     "px+b1",
+     "px+b2"
+    ],
+    "frost-3": [
+     "px+b5",
+     "px+b2",
+     "px+b12"
+    ],
+    "frost-5": [
+     "px+b5",
+     "px+b2",
+     "px+b11"
+    ],
+    "fog-3": [
+     "px+b2",
+     "px+b3",
+     "px+b12"
+    ],
+    "fog-5": [
+     "px+b1",
+     "px+b2",
+     "px+b5"
+    ],
+    "brightness-3": [
+     "px+b1",
+     "px+b7",
+     "px+b8"
+    ],
+    "brightness-5": [
+     "px+b3",
+     "px+b1",
+     "px+b6"
+    ],
+    "contrast-3": [
+     "px+b4",
+     "px+b2",
+     "px+b7"
+    ],
+    "contrast-5": [
+     "px+b5",
+     "px+b3",
+     "px+b6"
+    ],
+    "elastic_transform-3": [
+     "px+b6",
+     "px+b1",
+     "px+b2"
+    ],
+    "elastic_transform-5": [
+     "px+b5",
+     "px+b1",
+     "px+b7"
+    ],
+    "pixelate-3": [
+     "px+b6",
+     "px+b1",
+     "px+b4"
+    ],
+    "pixelate-5": [
+     "px+b6",
+     "px+b2",
+     "px+b3"
+    ],
+    "jpeg_compression-3": [
+     "px+b5",
+     "px+b2",
+     "px+b4"
+    ],
+    "jpeg_compression-5": [
+     "px+b5",
+     "px+b1",
+     "px+b9"
+    ]
+   },
+   "same_trunk_as_full": 0.16666666666666666
+  },
+  "2": {
+   "images_per_cell": 128,
+   "gain_over_pair": 1.0716666666666725,
+   "routed_fraction_after_warmup": 0.34579772079772086,
+   "trunk_counts": {
+    "px+b1": 2,
+    "px+b2": 2,
+    "px+b3": 1,
+    "px+b4": 7,
+    "px+b5": 9,
+    "px+b6": 7,
+    "px+b7": 1,
+    "px+b8": 1
+   },
+   "picks": {
+    "gaussian_noise-3": [
+     "px+b5",
+     "px+b3",
+     "px+b12"
+    ],
+    "gaussian_noise-5": [
+     "px+b6",
+     "px+b11",
+     "px+b12"
+    ],
+    "shot_noise-3": [
+     "px+b5",
+     "px+b2",
+     "px+b7"
+    ],
+    "shot_noise-5": [
+     "px+b6",
+     "px+b5",
+     "px+b12"
+    ],
+    "impulse_noise-3": [
+     "px+b5",
+     "px+b1",
+     "px+b12"
+    ],
+    "impulse_noise-5": [
+     "px+b5",
+     "px+b8",
+     "px+b12"
+    ],
+    "defocus_blur-3": [
+     "px+b4",
+     "px+b2",
+     "px+b9"
+    ],
+    "defocus_blur-5": [
+     "px+b8",
+     "px+b4",
+     "px+b7"
+    ],
+    "glass_blur-3": [
+     "px+b7",
+     "px+b3",
+     "px+b6"
+    ],
+    "glass_blur-5": [
+     "px+b5",
+     "px+b2",
+     "px+b7"
+    ],
+    "motion_blur-3": [
+     "px+b3",
+     "px+b8",
+     "px+b12"
+    ],
+    "motion_blur-5": [
+     "px+b4",
+     "px+b1",
+     "px+b12"
+    ],
+    "zoom_blur-3": [
+     "px+b4",
+     "px+b2",
+     "px+b6"
+    ],
+    "zoom_blur-5": [
+     "px+b4",
+     "px+b2",
+     "px+b6"
+    ],
+    "snow-3": [
+     "px+b6",
+     "px+b1",
+     "px+b11"
+    ],
+    "snow-5": [
+     "px+b6",
+     "px+b1",
+     "px+b2"
+    ],
+    "frost-3": [
+     "px+b5",
+     "px+b2",
+     "px+b8"
+    ],
+    "frost-5": [
+     "px+b5",
+     "px+b3",
+     "px+b11"
+    ],
+    "fog-3": [
+     "px+b2",
+     "px+b8",
+     "px+b9"
+    ],
+    "fog-5": [
+     "px+b1",
+     "px+b2",
+     "px+b5"
+    ],
+    "brightness-3": [
+     "px+b1",
+     "px+b7",
+     "px+b12"
+    ],
+    "brightness-5": [
+     "px+b2",
+     "px+b6",
+     "px+b7"
+    ],
+    "contrast-3": [
+     "px+b4",
+     "px+b2",
+     "px+b7"
+    ],
+    "contrast-5": [
+     "px+b5",
+     "px+b7",
+     "px+b9"
+    ],
+    "elastic_transform-3": [
+     "px+b6",
+     "px+b1",
+     "px+b5"
+    ],
+    "elastic_transform-5": [
+     "px+b6",
+     "px+b1",
+     "px+b5"
+    ],
+    "pixelate-3": [
+     "px+b4",
+     "px+b1",
+     "px+b12"
+    ],
+    "pixelate-5": [
+     "px+b6",
+     "px+b1",
+     "px+b3"
+    ],
+    "jpeg_compression-3": [
+     "px+b4",
+     "px+b3",
+     "px+b5"
+    ],
+    "jpeg_compression-5": [
+     "px+b5",
+     "px+b1",
+     "px+b12"
+    ]
+   },
+   "same_trunk_as_full": 0.23333333333333334
+  },
+  "3": {
+   "images_per_cell": 192,
+   "gain_over_pair": 1.2199999999999989,
+   "routed_fraction_after_warmup": 0.34524336283185847,
+   "trunk_counts": {
+    "px+b2": 3,
+    "px+b3": 2,
+    "px+b4": 5,
+    "px+b5": 8,
+    "px+b6": 8,
+    "px+b7": 3,
+    "px+b8": 1
+   },
+   "picks": {
+    "gaussian_noise-3": [
+     "px+b5",
+     "px+b3",
+     "px+b12"
+    ],
+    "gaussian_noise-5": [
+     "px+b6",
+     "px+b4",
+     "px+b8"
+    ],
+    "shot_noise-3": [
+     "px+b5",
+     "px+b4",
+     "px+b7"
+    ],
+    "shot_noise-5": [
+     "px+b6",
+     "px+b5",
+     "px+b12"
+    ],
+    "impulse_noise-3": [
+     "px+b5",
+     "px+b1",
+     "px+b12"
+    ],
+    "impulse_noise-5": [
+     "px+b6",
+     "px+b5",
+     "px+b8"
+    ],
+    "defocus_blur-3": [
+     "px+b6",
+     "px+b1",
+     "px+b4"
+    ],
+    "defocus_blur-5": [
+     "px+b8",
+     "px+b5",
+     "px+b11"
+    ],
+    "glass_blur-3": [
+     "px+b7",
+     "px+b4",
+     "px+b6"
+    ],
+    "glass_blur-5": [
+     "px+b6",
+     "px+b5",
+     "px+b7"
+    ],
+    "motion_blur-3": [
+     "px+b3",
+     "px+b8",
+     "px+b12"
+    ],
+    "motion_blur-5": [
+     "px+b5",
+     "px+b4",
+     "px+b12"
+    ],
+    "zoom_blur-3": [
+     "px+b4",
+     "px+b2",
+     "px+b6"
+    ],
+    "zoom_blur-5": [
+     "px+b7",
+     "px+b3",
+     "px+b5"
+    ],
+    "snow-3": [
+     "px+b7",
+     "px+b1",
+     "px+b4"
+    ],
+    "snow-5": [
+     "px+b6",
+     "px+b2",
+     "px+b7"
+    ],
+    "frost-3": [
+     "px+b5",
+     "px+b8",
+     "px+b12"
+    ],
+    "frost-5": [
+     "px+b5",
+     "px+b3",
+     "px+b11"
+    ],
+    "fog-3": [
+     "px+b2",
+     "px+b8",
+     "px+b9"
+    ],
+    "fog-5": [
+     "px+b2",
+     "px+b1",
+     "px+b5"
+    ],
+    "brightness-3": [
+     "px+b3",
+     "px+b7",
+     "px+b12"
+    ],
+    "brightness-5": [
+     "px+b2",
+     "px+b6",
+     "px+b7"
+    ],
+    "contrast-3": [
+     "px+b4",
+     "px+b1",
+     "px+b7"
+    ],
+    "contrast-5": [
+     "px+b5",
+     "px+b3",
+     "px+b6"
+    ],
+    "elastic_transform-3": [
+     "px+b4",
+     "px+b7",
+     "px+b8"
+    ],
+    "elastic_transform-5": [
+     "px+b6",
+     "px+b1",
+     "px+b7"
+    ],
+    "pixelate-3": [
+     "px+b4",
+     "px+b1",
+     "px+b12"
+    ],
+    "pixelate-5": [
+     "px+b6",
+     "px+b3",
+     "px+b8"
+    ],
+    "jpeg_compression-3": [
+     "px+b4",
+     "px+b3",
+     "px+b5"
+    ],
+    "jpeg_compression-5": [
+     "px+b5",
+     "px+b1",
+     "px+b12"
+    ]
+   },
+   "same_trunk_as_full": 0.26666666666666666
+  },
+  "5": {
+   "images_per_cell": 320,
+   "gain_over_pair": 1.2533333333333303,
+   "routed_fraction_after_warmup": 0.3461904761904762,
+   "trunk_counts": {
+    "px+b2": 2,
+    "px+b3": 3,
+    "px+b4": 7,
+    "px+b5": 6,
+    "px+b6": 6,
+    "px+b7": 5,
+    "px+b8": 1
+   },
+   "picks": {
+    "gaussian_noise-3": [
+     "px+b5",
+     "px+b4",
+     "px+b7"
+    ],
+    "gaussian_noise-5": [
+     "px+b6",
+     "px+b4",
+     "px+b8"
+    ],
+    "shot_noise-3": [
+     "px+b6",
+     "px+b4",
+     "px+b7"
+    ],
+    "shot_noise-5": [
+     "px+b6",
+     "px+b5",
+     "px+b11"
+    ],
+    "impulse_noise-3": [
+     "px+b5",
+     "px+b1",
+     "px+b12"
+    ],
+    "impulse_noise-5": [
+     "px+b6",
+     "px+b5",
+     "px+b11"
+    ],
+    "defocus_blur-3": [
+     "px+b6",
+     "px+b3",
+     "px+b9"
+    ],
+    "defocus_blur-5": [
+     "px+b8",
+     "px+b5",
+     "px+b11"
+    ],
+    "glass_blur-3": [
+     "px+b7",
+     "px+b4",
+     "px+b6"
+    ],
+    "glass_blur-5": [
+     "px+b7",
+     "px+b5",
+     "px+b6"
+    ],
+    "motion_blur-3": [
+     "px+b3",
+     "px+b8",
+     "px+b12"
+    ],
+    "motion_blur-5": [
+     "px+b5",
+     "px+b3",
+     "px+b12"
+    ],
+    "zoom_blur-3": [
+     "px+b4",
+     "px+b1",
+     "px+b7"
+    ],
+    "zoom_blur-5": [
+     "px+b5",
+     "px+b3",
+     "px+b7"
+    ],
+    "snow-3": [
+     "px+b7",
+     "px+b1",
+     "px+b11"
+    ],
+    "snow-5": [
+     "px+b7",
+     "px+b4",
+     "px+b11"
+    ],
+    "frost-3": [
+     "px+b5",
+     "px+b3",
+     "px+b8"
+    ],
+    "frost-5": [
+     "px+b4",
+     "px+b5",
+     "px+b11"
+    ],
+    "fog-3": [
+     "px+b2",
+     "px+b1",
+     "px+b9"
+    ],
+    "fog-5": [
+     "px+b2",
+     "px+b1",
+     "px+b5"
+    ],
+    "brightness-3": [
+     "px+b3",
+     "px+b1",
+     "px+b12"
+    ],
+    "brightness-5": [
+     "px+b3",
+     "px+b6",
+     "px+b9"
+    ],
+    "contrast-3": [
+     "px+b4",
+     "px+b1",
+     "px+b2"
+    ],
+    "contrast-5": [
+     "px+b4",
+     "px+b1",
+     "px+b7"
+    ],
+    "elastic_transform-3": [
+     "px+b4",
+     "px+b6",
+     "px+b8"
+    ],
+    "elastic_transform-5": [
+     "px+b7",
+     "px+b2",
+     "px+b5"
+    ],
+    "pixelate-3": [
+     "px+b4",
+     "px+b1",
+     "px+b12"
+    ],
+    "pixelate-5": [
+     "px+b6",
+     "px+b3",
+     "px+b8"
+    ],
+    "jpeg_compression-3": [
+     "px+b4",
+     "px+b3",
+     "px+b5"
+    ],
+    "jpeg_compression-5": [
+     "px+b5",
+     "px+b1",
+     "px+b8"
+    ]
+   },
+   "same_trunk_as_full": 0.2
+  },
+  "10": {
+   "images_per_cell": 640,
+   "gain_over_pair": 1.1566666666666805,
+   "routed_fraction_after_warmup": 0.3492892156862745,
+   "trunk_counts": {
+    "px+b2": 2,
+    "px+b3": 2,
+    "px+b4": 7,
+    "px+b5": 5,
+    "px+b6": 10,
+    "px+b7": 4
+   },
+   "picks": {
+    "gaussian_noise-3": [
+     "px+b6",
+     "px+b5",
+     "px+b7"
+    ],
+    "gaussian_noise-5": [
+     "px+b6",
+     "px+b5",
+     "px+b11"
+    ],
+    "shot_noise-3": [
+     "px+b6",
+     "px+b5",
+     "px+b7"
+    ],
+    "shot_noise-5": [
+     "px+b6",
+     "px+b5",
+     "px+b11"
+    ],
+    "impulse_noise-3": [
+     "px+b6",
+     "px+b5",
+     "px+b12"
+    ],
+    "impulse_noise-5": [
+     "px+b6",
+     "px+b5",
+     "px+b11"
+    ],
+    "defocus_blur-3": [
+     "px+b6",
+     "px+b4",
+     "px+b9"
+    ],
+    "defocus_blur-5": [
+     "px+b7",
+     "px+b5",
+     "px+b11"
+    ],
+    "glass_blur-3": [
+     "px+b7",
+     "px+b4",
+     "px+b5"
+    ],
+    "glass_blur-5": [
+     "px+b6",
+     "px+b5",
+     "px+b7"
+    ],
+    "motion_blur-3": [
+     "px+b4",
+     "px+b2",
+     "px+b12"
+    ],
+    "motion_blur-5": [
+     "px+b5",
+     "px+b3",
+     "px+b11"
+    ],
+    "zoom_blur-3": [
+     "px+b5",
+     "px+b3",
+     "px+b7"
+    ],
+    "zoom_blur-5": [
+     "px+b5",
+     "px+b3",
+     "px+b7"
+    ],
+    "snow-3": [
+     "px+b7",
+     "px+b5",
+     "px+b11"
+    ],
+    "snow-5": [
+     "px+b6",
+     "px+b2",
+     "px+b11"
+    ],
+    "frost-3": [
+     "px+b4",
+     "px+b7",
+     "px+b8"
+    ],
+    "frost-5": [
+     "px+b5",
+     "px+b7",
+     "px+b11"
+    ],
+    "fog-3": [
+     "px+b2",
+     "px+b5",
+     "px+b7"
+    ],
+    "fog-5": [
+     "px+b2",
+     "px+b4",
+     "px+b7"
+    ],
+    "brightness-3": [
+     "px+b3",
+     "px+b7",
+     "px+b12"
+    ],
+    "brightness-5": [
+     "px+b3",
+     "px+b6",
+     "px+b12"
+    ],
+    "contrast-3": [
+     "px+b4",
+     "px+b2",
+     "px+b3"
+    ],
+    "contrast-5": [
+     "px+b4",
+     "px+b1",
+     "px+b7"
+    ],
+    "elastic_transform-3": [
+     "px+b4",
+     "px+b7",
+     "px+b8"
+    ],
+    "elastic_transform-5": [
+     "px+b7",
+     "px+b2",
+     "px+b5"
+    ],
+    "pixelate-3": [
+     "px+b4",
+     "px+b1",
+     "px+b12"
+    ],
+    "pixelate-5": [
+     "px+b6",
+     "px+b3",
+     "px+b8"
+    ],
+    "jpeg_compression-3": [
+     "px+b4",
+     "px+b1",
+     "px+b5"
+    ],
+    "jpeg_compression-5": [
+     "px+b5",
+     "px+b1",
+     "px+b9"
+    ]
+   },
+   "same_trunk_as_full": 0.3333333333333333
+  }
+ },
+ "note": "labels are used only to score; the rule sees logits only. The selection pass costs 12 extra forward passes on the sample (one per candidate block)."
+}

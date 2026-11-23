@@ -1,0 +1,31 @@
+{
+ "n_cells": 3,
+ "mean_30_cells": {
+  "tok+eta+rule_t8_b1b11": 55.616666666666674,
+  "tok+eta+rule_t8_b1b11+neo": 59.800000000000004
+ },
+ "clean": {
+  "tok+eta+rule_t8_b1b11": 83.89999999999999,
+  "tok+eta+rule_t8_b1b11+neo": 84.0
+ },
+ "forward_only_reference": {},
+ "eta_updated_samples_mean": 482.3333333333333,
+ "per_family_vs_eta_neo": {},
+ "routed_fraction_mean": {
+  "tok+eta+rule_t8_b1b11+neo": 0.3306666666666667
+ },
+ "per_cell": {
+  "tok+eta+rule_t8_b1b11": {
+   "clean": 83.89999999999999,
+   "r-h1": 56.10000000000001,
+   "r-h2": 53.300000000000004,
+   "r-h3": 57.45
+  },
+  "tok+eta+rule_t8_b1b11+neo": {
+   "clean": 84.0,
+   "r-h1": 60.5,
+   "r-h2": 57.65,
+   "r-h3": 61.25000000000001
+  }
+ }
+}

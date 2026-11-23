@@ -1,0 +1,39 @@
+{
+ "image": "design split, first image of batch 16 (split index 960)",
+ "patches_flat_textured": [
+  81,
+  121
+ ],
+ "cells": {
+  "gaussian_noise-5": {
+   "n_patches": 200704,
+   "g_spec": 2.6345692913967587,
+   "g_mean": 0.07176633033226198,
+   "gate_on": true,
+   "drift_z_pixel": 61.618486467900276,
+   "drift_z_b6": 47.64334416920998
+  },
+  "zoom_blur-5": {
+   "n_patches": 200704,
+   "g_spec": 3.914036645719149,
+   "g_mean": 0.011481956192187169,
+   "gate_on": true,
+   "drift_z_pixel": 88.74312417999946,
+   "drift_z_b6": 13.586002379337053
+  },
+  "contrast-5": {
+   "n_patches": 200704,
+   "g_spec": 6.9419419494026045,
+   "g_mean": 0.01580714665369719,
+   "gate_on": true,
+   "drift_z_pixel": 164.0607539594037,
+   "drift_z_b6": 44.54916160855702
+  }
+ },
+ "trunk_entropy": {
+  "cell": "gaussian_noise-5",
+  "theta": 1.5,
+  "share_above_theta_from_logits": 0.549,
+  "routed_share_of_the_run": 0.5498046875
+ }
+}

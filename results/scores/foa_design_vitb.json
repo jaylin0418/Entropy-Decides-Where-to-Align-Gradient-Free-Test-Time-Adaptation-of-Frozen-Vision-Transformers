@@ -1,0 +1,103 @@
+{
+ "mean_cells": {
+  "foa": 53.51333333333333,
+  "tok+foa": 56.61000000000001
+ },
+ "n_cells": 15,
+ "clean": {
+  "foa": 82.85,
+  "tok+foa": 82.55
+ },
+ "references_same_cells": {
+  "spa1": {
+   "neo": 54.64666666666667,
+   "tok": 57.50333333333333,
+   "headcov": 55.79666666666667,
+   "tok+headcov": 58.49
+  },
+  "spa2": {
+   "eta": 55.2,
+   "eta+neo": 57.68666666666666,
+   "eta+headcov": 58.45333333333333,
+   "tok+eta": 57.853333333333325,
+   "tok+eta+neo": 59.916666666666664,
+   "tok+eta+headcov": 60.763333333333335
+  }
+ },
+ "per_cell": {
+  "foa": {
+   "clean": 82.85,
+   "gaussian_noise-5": 45.95,
+   "shot_noise-5": 45.95,
+   "impulse_noise-5": 47.449999999999996,
+   "defocus_blur-5": 52.5,
+   "glass_blur-5": 37.4,
+   "motion_blur-5": 53.1,
+   "zoom_blur-5": 46.5,
+   "snow-5": 59.9,
+   "frost-5": 54.0,
+   "fog-5": 58.95,
+   "brightness-5": 75.6,
+   "contrast-5": 38.800000000000004,
+   "elastic_transform-5": 50.9,
+   "pixelate-5": 67.25,
+   "jpeg_compression-5": 68.45
+  },
+  "tok+foa": {
+   "clean": 82.55,
+   "gaussian_noise-5": 51.849999999999994,
+   "shot_noise-5": 53.15,
+   "impulse_noise-5": 51.800000000000004,
+   "defocus_blur-5": 53.300000000000004,
+   "glass_blur-5": 39.45,
+   "motion_blur-5": 55.15,
+   "zoom_blur-5": 44.65,
+   "snow-5": 63.5,
+   "frost-5": 55.300000000000004,
+   "fog-5": 59.25,
+   "brightness-5": 76.95,
+   "contrast-5": 52.15,
+   "elastic_transform-5": 52.800000000000004,
+   "pixelate-5": 72.1,
+   "jpeg_compression-5": 67.75
+  }
+ },
+ "seconds": {
+  "foa": {
+   "clean": 200.6,
+   "gaussian_noise-5": 199.9,
+   "shot_noise-5": 199.8,
+   "impulse_noise-5": 199.5,
+   "defocus_blur-5": 199.6,
+   "glass_blur-5": 199.6,
+   "motion_blur-5": 199.5,
+   "zoom_blur-5": 199.4,
+   "snow-5": 199.7,
+   "frost-5": 199.3,
+   "fog-5": 199.4,
+   "brightness-5": 199.6,
+   "contrast-5": 199.2,
+   "elastic_transform-5": 199.5,
+   "pixelate-5": 199.5,
+   "jpeg_compression-5": 199.6
+  },
+  "tok+foa": {
+   "clean": 203.2,
+   "gaussian_noise-5": 202.2,
+   "shot_noise-5": 202.1,
+   "impulse_noise-5": 202.1,
+   "defocus_blur-5": 202.3,
+   "glass_blur-5": 202.1,
+   "motion_blur-5": 202.3,
+   "zoom_blur-5": 202.1,
+   "snow-5": 202.3,
+   "frost-5": 201.9,
+   "fog-5": 201.8,
+   "brightness-5": 201.9,
+   "contrast-5": 201.8,
+   "elastic_transform-5": 202.1,
+   "pixelate-5": 202.1,
+   "jpeg_compression-5": 202.2
+  }
+ }
+}

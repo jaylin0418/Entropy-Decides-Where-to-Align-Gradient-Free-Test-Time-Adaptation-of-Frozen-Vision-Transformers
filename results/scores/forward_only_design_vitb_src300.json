@@ -1,0 +1,102 @@
+{
+ "gate": {
+  "best": "tok+headcov",
+  "gain_over_neo": 0.0,
+  "clean_harm_best": 0.0,
+  "verdict": "FAIL"
+ },
+ "mean_30_cells": {
+  "tok+headcov": 58.79666666666666
+ },
+ "clean": {
+  "tok+headcov": 76.9
+ },
+ "clean_harm": {
+  "tok+headcov": 0.0
+ },
+ "warmup_first640": {
+  "tok+headcov": 57.979166666666664
+ },
+ "per_family_vs_neo": {
+  "gaussian_noise": {
+   "tok+headcov": 0.0
+  },
+  "shot_noise": {
+   "tok+headcov": 0.0
+  },
+  "impulse_noise": {
+   "tok+headcov": 0.0
+  },
+  "defocus_blur": {
+   "tok+headcov": 0.0
+  },
+  "glass_blur": {
+   "tok+headcov": 0.0
+  },
+  "motion_blur": {
+   "tok+headcov": 0.0
+  },
+  "zoom_blur": {
+   "tok+headcov": 0.0
+  },
+  "snow": {
+   "tok+headcov": 0.0
+  },
+  "frost": {
+   "tok+headcov": 0.0
+  },
+  "fog": {
+   "tok+headcov": 0.0
+  },
+  "brightness": {
+   "tok+headcov": 0.0
+  },
+  "contrast": {
+   "tok+headcov": 0.0
+  },
+  "elastic_transform": {
+   "tok+headcov": 0.0
+  },
+  "pixelate": {
+   "tok+headcov": 0.0
+  },
+  "jpeg_compression": {
+   "tok+headcov": 0.0
+  }
+ },
+ "per_cell": {
+  "tok+headcov": {
+   "clean": 76.9,
+   "gaussian_noise-3": 66.10000000000001,
+   "gaussian_noise-5": 49.95,
+   "shot_noise-3": 65.25,
+   "shot_noise-5": 50.0,
+   "impulse_noise-3": 66.3,
+   "impulse_noise-5": 49.1,
+   "defocus_blur-3": 61.4,
+   "defocus_blur-5": 44.4,
+   "glass_blur-3": 52.05,
+   "glass_blur-5": 35.8,
+   "motion_blur-3": 66.7,
+   "motion_blur-5": 49.9,
+   "zoom_blur-3": 55.400000000000006,
+   "zoom_blur-5": 42.3,
+   "snow-3": 65.55,
+   "snow-5": 57.550000000000004,
+   "frost-3": 58.5,
+   "frost-5": 51.4,
+   "fog-3": 67.9,
+   "fog-5": 56.05,
+   "brightness-3": 75.05,
+   "brightness-5": 71.05,
+   "contrast-3": 71.0,
+   "contrast-5": 46.2,
+   "elastic_transform-3": 69.65,
+   "elastic_transform-5": 48.5,
+   "pixelate-3": 72.3,
+   "pixelate-5": 66.9,
+   "jpeg_compression-3": 70.35,
+   "jpeg_compression-5": 61.3
+  }
+ }
+}

@@ -1,0 +1,27 @@
+__pycache__/
+*.pyc
+stats/
+cache/
+runs/
+*.npy
+# Official FOA / PEA code is fetched by the user (see third_party/*/SOURCE.md), not redistributed here
+third_party/foa/*
+!third_party/foa/SOURCE.md
+third_party/pea/*
+!third_party/pea/SOURCE.md
+paper/*.aux
+paper/*.log
+paper/*.out
+paper/*.bbl
+paper/*.blg
+paper/*.fdb_latexmk
+paper/*.fls
+
+# LaTeX build files
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.fls
+*.fdb_latexmk

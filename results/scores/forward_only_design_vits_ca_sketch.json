@@ -1,0 +1,176 @@
+{
+ "gate": {
+  "best": "tok+place_b11",
+  "gain_over_neo": 1.0333333333333385,
+  "clean_harm_best": -0.3999999999999915,
+  "verdict": "FAIL"
+ },
+ "reference": "neo",
+ "n_cells": 3,
+ "cells": [
+  "sketch-d1",
+  "sketch-d2",
+  "sketch-d3"
+ ],
+ "mean_30_cells": {
+  "neo": 36.9,
+  "tok": 36.61666666666667,
+  "place_b6": 34.699999999999996,
+  "tok+place_b1": 28.916666666666668,
+  "tok+place_b2": 29.53333333333333,
+  "tok+place_b3": 30.78333333333333,
+  "tok+place_b4": 32.38333333333333,
+  "tok+place_b5": 33.550000000000004,
+  "tok+place_b6": 33.36666666666667,
+  "tok+place_b7": 34.28333333333334,
+  "tok+place_b8": 36.21666666666666,
+  "tok+place_b9": 36.199999999999996,
+  "tok+place_b10": 36.21666666666667,
+  "tok+place_b11": 37.93333333333334,
+  "tok+place_b12": 36.61666666666667
+ },
+ "clean": {
+  "neo": 80.85,
+  "tok": 80.60000000000001,
+  "place_b6": 80.60000000000001,
+  "tok+place_b1": 80.9,
+  "tok+place_b2": 80.75,
+  "tok+place_b3": 80.75,
+  "tok+place_b4": 80.80000000000001,
+  "tok+place_b5": 80.5,
+  "tok+place_b6": 80.7,
+  "tok+place_b7": 80.55,
+  "tok+place_b8": 80.65,
+  "tok+place_b9": 80.4,
+  "tok+place_b10": 80.2,
+  "tok+place_b11": 80.45,
+  "tok+place_b12": 80.60000000000001
+ },
+ "clean_harm": {
+  "neo": 0.0,
+  "tok": -0.2499999999999858,
+  "place_b6": -0.2499999999999858,
+  "tok+place_b1": 0.05000000000001137,
+  "tok+place_b2": -0.09999999999999432,
+  "tok+place_b3": -0.09999999999999432,
+  "tok+place_b4": -0.04999999999998295,
+  "tok+place_b5": -0.3499999999999943,
+  "tok+place_b6": -0.14999999999999147,
+  "tok+place_b7": -0.29999999999999716,
+  "tok+place_b8": -0.19999999999998863,
+  "tok+place_b9": -0.44999999999998863,
+  "tok+place_b10": -0.6499999999999915,
+  "tok+place_b11": -0.3999999999999915,
+  "tok+place_b12": -0.2499999999999858
+ },
+ "warmup_first640": {
+  "neo": 37.1875,
+  "tok": 36.09375,
+  "place_b6": 35.260416666666664,
+  "tok+place_b1": 27.708333333333332,
+  "tok+place_b2": 28.697916666666668,
+  "tok+place_b3": 30.46875,
+  "tok+place_b4": 31.875,
+  "tok+place_b5": 33.489583333333336,
+  "tok+place_b6": 33.697916666666664,
+  "tok+place_b7": 34.322916666666664,
+  "tok+place_b8": 35.104166666666664,
+  "tok+place_b9": 35.3125,
+  "tok+place_b10": 35.15625,
+  "tok+place_b11": 37.291666666666664,
+  "tok+place_b12": 36.09375
+ },
+ "per_family_vs_neo": {},
+ "per_cell": {
+  "neo": {
+   "clean": 80.85,
+   "sketch-d1": 36.3,
+   "sketch-d2": 36.5,
+   "sketch-d3": 37.9
+  },
+  "tok": {
+   "clean": 80.60000000000001,
+   "sketch-d1": 35.85,
+   "sketch-d2": 36.55,
+   "sketch-d3": 37.45
+  },
+  "place_b6": {
+   "clean": 80.60000000000001,
+   "sketch-d1": 34.300000000000004,
+   "sketch-d2": 34.849999999999994,
+   "sketch-d3": 34.949999999999996
+  },
+  "tok+place_b1": {
+   "clean": 80.9,
+   "sketch-d1": 29.25,
+   "sketch-d2": 28.799999999999997,
+   "sketch-d3": 28.7
+  },
+  "tok+place_b2": {
+   "clean": 80.75,
+   "sketch-d1": 28.65,
+   "sketch-d2": 29.9,
+   "sketch-d3": 30.049999999999997
+  },
+  "tok+place_b3": {
+   "clean": 80.75,
+   "sketch-d1": 31.3,
+   "sketch-d2": 30.15,
+   "sketch-d3": 30.9
+  },
+  "tok+place_b4": {
+   "clean": 80.80000000000001,
+   "sketch-d1": 32.75,
+   "sketch-d2": 31.900000000000002,
+   "sketch-d3": 32.5
+  },
+  "tok+place_b5": {
+   "clean": 80.5,
+   "sketch-d1": 34.0,
+   "sketch-d2": 32.85,
+   "sketch-d3": 33.800000000000004
+  },
+  "tok+place_b6": {
+   "clean": 80.7,
+   "sketch-d1": 33.45,
+   "sketch-d2": 33.050000000000004,
+   "sketch-d3": 33.6
+  },
+  "tok+place_b7": {
+   "clean": 80.55,
+   "sketch-d1": 33.900000000000006,
+   "sketch-d2": 34.050000000000004,
+   "sketch-d3": 34.9
+  },
+  "tok+place_b8": {
+   "clean": 80.65,
+   "sketch-d1": 35.15,
+   "sketch-d2": 36.55,
+   "sketch-d3": 36.95
+  },
+  "tok+place_b9": {
+   "clean": 80.4,
+   "sketch-d1": 35.949999999999996,
+   "sketch-d2": 36.05,
+   "sketch-d3": 36.6
+  },
+  "tok+place_b10": {
+   "clean": 80.2,
+   "sketch-d1": 35.9,
+   "sketch-d2": 36.4,
+   "sketch-d3": 36.35
+  },
+  "tok+place_b11": {
+   "clean": 80.45,
+   "sketch-d1": 37.5,
+   "sketch-d2": 38.550000000000004,
+   "sketch-d3": 37.75
+  },
+  "tok+place_b12": {
+   "clean": 80.60000000000001,
+   "sketch-d1": 35.85,
+   "sketch-d2": 36.55,
+   "sketch-d3": 37.45
+  }
+ }
+}

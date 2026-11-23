@@ -1,0 +1,258 @@
+{
+ "gate": {
+  "best": "tok+headcov",
+  "gain_over_neo": 4.11666666666666,
+  "clean_harm_best": -0.3499999999999943,
+  "verdict": "PASS"
+ },
+ "mean_30_cells": {
+  "neo": 53.27166666666667,
+  "tok": 56.436666666666675,
+  "headcov": 54.26833333333333,
+  "tok+headcov": 57.38833333333333
+ },
+ "clean": {
+  "neo": 80.85,
+  "tok": 80.60000000000001,
+  "headcov": 80.45,
+  "tok+headcov": 80.5
+ },
+ "clean_harm": {
+  "neo": 0.0,
+  "tok": -0.2499999999999858,
+  "headcov": -0.3999999999999915,
+  "tok+headcov": -0.3499999999999943
+ },
+ "warmup_first640": {
+  "neo": 53.40625,
+  "tok": 56.135416666666664,
+  "headcov": 53.989583333333336,
+  "tok+headcov": 56.963541666666664
+ },
+ "per_family_vs_neo": {
+  "gaussian_noise": {
+   "neo": 0.0,
+   "tok": 2.9499999999999957,
+   "headcov": 0.42499999999999716,
+   "tok+headcov": 4.150000000000006
+  },
+  "shot_noise": {
+   "neo": 0.0,
+   "tok": 4.175000000000004,
+   "headcov": -0.07500000000000284,
+   "tok+headcov": 4.950000000000003
+  },
+  "impulse_noise": {
+   "neo": 0.0,
+   "tok": 4.0,
+   "headcov": 0.22500000000000142,
+   "tok+headcov": 4.674999999999997
+  },
+  "defocus_blur": {
+   "neo": 0.0,
+   "tok": 4.774999999999999,
+   "headcov": 1.3250000000000028,
+   "tok+headcov": 5.5
+  },
+  "glass_blur": {
+   "neo": 0.0,
+   "tok": 0.0,
+   "headcov": 2.3499999999999943,
+   "tok+headcov": 1.7249999999999943
+  },
+  "motion_blur": {
+   "neo": 0.0,
+   "tok": 1.7000000000000028,
+   "headcov": 0.5250000000000057,
+   "tok+headcov": 2.5
+  },
+  "zoom_blur": {
+   "neo": 0.0,
+   "tok": -0.3499999999999943,
+   "headcov": 1.8500000000000085,
+   "tok+headcov": 2.075000000000003
+  },
+  "snow": {
+   "neo": 0.0,
+   "tok": 4.075000000000003,
+   "headcov": 1.0499999999999972,
+   "tok+headcov": 4.875
+  },
+  "frost": {
+   "neo": 0.0,
+   "tok": 2.674999999999997,
+   "headcov": 2.0,
+   "tok+headcov": 3.875
+  },
+  "fog": {
+   "neo": 0.0,
+   "tok": 2.7750000000000057,
+   "headcov": 1.0750000000000028,
+   "tok+headcov": 3.325000000000003
+  },
+  "brightness": {
+   "neo": 0.0,
+   "tok": 1.7499999999999858,
+   "headcov": 0.32500000000000284,
+   "tok+headcov": 1.6749999999999972
+  },
+  "contrast": {
+   "neo": 0.0,
+   "tok": 13.575000000000003,
+   "headcov": 1.5249999999999986,
+   "tok+headcov": 14.349999999999994
+  },
+  "elastic_transform": {
+   "neo": 0.0,
+   "tok": 1.8500000000000085,
+   "headcov": 1.3499999999999943,
+   "tok+headcov": 3.950000000000003
+  },
+  "pixelate": {
+   "neo": 0.0,
+   "tok": 3.875,
+   "headcov": 0.42499999999999716,
+   "tok+headcov": 3.7249999999999943
+  },
+  "jpeg_compression": {
+   "neo": 0.0,
+   "tok": -0.3499999999999943,
+   "headcov": 0.575000000000017,
+   "tok+headcov": 0.4000000000000057
+  }
+ },
+ "per_cell": {
+  "neo": {
+   "clean": 80.85,
+   "gaussian_noise-3": 65.60000000000001,
+   "gaussian_noise-5": 34.8,
+   "shot_noise-3": 62.74999999999999,
+   "shot_noise-5": 34.849999999999994,
+   "impulse_noise-3": 64.5,
+   "impulse_noise-5": 36.7,
+   "defocus_blur-3": 56.699999999999996,
+   "defocus_blur-5": 37.1,
+   "glass_blur-3": 43.55,
+   "glass_blur-5": 27.6,
+   "motion_blur-3": 64.05,
+   "motion_blur-5": 45.65,
+   "zoom_blur-3": 50.949999999999996,
+   "zoom_blur-5": 35.4,
+   "snow-3": 62.050000000000004,
+   "snow-5": 48.05,
+   "frost-3": 54.1,
+   "frost-5": 46.400000000000006,
+   "fog-3": 64.1,
+   "fog-5": 51.449999999999996,
+   "brightness-3": 76.25,
+   "brightness-5": 71.15,
+   "contrast-3": 68.30000000000001,
+   "contrast-5": 19.6,
+   "elastic_transform-3": 71.3,
+   "elastic_transform-5": 42.95,
+   "pixelate-3": 73.4,
+   "pixelate-5": 57.9,
+   "jpeg_compression-3": 71.35000000000001,
+   "jpeg_compression-5": 59.599999999999994
+  },
+  "tok": {
+   "clean": 80.60000000000001,
+   "gaussian_noise-3": 65.45,
+   "gaussian_noise-5": 40.849999999999994,
+   "shot_noise-3": 64.45,
+   "shot_noise-5": 41.5,
+   "impulse_noise-3": 66.2,
+   "impulse_noise-5": 43.0,
+   "defocus_blur-3": 61.6,
+   "defocus_blur-5": 41.75,
+   "glass_blur-3": 43.25,
+   "glass_blur-5": 27.900000000000002,
+   "motion_blur-3": 65.5,
+   "motion_blur-5": 47.599999999999994,
+   "zoom_blur-3": 51.2,
+   "zoom_blur-5": 34.449999999999996,
+   "snow-3": 65.05,
+   "snow-5": 53.2,
+   "frost-3": 56.2,
+   "frost-5": 49.65,
+   "fog-3": 67.85,
+   "fog-5": 53.25,
+   "brightness-3": 77.64999999999999,
+   "brightness-5": 73.25,
+   "contrast-3": 72.95,
+   "contrast-5": 42.1,
+   "elastic_transform-3": 72.15,
+   "elastic_transform-5": 45.800000000000004,
+   "pixelate-3": 73.0,
+   "pixelate-5": 66.05,
+   "jpeg_compression-3": 70.65,
+   "jpeg_compression-5": 59.599999999999994
+  },
+  "headcov": {
+   "clean": 80.45,
+   "gaussian_noise-3": 65.5,
+   "gaussian_noise-5": 35.75,
+   "shot_noise-3": 62.4,
+   "shot_noise-5": 35.05,
+   "impulse_noise-3": 63.949999999999996,
+   "impulse_noise-5": 37.7,
+   "defocus_blur-3": 57.85,
+   "defocus_blur-5": 38.6,
+   "glass_blur-3": 46.7,
+   "glass_blur-5": 29.15,
+   "motion_blur-3": 64.55,
+   "motion_blur-5": 46.2,
+   "zoom_blur-3": 52.1,
+   "zoom_blur-5": 37.95,
+   "snow-3": 62.849999999999994,
+   "snow-5": 49.35,
+   "frost-3": 55.7,
+   "frost-5": 48.8,
+   "fog-3": 64.64999999999999,
+   "fog-5": 53.05,
+   "brightness-3": 76.4,
+   "brightness-5": 71.65,
+   "contrast-3": 69.5,
+   "contrast-5": 21.45,
+   "elastic_transform-3": 71.8,
+   "elastic_transform-5": 45.15,
+   "pixelate-3": 73.45,
+   "pixelate-5": 58.699999999999996,
+   "jpeg_compression-3": 71.85000000000001,
+   "jpeg_compression-5": 60.25
+  },
+  "tok+headcov": {
+   "clean": 80.5,
+   "gaussian_noise-3": 66.60000000000001,
+   "gaussian_noise-5": 42.1,
+   "shot_noise-3": 65.05,
+   "shot_noise-5": 42.449999999999996,
+   "impulse_noise-3": 66.8,
+   "impulse_noise-5": 43.75,
+   "defocus_blur-3": 62.1,
+   "defocus_blur-5": 42.699999999999996,
+   "glass_blur-3": 45.4,
+   "glass_blur-5": 29.2,
+   "motion_blur-3": 66.05,
+   "motion_blur-5": 48.65,
+   "zoom_blur-3": 52.800000000000004,
+   "zoom_blur-5": 37.7,
+   "snow-3": 65.75,
+   "snow-5": 54.1,
+   "frost-3": 57.45,
+   "frost-5": 50.8,
+   "fog-3": 67.75,
+   "fog-5": 54.449999999999996,
+   "brightness-3": 77.75,
+   "brightness-5": 73.0,
+   "contrast-3": 73.1,
+   "contrast-5": 43.5,
+   "elastic_transform-3": 72.8,
+   "elastic_transform-5": 49.35,
+   "pixelate-3": 73.25,
+   "pixelate-5": 65.5,
+   "jpeg_compression-3": 71.8,
+   "jpeg_compression-5": 59.95
+  }
+ }
+}

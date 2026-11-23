@@ -1,0 +1,12 @@
+{
+ "model": "deits",
+ "dataset": "cbar",
+ "trunk": 4,
+ "shallower": 5,
+ "deeper": 9,
+ "theta": 2.749227523803711,
+ "theta_rule": "0.65 quantile of the base path entropy on the design images",
+ "trunk_best_by_accuracy": "px+b5",
+ "routed_share_at_1.5": 0.7500000000000001,
+ "arm": "rule_t4_b5b9_gated"
+}

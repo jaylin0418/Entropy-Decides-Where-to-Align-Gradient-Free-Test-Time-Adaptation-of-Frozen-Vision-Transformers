@@ -1,0 +1,98 @@
+{
+ "gate": {
+  "best": "rule_t7_b5b9_gated",
+  "gain_over_neo": 0.0,
+  "clean_harm_best": 0.0,
+  "verdict": "FAIL"
+ },
+ "reference": "rule_t7_b5b9_gated",
+ "n_cells": 20,
+ "cells": [
+  "blue_noise_sample-3",
+  "blue_noise_sample-5",
+  "brownish_noise-3",
+  "brownish_noise-5",
+  "caustic_refraction-3",
+  "caustic_refraction-5",
+  "checkerboard_cutout-3",
+  "checkerboard_cutout-5",
+  "cocentric_sine_waves-3",
+  "cocentric_sine_waves-5",
+  "inverse_sparkles-3",
+  "inverse_sparkles-5",
+  "perlin_noise-3",
+  "perlin_noise-5",
+  "plasma_noise-3",
+  "plasma_noise-5",
+  "single_frequency_greyscale-3",
+  "single_frequency_greyscale-5",
+  "sparkles-3",
+  "sparkles-5"
+ ],
+ "mean_30_cells": {
+  "rule_t7_b5b9_gated": 70.3575
+ },
+ "clean": {
+  "rule_t7_b5b9_gated": 84.1
+ },
+ "clean_harm": {
+  "rule_t7_b5b9_gated": 0.0
+ },
+ "warmup_first640": {
+  "rule_t7_b5b9_gated": 71.7890625
+ },
+ "per_family_vs_neo": {},
+ "per_cell": {
+  "rule_t7_b5b9_gated": {
+   "clean": 84.1,
+   "blue_noise_sample-3": 78.9,
+   "blue_noise_sample-5": 70.8,
+   "brownish_noise-3": 78.8,
+   "brownish_noise-5": 76.5,
+   "caustic_refraction-3": 73.25,
+   "caustic_refraction-5": 63.7,
+   "checkerboard_cutout-3": 79.10000000000001,
+   "checkerboard_cutout-5": 74.25,
+   "cocentric_sine_waves-3": 63.4,
+   "cocentric_sine_waves-5": 58.550000000000004,
+   "inverse_sparkles-3": 62.25000000000001,
+   "inverse_sparkles-5": 38.800000000000004,
+   "perlin_noise-3": 81.6,
+   "perlin_noise-5": 77.85,
+   "plasma_noise-3": 65.60000000000001,
+   "plasma_noise-5": 57.75,
+   "single_frequency_greyscale-3": 78.5,
+   "single_frequency_greyscale-5": 68.4,
+   "sparkles-3": 81.15,
+   "sparkles-5": 78.0
+  }
+ },
+ "routed_fraction": {
+  "rule_t7_b5b9_gated": {
+   "clean": 0.0,
+   "blue_noise_sample-3": 0.17041015625,
+   "blue_noise_sample-5": 0.29443359375,
+   "brownish_noise-3": 0.1708984375,
+   "brownish_noise-5": 0.2109375,
+   "caustic_refraction-3": 0.0,
+   "caustic_refraction-5": 0.0,
+   "checkerboard_cutout-3": 0.06640625,
+   "checkerboard_cutout-5": 0.03515625,
+   "cocentric_sine_waves-3": 0.41064453125,
+   "cocentric_sine_waves-5": 0.505859375,
+   "inverse_sparkles-3": 0.46435546875,
+   "inverse_sparkles-5": 0.75341796875,
+   "perlin_noise-3": 0.15869140625,
+   "perlin_noise-5": 0.20751953125,
+   "plasma_noise-3": 0.42919921875,
+   "plasma_noise-5": 0.55029296875,
+   "single_frequency_greyscale-3": 0.189453125,
+   "single_frequency_greyscale-5": 0.341796875,
+   "sparkles-3": 0.01025390625,
+   "sparkles-5": 0.2138671875
+  }
+ },
+ "routed_fraction_mean": {
+  "rule_t7_b5b9_gated": 0.2591796875
+ }
+}

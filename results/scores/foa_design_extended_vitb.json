@@ -1,0 +1,103 @@
+{
+ "mean_cells": {
+  "foa": 55.601111111111116,
+  "tok+foa": 58.20666666666668
+ },
+ "n_cells": 15,
+ "clean": {
+  "foa": 84.18333333333334,
+  "tok+foa": 84.26666666666667
+ },
+ "references_same_cells": {
+  "spa1": {
+   "neo": 54.64666666666667,
+   "tok": 57.50333333333333,
+   "headcov": 55.79666666666667,
+   "tok+headcov": 58.49
+  },
+  "spa2": {
+   "eta": 55.2,
+   "eta+neo": 57.68666666666666,
+   "eta+headcov": 58.45333333333333,
+   "tok+eta": 57.853333333333325,
+   "tok+eta+neo": 59.916666666666664,
+   "tok+eta+headcov": 60.763333333333335
+  }
+ },
+ "per_cell": {
+  "foa": {
+   "clean": 84.18333333333334,
+   "gaussian_noise-5": 48.96666666666666,
+   "shot_noise-5": 49.6,
+   "impulse_noise-5": 50.16666666666667,
+   "defocus_blur-5": 52.5,
+   "glass_blur-5": 38.266666666666666,
+   "motion_blur-5": 54.58333333333333,
+   "zoom_blur-5": 48.6,
+   "snow-5": 60.71666666666666,
+   "frost-5": 56.31666666666667,
+   "fog-5": 61.5,
+   "brightness-5": 77.08333333333334,
+   "contrast-5": 45.38333333333333,
+   "elastic_transform-5": 53.18333333333334,
+   "pixelate-5": 67.66666666666666,
+   "jpeg_compression-5": 69.48333333333333
+  },
+  "tok+foa": {
+   "clean": 84.26666666666667,
+   "gaussian_noise-5": 53.516666666666666,
+   "shot_noise-5": 55.25,
+   "impulse_noise-5": 53.55,
+   "defocus_blur-5": 53.25,
+   "glass_blur-5": 40.150000000000006,
+   "motion_blur-5": 56.91666666666667,
+   "zoom_blur-5": 45.61666666666667,
+   "snow-5": 63.7,
+   "frost-5": 58.81666666666666,
+   "fog-5": 61.133333333333326,
+   "brightness-5": 78.5,
+   "contrast-5": 56.49999999999999,
+   "elastic_transform-5": 54.56666666666666,
+   "pixelate-5": 72.45,
+   "jpeg_compression-5": 69.18333333333334
+  }
+ },
+ "seconds": {
+  "foa": {
+   "clean": 600.6,
+   "gaussian_noise-5": 602.0,
+   "shot_noise-5": 601.1,
+   "impulse_noise-5": 601.3,
+   "defocus_blur-5": 601.3,
+   "glass_blur-5": 601.5,
+   "motion_blur-5": 602.6,
+   "zoom_blur-5": 602.3,
+   "snow-5": 602.5,
+   "frost-5": 601.9,
+   "fog-5": 601.7,
+   "brightness-5": 601.0,
+   "contrast-5": 600.1,
+   "elastic_transform-5": 600.9,
+   "pixelate-5": 600.0,
+   "jpeg_compression-5": 600.6
+  },
+  "tok+foa": {
+   "clean": 605.2,
+   "gaussian_noise-5": 604.7,
+   "shot_noise-5": 604.4,
+   "impulse_noise-5": 604.1,
+   "defocus_blur-5": 604.8,
+   "glass_blur-5": 604.9,
+   "motion_blur-5": 605.4,
+   "zoom_blur-5": 605.6,
+   "snow-5": 605.2,
+   "frost-5": 604.2,
+   "fog-5": 604.3,
+   "brightness-5": 604.5,
+   "contrast-5": 603.9,
+   "elastic_transform-5": 604.1,
+   "pixelate-5": 604.0,
+   "jpeg_compression-5": 604.0
+  }
+ }
+}

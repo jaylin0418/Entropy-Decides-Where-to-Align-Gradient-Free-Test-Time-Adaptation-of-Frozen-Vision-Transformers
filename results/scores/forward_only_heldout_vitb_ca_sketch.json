@@ -1,0 +1,111 @@
+{
+ "gate": {
+  "best": "rule_t11_b1b7_gated",
+  "gain_over_neo": 0.6166666666666742,
+  "clean_harm_best": 0.0,
+  "verdict": "FAIL"
+ },
+ "reference": "neo",
+ "n_cells": 3,
+ "cells": [
+  "sketch-h1",
+  "sketch-h2",
+  "sketch-h3"
+ ],
+ "mean_30_cells": {
+  "neo": 46.65,
+  "tok": 46.23333333333333,
+  "tok+place_b11": 47.13333333333333,
+  "rule_t11_b1b7_gated": 47.26666666666667,
+  "rule_t11_b1_gated": 46.81666666666666,
+  "rule_t11_b7_gated": 47.1
+ },
+ "clean": {
+  "neo": 84.15,
+  "tok": 83.95,
+  "tok+place_b11": 83.7,
+  "rule_t11_b1b7_gated": 84.15,
+  "rule_t11_b1_gated": 84.15,
+  "rule_t11_b7_gated": 84.15
+ },
+ "clean_harm": {
+  "neo": 0.0,
+  "tok": -0.20000000000000284,
+  "tok+place_b11": -0.45000000000000284,
+  "rule_t11_b1b7_gated": 0.0,
+  "rule_t11_b1_gated": 0.0,
+  "rule_t11_b7_gated": 0.0
+ },
+ "warmup_first640": {
+  "neo": 47.864583333333336,
+  "tok": 46.510416666666664,
+  "tok+place_b11": 47.708333333333336,
+  "rule_t11_b1b7_gated": 47.395833333333336,
+  "rule_t11_b1_gated": 46.770833333333336,
+  "rule_t11_b7_gated": 47.239583333333336
+ },
+ "per_family_vs_neo": {},
+ "per_cell": {
+  "neo": {
+   "clean": 84.15,
+   "sketch-h1": 46.9,
+   "sketch-h2": 47.05,
+   "sketch-h3": 46.0
+  },
+  "tok": {
+   "clean": 83.95,
+   "sketch-h1": 45.9,
+   "sketch-h2": 46.9,
+   "sketch-h3": 45.9
+  },
+  "tok+place_b11": {
+   "clean": 83.7,
+   "sketch-h1": 46.300000000000004,
+   "sketch-h2": 47.949999999999996,
+   "sketch-h3": 47.15
+  },
+  "rule_t11_b1b7_gated": {
+   "clean": 84.15,
+   "sketch-h1": 46.550000000000004,
+   "sketch-h2": 48.0,
+   "sketch-h3": 47.25
+  },
+  "rule_t11_b1_gated": {
+   "clean": 84.15,
+   "sketch-h1": 46.1,
+   "sketch-h2": 47.65,
+   "sketch-h3": 46.7
+  },
+  "rule_t11_b7_gated": {
+   "clean": 84.15,
+   "sketch-h1": 46.35,
+   "sketch-h2": 47.699999999999996,
+   "sketch-h3": 47.25
+  }
+ },
+ "routed_fraction": {
+  "rule_t11_b1b7_gated": {
+   "clean": 0.00146484375,
+   "sketch-h1": 0.3466796875,
+   "sketch-h2": 0.337890625,
+   "sketch-h3": 0.349609375
+  },
+  "rule_t11_b1_gated": {
+   "clean": 0.00146484375,
+   "sketch-h1": 0.3466796875,
+   "sketch-h2": 0.337890625,
+   "sketch-h3": 0.349609375
+  },
+  "rule_t11_b7_gated": {
+   "clean": 0.00146484375,
+   "sketch-h1": 0.3466796875,
+   "sketch-h2": 0.337890625,
+   "sketch-h3": 0.349609375
+  }
+ },
+ "routed_fraction_mean": {
+  "rule_t11_b1b7_gated": 0.3447265625,
+  "rule_t11_b1_gated": 0.3447265625,
+  "rule_t11_b7_gated": 0.3447265625
+ }
+}

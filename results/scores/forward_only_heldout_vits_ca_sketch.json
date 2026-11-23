@@ -1,0 +1,111 @@
+{
+ "gate": {
+  "best": "tok",
+  "gain_over_neo": 0.14999999999999858,
+  "clean_harm_best": 0.04999999999999716,
+  "verdict": "FAIL"
+ },
+ "reference": "neo",
+ "n_cells": 3,
+ "cells": [
+  "sketch-h1",
+  "sketch-h2",
+  "sketch-h3"
+ ],
+ "mean_30_cells": {
+  "neo": 36.449999999999996,
+  "tok": 36.599999999999994,
+  "tok+place_b6": 33.0,
+  "rule_t6_b8b11_gated": 35.96666666666666,
+  "rule_t6_b8_gated": 34.6,
+  "rule_t6_b11_gated": 35.63333333333333
+ },
+ "clean": {
+  "neo": 80.4,
+  "tok": 80.45,
+  "tok+place_b6": 80.25,
+  "rule_t6_b8b11_gated": 80.45,
+  "rule_t6_b8_gated": 80.45,
+  "rule_t6_b11_gated": 80.45
+ },
+ "clean_harm": {
+  "neo": 0.0,
+  "tok": 0.04999999999999716,
+  "tok+place_b6": -0.15000000000000568,
+  "rule_t6_b8b11_gated": 0.04999999999999716,
+  "rule_t6_b8_gated": 0.04999999999999716,
+  "rule_t6_b11_gated": 0.04999999999999716
+ },
+ "warmup_first640": {
+  "neo": 37.708333333333336,
+  "tok": 37.34375,
+  "tok+place_b6": 33.59375,
+  "rule_t6_b8b11_gated": 36.145833333333336,
+  "rule_t6_b8_gated": 35.260416666666664,
+  "rule_t6_b11_gated": 35.989583333333336
+ },
+ "per_family_vs_neo": {},
+ "per_cell": {
+  "neo": {
+   "clean": 80.4,
+   "sketch-h1": 36.7,
+   "sketch-h2": 36.0,
+   "sketch-h3": 36.65
+  },
+  "tok": {
+   "clean": 80.45,
+   "sketch-h1": 37.95,
+   "sketch-h2": 36.15,
+   "sketch-h3": 35.699999999999996
+  },
+  "tok+place_b6": {
+   "clean": 80.25,
+   "sketch-h1": 34.4,
+   "sketch-h2": 32.550000000000004,
+   "sketch-h3": 32.05
+  },
+  "rule_t6_b8b11_gated": {
+   "clean": 80.45,
+   "sketch-h1": 37.55,
+   "sketch-h2": 35.25,
+   "sketch-h3": 35.099999999999994
+  },
+  "rule_t6_b8_gated": {
+   "clean": 80.45,
+   "sketch-h1": 35.75,
+   "sketch-h2": 34.35,
+   "sketch-h3": 33.7
+  },
+  "rule_t6_b11_gated": {
+   "clean": 80.45,
+   "sketch-h1": 37.35,
+   "sketch-h2": 34.9,
+   "sketch-h3": 34.65
+  }
+ },
+ "routed_fraction": {
+  "rule_t6_b8b11_gated": {
+   "clean": 0.00048828125,
+   "sketch-h1": 0.36279296875,
+   "sketch-h2": 0.3447265625,
+   "sketch-h3": 0.3671875
+  },
+  "rule_t6_b8_gated": {
+   "clean": 0.00048828125,
+   "sketch-h1": 0.36279296875,
+   "sketch-h2": 0.3447265625,
+   "sketch-h3": 0.3671875
+  },
+  "rule_t6_b11_gated": {
+   "clean": 0.00048828125,
+   "sketch-h1": 0.36279296875,
+   "sketch-h2": 0.3447265625,
+   "sketch-h3": 0.3671875
+  }
+ },
+ "routed_fraction_mean": {
+  "rule_t6_b8b11_gated": 0.3582356770833333,
+  "rule_t6_b8_gated": 0.3582356770833333,
+  "rule_t6_b11_gated": 0.3582356770833333
+ }
+}

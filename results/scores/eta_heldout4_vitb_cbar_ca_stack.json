@@ -1,0 +1,65 @@
+{
+ "n_cells": 20,
+ "mean_30_cells": {
+  "tok+eta+rule_t7_b5b11": 70.225,
+  "tok+eta+rule_t7_b5b11+neo": 71.535
+ },
+ "clean": {
+  "tok+eta+rule_t7_b5b11": 83.89999999999999,
+  "tok+eta+rule_t7_b5b11+neo": 83.95
+ },
+ "forward_only_reference": {},
+ "eta_updated_samples_mean": 1431.2,
+ "per_family_vs_eta_neo": {},
+ "routed_fraction_mean": {
+  "tok+eta+rule_t7_b5b11+neo": 0.28914999999999996
+ },
+ "per_cell": {
+  "tok+eta+rule_t7_b5b11": {
+   "clean": 83.89999999999999,
+   "blue_noise_sample-3": 78.9,
+   "blue_noise_sample-5": 70.39999999999999,
+   "brownish_noise-3": 79.0,
+   "brownish_noise-5": 76.75,
+   "caustic_refraction-3": 75.35,
+   "caustic_refraction-5": 65.5,
+   "checkerboard_cutout-3": 78.45,
+   "checkerboard_cutout-5": 74.05000000000001,
+   "cocentric_sine_waves-3": 64.0,
+   "cocentric_sine_waves-5": 58.25,
+   "inverse_sparkles-3": 60.85,
+   "inverse_sparkles-5": 34.9,
+   "perlin_noise-3": 81.05,
+   "perlin_noise-5": 77.3,
+   "plasma_noise-3": 65.75,
+   "plasma_noise-5": 57.699999999999996,
+   "single_frequency_greyscale-3": 79.10000000000001,
+   "single_frequency_greyscale-5": 67.55,
+   "sparkles-3": 82.15,
+   "sparkles-5": 77.5
+  },
+  "tok+eta+rule_t7_b5b11+neo": {
+   "clean": 83.95,
+   "blue_noise_sample-3": 79.05,
+   "blue_noise_sample-5": 70.89999999999999,
+   "brownish_noise-3": 79.10000000000001,
+   "brownish_noise-5": 76.7,
+   "caustic_refraction-3": 75.44999999999999,
+   "caustic_refraction-5": 66.75,
+   "checkerboard_cutout-3": 78.9,
+   "checkerboard_cutout-5": 74.8,
+   "cocentric_sine_waves-3": 66.45,
+   "cocentric_sine_waves-5": 61.550000000000004,
+   "inverse_sparkles-3": 63.949999999999996,
+   "inverse_sparkles-5": 39.800000000000004,
+   "perlin_noise-3": 81.65,
+   "perlin_noise-5": 78.45,
+   "plasma_noise-3": 68.35,
+   "plasma_noise-5": 62.7,
+   "single_frequency_greyscale-3": 78.25,
+   "single_frequency_greyscale-5": 69.1,
+   "sparkles-3": 81.45,
+   "sparkles-5": 77.35
+  }
+ }
+}

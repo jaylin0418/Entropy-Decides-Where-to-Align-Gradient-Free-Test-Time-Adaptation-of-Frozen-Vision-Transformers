@@ -1,0 +1,60 @@
+{
+ "n_cells": 3,
+ "mean_30_cells": {
+  "eta": 48.18333333333334,
+  "eta+neo": 50.35,
+  "eta+headcov": 49.79999999999999,
+  "tok+eta+place_b8": 46.900000000000006,
+  "tok+eta+place_b8+neo": 48.73333333333333,
+  "tok+eta+place_b8+headcov": 48.15
+ },
+ "clean": {
+  "eta": 81.5,
+  "eta+neo": 80.80000000000001,
+  "eta+headcov": 80.75,
+  "tok+eta+place_b8": 81.55,
+  "tok+eta+place_b8+neo": 81.2,
+  "tok+eta+place_b8+headcov": 80.85
+ },
+ "forward_only_reference": {},
+ "eta_updated_samples_mean": 448.8333333333333,
+ "per_family_vs_eta_neo": {},
+ "per_cell": {
+  "eta": {
+   "clean": 81.5,
+   "r-h1": 47.55,
+   "r-h2": 46.150000000000006,
+   "r-h3": 50.849999999999994
+  },
+  "eta+neo": {
+   "clean": 80.80000000000001,
+   "r-h1": 49.75,
+   "r-h2": 47.75,
+   "r-h3": 53.55
+  },
+  "eta+headcov": {
+   "clean": 80.75,
+   "r-h1": 49.75,
+   "r-h2": 47.3,
+   "r-h3": 52.349999999999994
+  },
+  "tok+eta+place_b8": {
+   "clean": 81.55,
+   "r-h1": 46.400000000000006,
+   "r-h2": 44.95,
+   "r-h3": 49.35
+  },
+  "tok+eta+place_b8+neo": {
+   "clean": 81.2,
+   "r-h1": 48.55,
+   "r-h2": 46.25,
+   "r-h3": 51.4
+  },
+  "tok+eta+place_b8+headcov": {
+   "clean": 80.85,
+   "r-h1": 48.449999999999996,
+   "r-h2": 45.6,
+   "r-h3": 50.4
+  }
+ }
+}

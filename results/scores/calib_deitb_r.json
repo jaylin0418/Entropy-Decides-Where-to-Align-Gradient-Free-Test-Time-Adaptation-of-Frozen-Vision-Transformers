@@ -1,0 +1,12 @@
+{
+ "model": "deitb",
+ "dataset": "r",
+ "trunk": 7,
+ "shallower": 1,
+ "deeper": 8,
+ "theta": 4.021008014678955,
+ "theta_rule": "0.65 quantile of the base path entropy on the design images",
+ "trunk_best_by_accuracy": "px+b7",
+ "routed_share_at_1.5": 0.6395,
+ "arm": "rule_t7_b1b8_gated"
+}

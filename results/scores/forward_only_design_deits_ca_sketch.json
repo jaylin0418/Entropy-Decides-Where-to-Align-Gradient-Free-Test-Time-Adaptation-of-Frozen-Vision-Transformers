@@ -1,0 +1,176 @@
+{
+ "gate": {
+  "best": "place_b6",
+  "gain_over_neo": 1.6000000000000014,
+  "clean_harm_best": 0.0,
+  "verdict": "FAIL"
+ },
+ "reference": "neo",
+ "n_cells": 3,
+ "cells": [
+  "sketch-d1",
+  "sketch-d2",
+  "sketch-d3"
+ ],
+ "mean_30_cells": {
+  "neo": 31.03333333333333,
+  "tok": 29.966666666666665,
+  "place_b6": 32.63333333333333,
+  "tok+place_b1": 23.849999999999998,
+  "tok+place_b2": 27.0,
+  "tok+place_b3": 28.3,
+  "tok+place_b4": 29.416666666666668,
+  "tok+place_b5": 30.45,
+  "tok+place_b6": 30.71666666666667,
+  "tok+place_b7": 29.899999999999995,
+  "tok+place_b8": 29.766666666666666,
+  "tok+place_b9": 31.349999999999998,
+  "tok+place_b10": 30.933333333333334,
+  "tok+place_b11": 30.316666666666666,
+  "tok+place_b12": 29.966666666666665
+ },
+ "clean": {
+  "neo": 78.75,
+  "tok": 78.9,
+  "place_b6": 78.75,
+  "tok+place_b1": 78.64999999999999,
+  "tok+place_b2": 78.85,
+  "tok+place_b3": 78.9,
+  "tok+place_b4": 79.25,
+  "tok+place_b5": 78.9,
+  "tok+place_b6": 78.75,
+  "tok+place_b7": 78.64999999999999,
+  "tok+place_b8": 78.4,
+  "tok+place_b9": 78.5,
+  "tok+place_b10": 78.9,
+  "tok+place_b11": 79.0,
+  "tok+place_b12": 78.9
+ },
+ "clean_harm": {
+  "neo": 0.0,
+  "tok": 0.15000000000000568,
+  "place_b6": 0.0,
+  "tok+place_b1": -0.10000000000000853,
+  "tok+place_b2": 0.09999999999999432,
+  "tok+place_b3": 0.15000000000000568,
+  "tok+place_b4": 0.5,
+  "tok+place_b5": 0.15000000000000568,
+  "tok+place_b6": 0.0,
+  "tok+place_b7": -0.10000000000000853,
+  "tok+place_b8": -0.3499999999999943,
+  "tok+place_b9": -0.25,
+  "tok+place_b10": 0.15000000000000568,
+  "tok+place_b11": 0.25,
+  "tok+place_b12": 0.15000000000000568
+ },
+ "warmup_first640": {
+  "neo": 31.510416666666668,
+  "tok": 31.5625,
+  "place_b6": 33.541666666666664,
+  "tok+place_b1": 24.010416666666668,
+  "tok+place_b2": 26.822916666666668,
+  "tok+place_b3": 28.90625,
+  "tok+place_b4": 30.208333333333332,
+  "tok+place_b5": 31.614583333333332,
+  "tok+place_b6": 31.510416666666668,
+  "tok+place_b7": 31.354166666666668,
+  "tok+place_b8": 31.458333333333332,
+  "tok+place_b9": 32.708333333333336,
+  "tok+place_b10": 32.552083333333336,
+  "tok+place_b11": 31.770833333333332,
+  "tok+place_b12": 31.5625
+ },
+ "per_family_vs_neo": {},
+ "per_cell": {
+  "neo": {
+   "clean": 78.75,
+   "sketch-d1": 31.05,
+   "sketch-d2": 31.05,
+   "sketch-d3": 31.0
+  },
+  "tok": {
+   "clean": 78.9,
+   "sketch-d1": 30.099999999999998,
+   "sketch-d2": 29.75,
+   "sketch-d3": 30.049999999999997
+  },
+  "place_b6": {
+   "clean": 78.75,
+   "sketch-d1": 32.7,
+   "sketch-d2": 32.800000000000004,
+   "sketch-d3": 32.4
+  },
+  "tok+place_b1": {
+   "clean": 78.64999999999999,
+   "sketch-d1": 24.099999999999998,
+   "sketch-d2": 24.25,
+   "sketch-d3": 23.200000000000003
+  },
+  "tok+place_b2": {
+   "clean": 78.85,
+   "sketch-d1": 26.75,
+   "sketch-d2": 26.8,
+   "sketch-d3": 27.450000000000003
+  },
+  "tok+place_b3": {
+   "clean": 78.9,
+   "sketch-d1": 28.9,
+   "sketch-d2": 27.750000000000004,
+   "sketch-d3": 28.249999999999996
+  },
+  "tok+place_b4": {
+   "clean": 79.25,
+   "sketch-d1": 29.95,
+   "sketch-d2": 29.299999999999997,
+   "sketch-d3": 28.999999999999996
+  },
+  "tok+place_b5": {
+   "clean": 78.9,
+   "sketch-d1": 29.849999999999998,
+   "sketch-d2": 30.75,
+   "sketch-d3": 30.75
+  },
+  "tok+place_b6": {
+   "clean": 78.75,
+   "sketch-d1": 30.3,
+   "sketch-d2": 31.2,
+   "sketch-d3": 30.65
+  },
+  "tok+place_b7": {
+   "clean": 78.64999999999999,
+   "sketch-d1": 29.9,
+   "sketch-d2": 29.549999999999997,
+   "sketch-d3": 30.25
+  },
+  "tok+place_b8": {
+   "clean": 78.4,
+   "sketch-d1": 29.45,
+   "sketch-d2": 30.099999999999998,
+   "sketch-d3": 29.75
+  },
+  "tok+place_b9": {
+   "clean": 78.5,
+   "sketch-d1": 31.1,
+   "sketch-d2": 31.75,
+   "sketch-d3": 31.2
+  },
+  "tok+place_b10": {
+   "clean": 78.9,
+   "sketch-d1": 30.85,
+   "sketch-d2": 31.35,
+   "sketch-d3": 30.599999999999998
+  },
+  "tok+place_b11": {
+   "clean": 79.0,
+   "sketch-d1": 30.5,
+   "sketch-d2": 30.15,
+   "sketch-d3": 30.3
+  },
+  "tok+place_b12": {
+   "clean": 78.9,
+   "sketch-d1": 30.099999999999998,
+   "sketch-d2": 29.75,
+   "sketch-d3": 30.049999999999997
+  }
+ }
+}
