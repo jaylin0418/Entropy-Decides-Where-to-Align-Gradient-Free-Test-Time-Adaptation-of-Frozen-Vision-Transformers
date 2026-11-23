@@ -154,6 +154,8 @@ TS = [  # (key prefix, value path or formula, scored files, run commands, steps,
 # ---- literal numbers: category by printed text (the context of each is a setting unless listed here)
 SETTING = ('hyper-parameter, data size or protocol constant of the runs (tokalign/aligner.py, tokalign/data.py, scripts/*; README Data preparation)')
 LITERAL = {'66.3': ('quoted from another paper', 'FOA paper (66.3 % on 50,000-image domains)', 'citation'),
+           '64.5': ('quoted from another paper', 'PEA paper, Table 1 (ViT-Base, ImageNet-C severity 5, continual, without augmentation)', 'citation'),
+           '66.5': ('quoted from another paper', 'PEA paper, Table 1 (ViT-Base, ImageNet-C severity 5, continual, with augmentation)', 'citation'),
            '13.5': ('quoted from another paper', 'DDA (13.5 s per image)', 'citation'),
            '0.75': ('analytic cost', 'one 768x768 multiply per token and per image plus one eigendecomposition per refresh = about 0.12 GMACs per image = 0.75 % of 17.56 GMACs (scripts/analysis/frontier_and_drift.py MACS)', 'analytic'),
            '1.5': ('analytic cost', 'two 768x768 multiplies per token (TokAlign and LayerAlign after block 6) plus the head stage = about 1.5 % of a ViT-B/16 forward pass', 'analytic'),

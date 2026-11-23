@@ -54,7 +54,7 @@ python scripts/episodic/score_forward_only.py --runs runs/forward_only_heldout4_
 
 `site_choice.py` writes the main block (`trunk_pick_by_entropy`), the branch pair (`second_opinion_pick_pair`) and the
 entropy quantiles under `label_free`. Arm names: `neo`, `tok` (TokAlign), `place_b<k>` (LayerAlign after block k),
-`tok+place_b<k>` (the main path), `rule_t<b>_b<e>b<l>_gated` (the cascade: main block b, branches e and l), `eta`, `sar`,
+`tok+place_b<k>` (the main path), `rule_t<b>_b<e>b<l>_gated` (the cascade: main block b, branches e and l, the paper's a1 and a2), `eta`, `sar`,
 `tok+eta+place_b<k>` and `tok+eta+rule_t<b>_b<e>b<l>` (`run_gradient_host.py`). `--model vits|deitb|deits`,
 `--dataset r|sketch` and `--cells clean <cells>` with `--imagenet-c $IMAGENET_C_BAR` select the other models and shifts.
 Labels are read only by the `score_*.py` scripts.

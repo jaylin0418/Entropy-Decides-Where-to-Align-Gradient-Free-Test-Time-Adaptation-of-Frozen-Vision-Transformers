@@ -451,6 +451,7 @@ def early_exit():
             if a not in ep:
                 continue
             put(f'ex.h.{bench}.{k}', ep[a]); put(f'ex.h.{bench}.gain.{k}', ep[a] - ep['tok+place_b6'], '+.2f'); put(f'ex.h.{bench}.gainneo.{k}', ep[a] - ep['neo'], '+.2f')
+            put(f'ex.h.{bench}.gaing.{k}', ep[a] - ep['pair_gated'], '+.2f')                       # against the gated main path, the reference of the calibrated cascade's table
             if a in h.get('routed_mean', {}):
                 put(f'ex.h.{bench}.routed.{k}', 100 * h['routed_mean'][a], '.0f')
         put(f'ex.h.{bench}.n', h['n_cells'], 'd')
@@ -517,6 +518,7 @@ def early_exit():
         c, h = E['controls'][key], E['held4'][key]; pair, meth = h['episodic']['tok+place_b6'], h['episodic']['exit_b5b9_gated']
         for k, a in (('random', 'exit_b5b9_random_gated'), ('equal', 'exit_b5b9_equal_gated'), ('full', 'mix_b5b9_gated')):
             put(f'ex.ctl.{bench}.{k}', c['episodic'][a]); put(f'ex.ctl.{bench}.{k}.gain', c['episodic'][a] - pair, '+.2f')
+            put(f'ex.ctl.{bench}.{k}.gaing', c['episodic'][a] - h['episodic']['pair_gated'], '+.2f')   # against the gated main path
             put(f'ex.ctl.{bench}.{k}.vsmethod', c['episodic'][a] - meth, '+.2f'); put(f'ex.ctl.{bench}.{k}.clean', c['clean'][a] - h['clean']['neo'], '+.2f')
             put(f'ex.ctl.{bench}.{k}.routed', 100 * c['routed_mean'][a], '.0f')
             put(f'ex.ctl.{bench}.{k}.cleanabs', c['clean'][a])
@@ -615,6 +617,7 @@ def rule():
     if R['vits']['pick'] is not None:
         pk = R['vits']['pick']; put('rl.vs.pick.trunk', pk['trunk_pick_by_entropy'][4:], 's'); put('rl.vs.pick.lo', pk['second_opinion_pick_shallower'][4:], 's'); put('rl.vs.pick.hi', pk['second_opinion_pick_deeper'][4:], 's')
         put('rl.vs.pick.best', R['vits']['pick_t6']['trunk_best_by_accuracy'][4:], 's')
+        put('rl.vs.theta65', pk['trunk_entropy_quantile']['0.65'])                                   # the quantile rule's threshold on ViT-S/16 (its run used 1.5 nat)
     # the other held-out image sets and the design split (gain over the pair of the same set), the random-routing control, streams, timing
     TSS = v('two_site')
     refs = {'heldout': TSS['slices_vitb']['heldout']['episodic'] if 'slices_vitb' in TSS and 'heldout' in TSS['slices_vitb'] else None,

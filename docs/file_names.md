@@ -22,3 +22,17 @@ labelled-search cascade) and `rule_` (the calibrated cascade), and `trunk` in th
 | `results/scores/block_alignment_design_vitb` | `results/regprobe/probe_a.json` |
 | the where-to-align, labelled-search, calibrated-cascade and model-dataset runs | made with this repository's scripts (research job scripts `scripts/cvpr/course*.sh`), outputs under `data/derived/course_two_site/` |
 | `--split heldout` / `heldout2` / `heldout3` / `heldout4` | the first to fourth held-out sets of the report |
+
+## The code's terms against the report's
+
+| in the code, docs/ and the score files | in the report |
+|---|---|
+| `two_site`, `base path`, `pair`, `pair_gated`, `tok+place_b<k>` | the main path (TokAlign, LayerAlign after the main block, NEO, gated) |
+| `trunk`, `t<b>` | the main block b |
+| `second opinion`, `so`, `b<e>b<l>`, `shallower` / `deeper` | the two extra branches after blocks e < l (a1 < a2 in the report) |
+| `routed`, `routed_fraction`, `exit_theta` | the unsure images, their share, and the threshold theta |
+| `exit_` arms (`exit_b5b9_gated`) | the cascade with the blocks of the labelled dev search (5 and 9), a comparison only |
+| `rule_` arms (`rule_t6_b4b11_gated`) | the calibrated cascade |
+| `mix_` arms | the control that runs the branches on every image |
+| `hier` | the two-level map of Section G, not kept |
+| `design` | the dev images |

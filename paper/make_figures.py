@@ -139,18 +139,19 @@ for ax_, key, ylab, ttl in ((a1, 'agree_routed', 'agreement with block 6 (%)', '
 a2.legend(loc='upper left', handlelength=1.6, borderaxespad=0.1)
 cand_c = ['px'] + [f'px+b{k}' for k in range(1, 13) if k != 6]
 pr = SO['inc']['pairs']
-M = np.full((len(cand_c), len(cand_c)), np.nan)
-for i, a_ in enumerate(cand_c):
-    for j, b_ in enumerate(cand_c):
-        if i < j:
+rows_c, cols_c = cand_c[:-1], cand_c[1:]                                   # the shallower branch (px to 11) against the deeper (1 to 12)
+M = np.full((len(rows_c), len(cols_c)), np.nan)
+for i, a_ in enumerate(rows_c):
+    for j, b_ in enumerate(cols_c):
+        if i <= j:
             M[i, j] = pr.get(f'{a_}|{b_}', pr.get(f'{b_}|{a_}'))
 im = a3.imshow(np.ma.masked_invalid(M), cmap='Blues', aspect='auto', vmin=min(0.0, np.nanmin(M)), vmax=np.nanmax(M), interpolation='nearest')
 fig.colorbar(im, ax=a3, fraction=0.05, pad=0.02)
 for (ka, kb), ec, ls, lw in (((5, 9), C['host'], '--', 1.0), ((4, 11), C['accent'], '-', 1.4)):
-    i_, j_ = cand_c.index(f'px+b{ka}'), cand_c.index(f'px+b{kb}')
+    i_, j_ = rows_c.index(f'px+b{ka}'), cols_c.index(f'px+b{kb}')
     a3.add_patch(Rectangle((j_ - 0.5, i_ - 0.5), 1, 1, fill=False, ec=ec, lw=lw, ls=ls))
-labels_c = ['px'] + [d.replace('px+b', '') for d in cand_c[1:]]
-a3.set_xticks(range(len(cand_c))); a3.set_xticklabels(labels_c); a3.set_yticks(range(len(cand_c))); a3.set_yticklabels(labels_c)
+lab = lambda d: d.replace('px+b', '')
+a3.set_xticks(range(len(cols_c))); a3.set_xticklabels([lab(d) for d in cols_c]); a3.set_yticks(range(len(rows_c))); a3.set_yticklabels([lab(d) for d in rows_c])
 a3.set_xlabel('deeper branch'); a3.set_ylabel('shallower branch')
 a3.set_title('(c) two extra branches, ImageNet-C (pt)', loc='left')
 save(fig, 'why_sites')
