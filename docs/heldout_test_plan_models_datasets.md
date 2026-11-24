@@ -1,5 +1,7 @@
 # Pre-registration — the calibrated second-opinion stack on more models and on natural shifts
 
+> Table and section numbers in this plan are those of the report draft at the time it was declared (its Table 2 is now Table 3, Table S8 is Table S1, Sections F and G are C.2 and G). The plan is kept as declared.
+
 Declared 2026-11-10 23:14 MST (commit 72a4d3e), before any of its runs. Each held-out file is scored once. The job
 script `scripts/cvpr/course_ca.sh` of the research repository runs every step from this repository (`release/confidence-align`).
 

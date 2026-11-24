@@ -1,5 +1,7 @@
 # Pre-registration — hierarchical (within/between-image) alignment (ViT-B/16 and ViT-S/16 on ImageNet-C)
 
+> Section, table and figure numbers in this plan are those of the report draft at the time it was declared (the two-level map is now Section G, other maps). The plan is kept as declared.
+
 Declared 2026-11-08 21:30 MST, before the design run of the method and before any `heldout3` image was passed through
 the method. Everything below is frozen; the held-out images are scored once.
 

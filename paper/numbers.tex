@@ -39,6 +39,7 @@
 \expandafter\def\csname pn@u.range.hi\endcsname{2.6}
 \expandafter\def\csname pn@u.cleanmax\endcsname{0.30}
 \expandafter\def\csname pn@cost.gmacs\endcsname{17.56}
+\expandafter\def\csname pn@cost.mainpath.pct\endcsname{1.3}
 \expandafter\def\csname pn@cost.neo.ms\endcsname{267}
 \expandafter\def\csname pn@cost.neo.x\endcsname{1.00}
 \expandafter\def\csname pn@cost.neo.acc\endcsname{59.90}
@@ -120,6 +121,7 @@
 \expandafter\def\csname pn@ts.sw.pixelbest.n\endcsname{5}
 \expandafter\def\csname pn@ts.sw.pixelbest.names\endcsname{Gaussian noise, shot noise, impulse noise, defocus blur and pixelate}
 \expandafter\def\csname pn@ts.sw.midbest.n\endcsname{8}
+\expandafter\def\csname pn@ts.sw.pixelbest.nonnoise.names\endcsname{defocus blur and pixelate}
 \expandafter\def\csname pn@ts.sw.earlybest.n\endcsname{2}
 \expandafter\def\csname pn@ts.sw.b6neg.n\endcsname{4}
 \expandafter\def\csname pn@ts.sw.b6neg.names\endcsname{Gaussian noise, shot noise, impulse noise and defocus blur}
@@ -612,6 +614,7 @@
 \expandafter\def\csname pn@hi.d.n0x4.vs.hierb6\endcsname{+0.10}
 \expandafter\def\csname pn@hi.d.n0d4.vs.hierb6\endcsname{+0.04}
 \expandafter\def\csname pn@hi.d.hierb6.vs.withinb6\endcsname{+0.05}
+\expandafter\def\csname pn@hi.d.hierb6.vs.b6.abs\endcsname{0.15}
 \expandafter\def\csname pn@hi.grp.noise.hierb6\endcsname{\ensuremath{-}1.1}
 \expandafter\def\csname pn@hi.grp.blur.hierb6\endcsname{+4.1}
 \expandafter\def\csname pn@hi.grp.weather.hierb6\endcsname{+2.9}
@@ -655,7 +658,7 @@
 \expandafter\def\csname pn@hi.corr.frost.hierb6\endcsname{+0.3}
 \expandafter\def\csname pn@hi.corr.fog.hierb6\endcsname{\ensuremath{-}0.7}
 \expandafter\def\csname pn@hi.corr.brightness.hierb6\endcsname{\ensuremath{-}0.3}
-\expandafter\def\csname pn@hi.corr.contrast.hierb6\endcsname{\ensuremath{-}0.0}
+\expandafter\def\csname pn@hi.corr.contrast.hierb6\endcsname{+0.0}
 \expandafter\def\csname pn@hi.corr.elastic_transform.hierb6\endcsname{\ensuremath{-}0.1}
 \expandafter\def\csname pn@hi.corr.pixelate.hierb6\endcsname{\ensuremath{-}0.3}
 \expandafter\def\csname pn@hi.corr.jpeg_compression.hierb6\endcsname{+0.0}
@@ -671,7 +674,7 @@
 \expandafter\def\csname pn@hi.corr.glass_blur.hierpx\endcsname{\ensuremath{-}0.3}
 \expandafter\def\csname pn@hi.corr.motion_blur.hierpx\endcsname{\ensuremath{-}0.1}
 \expandafter\def\csname pn@hi.corr.zoom_blur.hierpx\endcsname{+0.1}
-\expandafter\def\csname pn@hi.corr.snow.hierpx\endcsname{\ensuremath{-}0.0}
+\expandafter\def\csname pn@hi.corr.snow.hierpx\endcsname{+0.0}
 \expandafter\def\csname pn@hi.corr.frost.hierpx\endcsname{+0.7}
 \expandafter\def\csname pn@hi.corr.fog.hierpx\endcsname{+0.5}
 \expandafter\def\csname pn@hi.corr.brightness.hierpx\endcsname{+0.1}
@@ -685,7 +688,7 @@
 \expandafter\def\csname pn@hi.corr.hierpx.worst\endcsname{\ensuremath{-}0.3}
 \expandafter\def\csname pn@hi.corr.hierpx.wins\endcsname{9}
 \expandafter\def\csname pn@hi.corr.gaussian_noise.hierpair\endcsname{\ensuremath{-}0.1}
-\expandafter\def\csname pn@hi.corr.shot_noise.hierpair\endcsname{\ensuremath{-}0.0}
+\expandafter\def\csname pn@hi.corr.shot_noise.hierpair\endcsname{+0.0}
 \expandafter\def\csname pn@hi.corr.impulse_noise.hierpair\endcsname{\ensuremath{-}0.1}
 \expandafter\def\csname pn@hi.corr.defocus_blur.hierpair\endcsname{\ensuremath{-}0.2}
 \expandafter\def\csname pn@hi.corr.glass_blur.hierpair\endcsname{\ensuremath{-}0.6}
@@ -777,7 +780,7 @@
 \expandafter\def\csname pn@hi.dec.b6.within.snow\endcsname{\ensuremath{-}0.06}
 \expandafter\def\csname pn@hi.dec.b6.within.frost\endcsname{\ensuremath{-}0.07}
 \expandafter\def\csname pn@hi.dec.b6.within.fog\endcsname{\ensuremath{-}0.09}
-\expandafter\def\csname pn@hi.dec.b6.within.brightness\endcsname{\ensuremath{-}0.00}
+\expandafter\def\csname pn@hi.dec.b6.within.brightness\endcsname{+0.00}
 \expandafter\def\csname pn@hi.dec.b6.within.contrast\endcsname{\ensuremath{-}0.04}
 \expandafter\def\csname pn@hi.dec.b6.within.elastic_transform\endcsname{\ensuremath{-}0.04}
 \expandafter\def\csname pn@hi.dec.b6.within.pixelate\endcsname{\ensuremath{-}0.06}
@@ -787,7 +790,7 @@
 \expandafter\def\csname pn@hi.dec.b6.within.weather\endcsname{\ensuremath{-}0.06}
 \expandafter\def\csname pn@hi.dec.b6.within.digital\endcsname{\ensuremath{-}0.04}
 \expandafter\def\csname pn@hi.dec.b6.within.min\endcsname{\ensuremath{-}0.09}
-\expandafter\def\csname pn@hi.dec.b6.within.max\endcsname{\ensuremath{-}0.00}
+\expandafter\def\csname pn@hi.dec.b6.within.max\endcsname{+0.00}
 \expandafter\def\csname pn@hi.dec.b6.within.shrink.lo\endcsname{0}
 \expandafter\def\csname pn@hi.dec.b6.within.shrink.hi\endcsname{9}
 \expandafter\def\csname pn@hi.dec.b6.within.neg.n\endcsname{15}
@@ -1908,10 +1911,12 @@
 \expandafter\def\csname pn@rl.ctl.inc.random.gain\endcsname{+0.51}
 \expandafter\def\csname pn@rl.ctl.inc.random.routed\endcsname{36}
 \expandafter\def\csname pn@rl.ctl.inc.random.cleanabs\endcsname{84.10}
+\expandafter\def\csname pn@rl.ctl.inc.random.cleand\endcsname{+0.00}
 \expandafter\def\csname pn@rl.ctl.cbar.random\endcsname{69.50}
 \expandafter\def\csname pn@rl.ctl.cbar.random.gain\endcsname{+0.47}
 \expandafter\def\csname pn@rl.ctl.cbar.random.routed\endcsname{27}
 \expandafter\def\csname pn@rl.ctl.cbar.random.cleanabs\endcsname{84.10}
+\expandafter\def\csname pn@rl.ctl.cbar.random.cleand\endcsname{+0.00}
 \expandafter\def\csname pn@rl.ctl.inc.views\endcsname{67.86}
 \expandafter\def\csname pn@rl.ctl.inc.views.gain\endcsname{+0.87}
 \expandafter\def\csname pn@rl.ctl.inc.views.routed\endcsname{35}
@@ -2092,7 +2097,7 @@
 \expandafter\def\csname pn@rl.h.cfam.brownish_noise.neo\endcsname{75.7}
 \expandafter\def\csname pn@rl.h.cfam.brownish_noise.pair\endcsname{77.9}
 \expandafter\def\csname pn@rl.h.cfam.brownish_noise.stack\endcsname{77.8}
-\expandafter\def\csname pn@rl.h.cfam.brownish_noise.gain\endcsname{\ensuremath{-}0.0}
+\expandafter\def\csname pn@rl.h.cfam.brownish_noise.gain\endcsname{+0.0}
 \expandafter\def\csname pn@rl.h.cfam.brownish_noise.routed\endcsname{19}
 \expandafter\def\csname pn@rl.h.cfam.caustic_refraction.neo\endcsname{68.5}
 \expandafter\def\csname pn@rl.h.cfam.caustic_refraction.pair\endcsname{69.5}
@@ -2226,7 +2231,7 @@
 \expandafter\def\csname pn@rl.fs.inc.k1.gainneo\endcsname{+6.12}
 \expandafter\def\csname pn@rl.fs.inc.k1.vsfull\endcsname{\ensuremath{-}0.14}
 \expandafter\def\csname pn@rl.fs.inc.k1.vsfullbase\endcsname{+1.22}
-\expandafter\def\csname pn@rl.fs.inc.k1.vsfullbase.base\endcsname{\ensuremath{-}0.00}
+\expandafter\def\csname pn@rl.fs.inc.k1.vsfullbase.base\endcsname{+0.00}
 \expandafter\def\csname pn@rl.fs.inc.k1.m5\endcsname{holds}
 \expandafter\def\csname pn@rl.fs.inc.k3.stack\endcsname{68.45}
 \expandafter\def\csname pn@rl.fs.inc.k3.base\endcsname{67.32}
@@ -2308,7 +2313,7 @@
 \expandafter\def\csname pn@rc.vitb_r.cic.lo\endcsname{+2.45}
 \expandafter\def\csname pn@rc.vitb_r.cic.hi\endcsname{+2.65}
 \expandafter\def\csname pn@rc.vitb_r.n\endcsname{3}
-\expandafter\def\csname pn@rc.vitb_r.rho\endcsname{\ensuremath{-}0.00}
+\expandafter\def\csname pn@rc.vitb_r.rho\endcsname{+0.00}
 \expandafter\def\csname pn@rc.vitb_r.rho4\endcsname{+0.05}
 \expandafter\def\csname pn@rc.vitb_r.saved\endcsname{0.04}
 \expandafter\def\csname pn@rc.vitb_r.gap\endcsname{\ensuremath{-}3.05}
@@ -2572,7 +2577,7 @@
 \expandafter\def\csname pn@ca.vitb_r.hi\endcsname{11}
 \expandafter\def\csname pn@ca.vitb_r.theta\endcsname{2.87}
 \expandafter\def\csname pn@ca.vitb_r.best\endcsname{none}
-\expandafter\def\csname pn@ca.vitb_r.rho\endcsname{\ensuremath{-}0.00}
+\expandafter\def\csname pn@ca.vitb_r.rho\endcsname{+0.00}
 \expandafter\def\csname pn@ca.vitb_r.pick.acc\endcsname{56.27}
 \expandafter\def\csname pn@ca.vitb_r.best.acc\endcsname{59.32}
 \expandafter\def\csname pn@ca.vitb_r.pick.gap\endcsname{\ensuremath{-}3.05}
@@ -3008,6 +3013,7 @@
 \expandafter\def\csname pn@ax.vitb_inc.etastack.abs\endcsname{70.05}
 \expandafter\def\csname pn@ax.vitb_inc.etastack.routed\endcsname{32}
 \expandafter\def\csname pn@ax.vitb_inc.etastack.cleand\endcsname{+0.05}
+\expandafter\def\csname pn@ax.vitb_inc.etastack.cleand.abs\endcsname{0.05}
 \expandafter\def\csname pn@ax.vitb_inc.m4\endcsname{holds}
 \expandafter\def\csname pn@ax.vits_inc.pick\endcsname{6/4,11}
 \expandafter\def\csname pn@ax.vits_inc.rho\endcsname{+0.94}
@@ -3021,6 +3027,7 @@
 \expandafter\def\csname pn@ax.vits_inc.etastack.abs\endcsname{63.85}
 \expandafter\def\csname pn@ax.vits_inc.etastack.routed\endcsname{37}
 \expandafter\def\csname pn@ax.vits_inc.etastack.cleand\endcsname{+0.10}
+\expandafter\def\csname pn@ax.vits_inc.etastack.cleand.abs\endcsname{0.10}
 \expandafter\def\csname pn@ax.vits_inc.m4\endcsname{holds}
 \expandafter\def\csname pn@ax.vitb_cbar.pick\endcsname{7/5,11}
 \expandafter\def\csname pn@ax.vitb_cbar.rho\endcsname{+0.93}
@@ -3034,9 +3041,14 @@
 \expandafter\def\csname pn@ax.vitb_cbar.etastack.abs\endcsname{71.53}
 \expandafter\def\csname pn@ax.vitb_cbar.etastack.routed\endcsname{29}
 \expandafter\def\csname pn@ax.vitb_cbar.etastack.cleand\endcsname{\ensuremath{-}0.10}
+\expandafter\def\csname pn@ax.vitb_cbar.etastack.cleand.abs\endcsname{0.10}
 \expandafter\def\csname pn@ax.vitb_cbar.m4\endcsname{holds}
+\expandafter\def\csname pn@sg.corr.b1.leastacc.n\endcsname{8}
+\expandafter\def\csname pn@sg.corr.b1.leastconf.n\endcsname{6}
+\expandafter\def\csname pn@sg.corr.b1.conf.rank.max\endcsname{3}
+\expandafter\def\csname pn@sg.corr.n\endcsname{8}
 \expandafter\def\csname pn@ax.vitb_r.pick\endcsname{8/1,11}
-\expandafter\def\csname pn@ax.vitb_r.rho\endcsname{\ensuremath{-}0.00}
+\expandafter\def\csname pn@ax.vitb_r.rho\endcsname{+0.00}
 \expandafter\def\csname pn@ax.vitb_r.base\endcsname{\ensuremath{-}1.80}
 \expandafter\def\csname pn@ax.vitb_r.stack\endcsname{+0.73}
 \expandafter\def\csname pn@ax.vitb_r.stack.vsbase\endcsname{+2.53}
@@ -3048,6 +3060,7 @@
 \expandafter\def\csname pn@ax.vitb_r.etastack.abs\endcsname{59.80}
 \expandafter\def\csname pn@ax.vitb_r.etastack.routed\endcsname{33}
 \expandafter\def\csname pn@ax.vitb_r.etastack.cleand\endcsname{\ensuremath{-}0.20}
+\expandafter\def\csname pn@ax.vitb_r.etastack.cleand.abs\endcsname{0.20}
 \expandafter\def\csname pn@ax.vitb_r.m4\endcsname{fails}
 \expandafter\def\csname pn@ax.vitb_sketch.pick\endcsname{11/1,7}
 \expandafter\def\csname pn@ax.vitb_sketch.rho\endcsname{+0.66}
@@ -3062,6 +3075,7 @@
 \expandafter\def\csname pn@ax.vitb_sketch.etastack.abs\endcsname{48.05}
 \expandafter\def\csname pn@ax.vitb_sketch.etastack.routed\endcsname{30}
 \expandafter\def\csname pn@ax.vitb_sketch.etastack.cleand\endcsname{\ensuremath{-}0.60}
+\expandafter\def\csname pn@ax.vitb_sketch.etastack.cleand.abs\endcsname{0.60}
 \expandafter\def\csname pn@ax.vitb_sketch.m4\endcsname{fails}
 \expandafter\def\csname pn@ax.vits_cbar.pick\endcsname{7/6,11}
 \expandafter\def\csname pn@ax.vits_cbar.rho\endcsname{+0.95}
@@ -3076,6 +3090,7 @@
 \expandafter\def\csname pn@ax.vits_cbar.etastack.abs\endcsname{65.87}
 \expandafter\def\csname pn@ax.vits_cbar.etastack.routed\endcsname{30}
 \expandafter\def\csname pn@ax.vits_cbar.etastack.cleand\endcsname{\ensuremath{-}0.05}
+\expandafter\def\csname pn@ax.vits_cbar.etastack.cleand.abs\endcsname{0.05}
 \expandafter\def\csname pn@ax.vits_cbar.m4\endcsname{holds}
 \expandafter\def\csname pn@ax.vits_r.pick\endcsname{8/9,11}
 \expandafter\def\csname pn@ax.vits_r.rho\endcsname{+0.23}
@@ -3090,6 +3105,7 @@
 \expandafter\def\csname pn@ax.vits_r.etastack.abs\endcsname{50.55}
 \expandafter\def\csname pn@ax.vits_r.etastack.routed\endcsname{32}
 \expandafter\def\csname pn@ax.vits_r.etastack.cleand\endcsname{+0.05}
+\expandafter\def\csname pn@ax.vits_r.etastack.cleand.abs\endcsname{0.05}
 \expandafter\def\csname pn@ax.vits_r.m4\endcsname{holds}
 \expandafter\def\csname pn@ax.vits_sketch.pick\endcsname{6/8,11}
 \expandafter\def\csname pn@ax.vits_sketch.rho\endcsname{+0.38}
@@ -3104,6 +3120,7 @@
 \expandafter\def\csname pn@ax.vits_sketch.etastack.abs\endcsname{37.53}
 \expandafter\def\csname pn@ax.vits_sketch.etastack.routed\endcsname{29}
 \expandafter\def\csname pn@ax.vits_sketch.etastack.cleand\endcsname{\ensuremath{-}0.40}
+\expandafter\def\csname pn@ax.vits_sketch.etastack.cleand.abs\endcsname{0.40}
 \expandafter\def\csname pn@ax.vits_sketch.m4\endcsname{fails}
 \expandafter\def\csname pn@ax.deitb_inc.pick\endcsname{6/7,8}
 \expandafter\def\csname pn@ax.deitb_inc.rho\endcsname{+0.97}
@@ -3118,6 +3135,7 @@
 \expandafter\def\csname pn@ax.deitb_inc.etastack.abs\endcsname{66.15}
 \expandafter\def\csname pn@ax.deitb_inc.etastack.routed\endcsname{22}
 \expandafter\def\csname pn@ax.deitb_inc.etastack.cleand\endcsname{\ensuremath{-}0.60}
+\expandafter\def\csname pn@ax.deitb_inc.etastack.cleand.abs\endcsname{0.60}
 \expandafter\def\csname pn@ax.deitb_inc.m4\endcsname{fails}
 \expandafter\def\csname pn@ax.deitb_cbar.pick\endcsname{6/7,8}
 \expandafter\def\csname pn@ax.deitb_cbar.rho\endcsname{+0.88}
@@ -3132,6 +3150,7 @@
 \expandafter\def\csname pn@ax.deitb_cbar.etastack.abs\endcsname{69.83}
 \expandafter\def\csname pn@ax.deitb_cbar.etastack.routed\endcsname{21}
 \expandafter\def\csname pn@ax.deitb_cbar.etastack.cleand\endcsname{\ensuremath{-}0.50}
+\expandafter\def\csname pn@ax.deitb_cbar.etastack.cleand.abs\endcsname{0.50}
 \expandafter\def\csname pn@ax.deitb_cbar.m4\endcsname{fails}
 \expandafter\def\csname pn@ax.deitb_r.pick\endcsname{7/1,8}
 \expandafter\def\csname pn@ax.deitb_r.rho\endcsname{+0.86}
@@ -3146,6 +3165,7 @@
 \expandafter\def\csname pn@ax.deitb_r.etastack.abs\endcsname{46.00}
 \expandafter\def\csname pn@ax.deitb_r.etastack.routed\endcsname{30}
 \expandafter\def\csname pn@ax.deitb_r.etastack.cleand\endcsname{+0.15}
+\expandafter\def\csname pn@ax.deitb_r.etastack.cleand.abs\endcsname{0.15}
 \expandafter\def\csname pn@ax.deitb_r.m4\endcsname{holds}
 \expandafter\def\csname pn@ax.deitb_sketch.pick\endcsname{7/5,8}
 \expandafter\def\csname pn@ax.deitb_sketch.rho\endcsname{+0.33}
@@ -3160,6 +3180,7 @@
 \expandafter\def\csname pn@ax.deitb_sketch.etastack.abs\endcsname{36.33}
 \expandafter\def\csname pn@ax.deitb_sketch.etastack.routed\endcsname{23}
 \expandafter\def\csname pn@ax.deitb_sketch.etastack.cleand\endcsname{+0.20}
+\expandafter\def\csname pn@ax.deitb_sketch.etastack.cleand.abs\endcsname{0.20}
 \expandafter\def\csname pn@ax.deitb_sketch.m4\endcsname{fails}
 \expandafter\def\csname pn@ax.deits_inc.pick\endcsname{4/5,6}
 \expandafter\def\csname pn@ax.deits_inc.rho\endcsname{+0.97}
@@ -3174,6 +3195,7 @@
 \expandafter\def\csname pn@ax.deits_inc.etastack.abs\endcsname{61.64}
 \expandafter\def\csname pn@ax.deits_inc.etastack.routed\endcsname{28}
 \expandafter\def\csname pn@ax.deits_inc.etastack.cleand\endcsname{\ensuremath{-}0.15}
+\expandafter\def\csname pn@ax.deits_inc.etastack.cleand.abs\endcsname{0.15}
 \expandafter\def\csname pn@ax.deits_inc.m4\endcsname{fails}
 \expandafter\def\csname pn@ax.deits_cbar.pick\endcsname{4/5,9}
 \expandafter\def\csname pn@ax.deits_cbar.rho\endcsname{+0.85}
@@ -3188,6 +3210,7 @@
 \expandafter\def\csname pn@ax.deits_cbar.etastack.abs\endcsname{65.19}
 \expandafter\def\csname pn@ax.deits_cbar.etastack.routed\endcsname{27}
 \expandafter\def\csname pn@ax.deits_cbar.etastack.cleand\endcsname{\ensuremath{-}0.40}
+\expandafter\def\csname pn@ax.deits_cbar.etastack.cleand.abs\endcsname{0.40}
 \expandafter\def\csname pn@ax.deits_cbar.m4\endcsname{fails}
 \expandafter\def\csname pn@ax.deits_r.pick\endcsname{6/4,10}
 \expandafter\def\csname pn@ax.deits_r.rho\endcsname{+0.60}
@@ -3202,6 +3225,7 @@
 \expandafter\def\csname pn@ax.deits_r.etastack.abs\endcsname{44.80}
 \expandafter\def\csname pn@ax.deits_r.etastack.routed\endcsname{33}
 \expandafter\def\csname pn@ax.deits_r.etastack.cleand\endcsname{+0.15}
+\expandafter\def\csname pn@ax.deits_r.etastack.cleand.abs\endcsname{0.15}
 \expandafter\def\csname pn@ax.deits_r.m4\endcsname{holds}
 \expandafter\def\csname pn@ax.deits_sketch.pick\endcsname{5/4,6}
 \expandafter\def\csname pn@ax.deits_sketch.rho\endcsname{+0.18}
@@ -3216,6 +3240,7 @@
 \expandafter\def\csname pn@ax.deits_sketch.etastack.abs\endcsname{31.40}
 \expandafter\def\csname pn@ax.deits_sketch.etastack.routed\endcsname{32}
 \expandafter\def\csname pn@ax.deits_sketch.etastack.cleand\endcsname{+0.00}
+\expandafter\def\csname pn@ax.deits_sketch.etastack.cleand.abs\endcsname{0.00}
 \expandafter\def\csname pn@ax.deits_sketch.m4\endcsname{holds}
 \expandafter\def\csname pn@sar.ts.h.neo.gain.px1\endcsname{3.0}
 \expandafter\def\csname pn@cb.h.gain.twosite1\endcsname{2.0}

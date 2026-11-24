@@ -35,7 +35,8 @@ def fmt(x, spec):
     if spec.startswith('up'):
         q = Decimal(1).scaleb(-int(spec[-2]))
         return str(Decimal(repr(x)).quantize(q, rounding=ROUND_HALF_UP))
-    return format(x, spec)
+    s = format(x, spec)
+    return re.sub(r'^-(0(\.0+)?)$', r'+\1' if '+' in spec else r'\1', s)   # no negative zero
 
 
 def put(key, x, spec='.2f'):
@@ -77,6 +78,8 @@ def build():
 
     # ---------------- cost: wall-clock of NEO and ETA (design timing cells) and the MACs of one ViT-B/16 forward pass
     put('cost.gmacs', VITB_GMACS)
+    from compute_cost import MAP
+    put('cost.mainpath.pct', 100 * 2 * MAP, '.1f')                       # the main path's two maps, in percent of a forward pass
     wc = v('design_vitb/wallclock')
     for k, a in (('neo', 'neo'), ('k1', 'stack_k1'), ('k16', 'stack_k16_fp32'), ('k16s32', 'stack_k16_fp32_stats32'), ('eta', 'eta')):
         put(f'cost.{k}.ms', wc[a]['ms_per_batch'], '.0f'); put(f'cost.{k}.x', wc[a]['x_neo']); put(f'cost.{k}.acc', wc[a]['acc_6cells'])
@@ -161,6 +164,7 @@ def two_site():
     mid_best = [co for co in CORR if best_site[co] in ('b4', 'b5', 'b6', 'b7', 'b8')]
     put('ts.sw.pixelbest.n', len(pixel_best), 'd'); put('ts.sw.pixelbest.names', join_names(pixel_best), 's')
     put('ts.sw.midbest.n', len(mid_best), 'd')
+    put('ts.sw.pixelbest.nonnoise.names', join_names([co for co in pixel_best if co not in GROUPS['noise']]), 's')
     early_best = [co for co in CORR if best_site[co] in ('b1', 'b2', 'b3')]
     put('ts.sw.earlybest.n', len(early_best), 'd')
     b6_neg = [co for co in CORR if fam_gain(sw['frozen_per_cell']['b6'], sw['neo_per_cell'], co) < 0]
@@ -300,6 +304,7 @@ def hier():
     for k, base in (('hierb6', 'b6'), ('withinb6', 'b6'), ('betweenb6', 'b6'), ('hierpx', 'tok'), ('hierpair', 'twosite'), ('tokhierb6', 'twosite'),
                     ('n0x4', 'hierb6'), ('n0d4', 'hierb6'), ('hierb6', 'withinb6')):
         put(f'hi.d.{k}.vs.{base}', mean[k] - mean[base], '+.2f')
+    put('hi.d.hierb6.vs.b6.abs', abs(mean['hierb6'] - mean['b6']), '.2f')                      # the size of the gap, unsigned
     # per corruption (mean of severities 3 and 5) and per family: gains over NEO, and the two-level arm against its pooled arm
     g = lambda k, co: np.mean([cell[k][f'{co}-{s}'] - cell['neo'][f'{co}-{s}'] for s in (3, 5)])
     for k in ('hierb6', 'withinb6', 'betweenb6', 'hierpx', 'hierpair', 'b6', 'tok', 'twosite'):
@@ -642,6 +647,7 @@ def rule():
         b = base[bench]; acc = f['episodic']['rule_t6_b4b11_random_gated']
         put(f'rl.ctl.{bench}.random', acc); put(f'rl.ctl.{bench}.random.gain', acc - b['episodic']['pair_gated'], '+.2f'); put(f'rl.ctl.{bench}.random.routed', 100 * f['routed']['rule_t6_b4b11_random_gated'], '.0f')
         put(f'rl.ctl.{bench}.random.cleanabs', f['clean']['rule_t6_b4b11_random_gated'])
+        put(f'rl.ctl.{bench}.random.cleand', f['clean']['rule_t6_b4b11_random_gated'] - b['clean']['neo'], '+.2f')
     for bench, f in R.get('views', {}).items():                       # the views control: the main path on a flip and a center crop of the same unsure images
         if f is None:
             continue
@@ -838,7 +844,7 @@ def across():
             put(f'ax.{key}.etastack', es['episodic'][arm] - neo, '+.2f'); put(f'ax.{key}.etastack.vsetaours', round(es['episodic'][arm], 2) - round(etaours, 2), '+.2f') if etaours is not None else None
             put(f'ax.{key}.etastack.abs', es['episodic'][arm]); put(f'ax.{key}.etastack.routed', 100 * es['routed'].get(arm, float('nan')), '.0f')
             if eta_clean is not None:                      # the clean cell against ETA with NEO on the same split (claim M4)
-                put(f'ax.{key}.etastack.cleand', es['clean'][arm] - eta_clean, '+.2f')
+                put(f'ax.{key}.etastack.cleand', es['clean'][arm] - eta_clean, '+.2f'); put(f'ax.{key}.etastack.cleand.abs', abs(es['clean'][arm] - eta_clean), '.2f')
                 put(f'ax.{key}.m4', 'holds' if es['episodic'][arm] - etaours >= 0.5 and es['clean'][arm] - eta_clean >= -0.2 else 'fails', 's')
         else:
             put(f'ax.{key}.etastack', '--', 's')
@@ -860,6 +866,13 @@ def across():
     for key in ('vits_cbar', 'deitb_cbar'):                 # the grid's cells that have not been run yet render as '--'
         if key not in CA or 'held' not in CA[key]:
             blank(key)
+    # block 1 among the 13 placements on the eight corruption pairs (Section C.2): least accurate everywhere, how often least confident
+    corr_lf = [lfb, lfs, lfc] + [CA[k]['signal'] for k in ('vits_cbar', 'deitb_inc', 'deitb_cbar', 'deits_inc', 'deits_cbar')]
+    arms = ['px'] + [f'px+b{k}' for k in range(1, 13)]
+    acc_rank = [sorted(arms, key=lf['trunk_accuracy'].get).index('px+b1') + 1 for lf in corr_lf]
+    ent_rank = [sorted(arms, key=lf['trunk_mean_entropy'].get, reverse=True).index('px+b1') + 1 for lf in corr_lf]
+    put('sg.corr.b1.leastacc.n', sum(r == 1 for r in acc_rank), 'd'); put('sg.corr.b1.leastconf.n', sum(r == 1 for r in ent_rank), 'd')
+    put('sg.corr.b1.conf.rank.max', max(ent_rank), 'd'); put('sg.corr.n', len(corr_lf), 'd')
     # the pairs of the models-datasets plan
     for key, p in CA.items():
         if key.startswith('_') or not isinstance(p, dict) or 'held' not in p:

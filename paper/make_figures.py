@@ -82,7 +82,7 @@ for b, col, ls, mk, lab in (('inc', C['accent'], '-', 'o', 'ImageNet-C'), ('cbar
 axe.scatter([], [], marker='o', s=40, facecolors='none', edgecolors=C['ink'], label='lowest entropy (the pick)')
 axe.scatter([], [], marker='*', s=40, color=C['ink'], label='most accurate block')
 axe.set_ylabel('mean entropy (nat)')
-ylo, yhi = axe.get_ylim(); axe.set_ylim(ylo, yhi + 0.55 * (yhi - ylo))  # room above the curves for the legend
+ylo, yhi = axe.get_ylim(); axe.set_ylim(ylo, yhi + 0.9 * (yhi - ylo))  # room above the curves for the legend, clear of the block-1 points
 axe.legend(loc='upper center', ncol=2, handlelength=1.4, columnspacing=0.8, borderaxespad=0.1, handletextpad=0.3)
 axe.grid(True, axis='y', color=C['grid'], lw=0.5); axe.set_axisbelow(True); axe.set_title('(b) TokAlign + LayerAlign after block $k$: mean entropy', loc='left')
 axe.set_xticks(xs); axe.set_xticklabels(['pixels'] + [s[1:] for s in SITES[1:]]); axe.set_xlabel('placement: pixels, or patch tokens after block $k$')
@@ -173,11 +173,11 @@ fig.patches.append(FancyArrowPatch((fx(0.76), 0.90 / H), (fx(0.86), 0.90 / H), t
 ks = list(range(1, 13))
 a1 = fig.add_axes([fx(1.06), 0.40 / H, 0.98 / W, 0.96 / H])
 ent = [LFI['trunk_mean_entropy'][f'px+b{k}'] for k in ks]; kt = ks[int(np.argmin(ent))]
-a1.plot(ks, ent, marker='o', ms=2.6, lw=0.9, color=LAY)
+a1.plot([0] + ks, [LFI['trunk_mean_entropy']['px']] + ent, marker='o', ms=2.6, lw=0.9, color=LAY)   # the 13 placements: px, then px + block k
 a1.scatter([kt], [min(ent)], marker='o', s=60, facecolors='none', edgecolors=LAY, linewidths=1.0, zorder=4)
 a1.annotate(f'main = {kt}', (kt, min(ent)), xytext=(0.30, 0.90), textcoords='axes fraction', ha='center', va='top', color=LAY,
             arrowprops=dict(arrowstyle='-', color=LAY, lw=0.6, shrinkA=0, shrinkB=5))
-a1.set_title('mean entropy', loc='left', pad=2); a1.set_xticks([1, 6, 12]); a1.set_yticks([]); a1.set_xlabel('block $k$', labelpad=1)
+a1.set_title('mean entropy', loc='left', pad=2); a1.set_xticks([0, 6, 12]); a1.set_xticklabels(['px', '6', '12']); a1.set_yticks([]); a1.set_xlabel('placement', labelpad=1)
 a1.grid(True, axis='y', color=C['grid'], lw=0.5)
 fig.patches.append(FancyArrowPatch((fx(2.08), 0.90 / H), (fx(2.18), 0.90 / H), transform=fig.transFigure, arrowstyle='-|>', mutation_scale=6, lw=0.7, color=C['host_dark'], shrinkA=0, shrinkB=0))
 a2 = fig.add_axes([fx(2.36), 0.40 / H, 0.98 / W, 0.96 / H])
@@ -302,7 +302,7 @@ for b, col, mk, lab in (('inc', C['accent'], 'o', 'ImageNet-C'), ('cbar', C['hos
     per = SS[b]['per_cell_first_k_batches']; Ks = sorted(int(k) for k in per)
     b2.plot([per[str(k)]['images_per_cell'] for k in Ks], [per[str(k)]['gain_over_pair'] for k in Ks], marker=mk, ms=3, lw=1.0, color=col, label=lab)
     b2.axhline(SS[b]['full_rule']['gain_over_pair'], color=col, lw=0.6, ls=':')
-b1.set_xscale('log'); b1.set_xticks([64, 128, 320, 640, 1280, 2000]); b1.set_xticklabels(['64', '128', '320', '640', '1280', '2000']); b1.minorticks_off()
+b1.set_xscale('log'); b1.set_xticks([64, 128, 192, 320, 640, 1280, 2000]); b1.set_xticklabels(['64', '128', '192', '320', '640', '1280', '2000']); b1.minorticks_off()
 b1.set_xlabel('calibration images per cell, one choice per benchmark'); b1.set_ylabel('gain over the main path (pt)'); b1.set_title('(a) one calibration for a whole benchmark', loc='left')
 b2.set_xscale('log'); b2.set_xticks([64, 128, 192, 320, 640]); b2.set_xticklabels(['64', '128', '192', '320', '640']); b2.minorticks_off()
 b2.set_xlabel('calibration images per shift (the first batches of 64)'); b2.set_title('(b) one calibration per shift', loc='left')

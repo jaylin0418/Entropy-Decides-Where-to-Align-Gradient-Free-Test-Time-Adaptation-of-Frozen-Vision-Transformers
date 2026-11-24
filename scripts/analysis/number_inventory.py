@@ -83,6 +83,10 @@ TS = [  # (key prefix, value path or formula, scored files, run commands, steps,
      "run with this repository's scripts on the course checkpoint (GPU, 2026-11-11, data/derived/course_two_site, tags _ca_inc _ca_r _ca_sketch; held-out cells scored once); scored file committed"),
     ('ax.', 'the cross-model table: per pair the gains over NEO of the main path, the calibrated cascade and ETA on the same held-out cells (from two_site/held3_*, rule/*, ca/*)', 'as rl.*, ca.*, two_site/held3_{vitb,vits}',
      'paper/make_numbers.py (across)', 'P1 P2', "computed by paper/make_numbers.py from the committed scores (CPU)"),
+    ('sg.', 'block 1 among the 13 placements on the eight corruption pairs (Section C.2): its rank by accuracy and by mean entropy from the label_free entries of exit/site_choice/{inc,cbar}, rule/vits/pick_t6 and ca/<pair>/signal', 'site_choice_design_vitb, site_choice_design_vitb_cbar_t7, site_choice_design_vits_rule, site_choice_design_{vits_cbar_ca,deitb_ca_inc,deitb_cbar_ca,deits_ca_inc,deits_cbar_ca}_t6',
+     'paper/make_numbers.py (across)', 'P1 P2', "computed by paper/make_numbers.py from the committed scores (CPU)"),
+    ('cost.mainpath.', 'paper/compute_cost.py MAP: two maps of 196 x 768 x 768 multiply-accumulates per image against 17.56 GMACs, in percent', '',
+     'paper/compute_cost.py', 'P1 P2', 'analytic'),
     ('rl.pick.', 'rule/picks/{inc,cbar_t6,cbar_t7}: the main block and the pair of branch blocks the entropy rule picks on the design logits, and the gain of the pick against the best labelled pair', 'site_choice_design_vitb, site_choice_design_vitb_cbar, site_choice_design_vitb_cbar_t7',
      'site_choice.py (label_free, --trunk 6 | 7)', 'S5 E19 E28 E34 E35 A6 A7 A8 P1 P2', "computed by this repository's analysis script from the saved logits of the dev runs (CPU, model-free)"),
     ('rl.ss.', 'rule/sample_size/{inc,cbar}: the rule applied to the first n images of every cell (pooled) and to the first K batches of each cell (one choice per shift), from the saved design logits', 'rule_sample_size_design_vitb, rule_sample_size_design_vitb_cbar',
@@ -158,7 +162,7 @@ LITERAL = {'66.3': ('quoted from another paper', 'FOA paper (66.3 % on 50,000-im
            '66.5': ('quoted from another paper', 'PEA paper, Table 1 (ViT-Base, ImageNet-C severity 5, continual, with augmentation)', 'citation'),
            '13.5': ('quoted from another paper', 'DDA (13.5 s per image)', 'citation'),
            '0.75': ('analytic cost', 'one 768x768 multiply per token and per image plus one eigendecomposition per refresh = about 0.12 GMACs per image = 0.75 % of 17.56 GMACs (scripts/analysis/frontier_and_drift.py MACS)', 'analytic'),
-           '1.5': ('analytic cost', 'two 768x768 multiplies per token (TokAlign and LayerAlign after block 6) plus the head stage = about 1.5 % of a ViT-B/16 forward pass', 'analytic'),
+           '1.5': ('setting', 'the threshold theta = 1.5 nat fixed by hand for the ViT-B/16 runs and ViT-S/16 on ImageNet-C before the quantile rule (run_forward_only.py --exit-theta 1.5)', 'setting'),
            '28': ('cost accounting', 'FOA 27+1 forwards per batch', 'setting'), '25': ('bound stated in words', '50,000 / 2,000 = 25 times more batches', 'setting')}
 COST_WORDS = ('forward-pass equivalents', 'forward passes', 'charged', 'MACs', 'multiply', 'multiplies')
 FIG_DATA = [  # figures: what paper/make_figures.py draws (rows with line 0)

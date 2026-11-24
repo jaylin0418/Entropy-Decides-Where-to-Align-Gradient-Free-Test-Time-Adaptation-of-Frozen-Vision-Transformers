@@ -5,13 +5,13 @@
 #   IMAGENET_C_BAR  ImageNet-C-bar, the authors' archive extracted: the cbar_download directory (same layout as ImageNet-C), for E28 E29
 #   PY_TIMM1      a Python whose environment has timm 1.0.15 and cma (FOA needs timm >= 0.9), for E15 E16
 #   IMAGENET_R, IMAGENET_SKETCH  ImageNet-R and ImageNet-Sketch extracted (class folders), for the natural-shift pairs
-# GPU time of the original runs on one GB10 (from their run records): about 25 GPU-hours for the pixel-site study, half of it
-# FOA, PEA and the recurring/mixed streams, plus about 17 GPU-hours for the where-to-align study (two-site design run, depth
+# GPU time of the original runs on one GB10 (from their run records): about 25 GPU-hours for the TokAlign study, half of it
+# FOA, PEA and the recurring/mixed streams, plus about 17 GPU-hours for the where-to-align study (main-path dev run, depth
 # sweeps, drift by depth, heldout3 of both backbones; the ETA depth sweep alone is 10.5 hours), about 1.1 GPU-hours for the
 # two-level (between-image / within-image) alignment and the decomposition of the token statistics on the design cells, and
-# about 3.6 GPU-hours for the SAR runs with the two-site arms (E14 design, E27 heldout3), 35 minutes for the two ImageNet-C-bar runs
-# (E28 E29, mostly image decoding), 10 minutes for the two-site timing run (C2) and 3.3 GPU-hours for the two further held-out
-# slices (E30 E31 forward-only 46 minutes each, E32 E33 ETA 53 minutes each), and for the v2 adaptive site choice about 5.5 GPU-hours
+# about 3.6 GPU-hours for the SAR runs with the main-path arms (E14 dev, E27 heldout3), 35 minutes for the two ImageNet-C-bar runs
+# (E28 E29, mostly image decoding), 10 minutes for the main-path timing run (C2) and 3.3 GPU-hours for the two further held-out
+# slices (E30 E31 forward-only 46 minutes each, E32 E33 ETA 53 minutes each), and for the cascade and its calibration about 5.5 GPU-hours
 # (E34 88 minutes, E35 107 minutes, E36 44 minutes, E37 26 minutes, E38 65 minutes, E39 42 minutes, E40 to E43 40 minutes, C3 C4 20 minutes, E44 to E47 about 2 hours).
 # Steps [S] [E] [T] [C] [F] need a GPU unless marked CPU; [R] and [A] are CPU only; [P] builds the report. Step labels are stable
 # (gaps are steps of the earlier studies that the report no longer uses); results/number_inventory.csv names the steps behind every number.
