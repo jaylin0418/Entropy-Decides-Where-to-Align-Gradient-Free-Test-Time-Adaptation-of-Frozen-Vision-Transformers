@@ -1,5 +1,5 @@
 Official PEA code for ViTs (progressive embedding alignment), used by `scripts/episodic/run_pea.py` (the PEA rows of
-the five-host table and the PEA settings in the supplement).
+Table S6 and the PEA settings in the supplement).
 
 - Upstream: https://github.com/TheMaXiao/PEA_TTA, commit `9c358ba682052862df0739fbbadb71f1b586614d`.
 - Licence: **none found** (no LICENSE file, no licence in the README). Without a licence the code may not be

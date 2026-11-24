@@ -53,7 +53,7 @@ $PY_TIMM1 scripts/episodic/run_foa.py --n-eval 6000 --stats stats/vitb.pt $D    
 python scripts/episodic/run_pea.py --stats stats/vitb.pt $D                                                     # E17
 python scripts/episodic/run_pea.py --src-split pea_source --n-src 20000 --tag _src20k --stats stats/vitb.pt $D  # E18
 
-# where to align (the report's Sections 4 and S): the two-site design run, heldout3 of both backbones, the depth sweeps
+# where to align (the report's Section 4 and Supplement C): the two-site design run, heldout3 of both backbones, the depth sweeps
 python scripts/episodic/run_forward_only.py --split design --arms $TWO --stats $SB --tag _two_site $D                       # E19
 python scripts/episodic/run_forward_only.py --split heldout3 --arms $TWO --stats $SB $D                                     # E20
 python scripts/episodic/run_gradient_host.py --method eta --split heldout3 --arms $TWOETA --stats $SB $D                    # E21
@@ -102,6 +102,8 @@ python scripts/analysis/site_choice.py --logits runs/logits --base forward_only_
 read -r VT VA1 VA2 < <(python -c "import json; d=json.load(open('$O/site_choice_design_vits_rule.json')); lo, hi = (a[4:] for a in d['label_free']['second_opinion_pick_pair'].split('|')); print(d['trunk'][4:], lo, hi)")
 python scripts/episodic/run_forward_only.py --model vits --split heldout3 --arms rule_t${VT}_b${VA1}b${VA2}_gated rule_t${VT}_b${VA1}_gated rule_t${VT}_b${VA2}_gated --exit-theta 1.5 --stats $SS --tag _rule $D   # E59 (R3: the picks of A11 A12, blocks 6 / 4, 11, theta 1.5 nat as on ViT-B/16)
 for s in heldout heldout2 heldout3; do python scripts/episodic/run_forward_only.py --split $s --arms rule_t6_b4b11_gated --stats $SB --tag _rule $D; done   # E60 E61 E62 (the other slices)
+python scripts/episodic/run_forward_only.py --split design --arms rule_t6_b4b11_gated --stats $SB --tag _rule $D   # E81 (the dev cells: Table S3's dev row and the cascade in Table S6)
+python scripts/episodic/run_forward_only.py --split design --arms rule_t6_b4b11_gated --cells clean $CBARCELLS --stats $SB --tag _cbar_rule --imagenet-val $IMAGENET_VAL --imagenet-c $IMAGENET_C_BAR --cache-dir cache --out-dir runs   # E82 (ImageNet-C-bar dev cells, Table S3)
 python scripts/episodic/run_forward_only.py --split heldout3 --arms rule_t6_b4b11_gated --cells clean $CBARCELLS --stats $SB --tag _cbar_rule --imagenet-val $IMAGENET_VAL --imagenet-c $IMAGENET_C_BAR --cache-dir cache --out-dir runs  # E63
 python scripts/episodic/run_forward_only.py --split heldout4 --arms rule_t6_b4b11_random_gated --stats $SB --tag _rule_random $D                          # E64 (random-routing control)
 python scripts/episodic/run_forward_only.py --split heldout4 --arms rule_t6_b4b11_random_gated --cells clean $CBARCELLS --stats $SB --tag _cbar_rule_random --imagenet-val $IMAGENET_VAL --imagenet-c $IMAGENET_C_BAR --cache-dir cache --out-dir runs  # E65
@@ -117,7 +119,7 @@ python scripts/episodic/run_forward_only.py --split design --arms place_b1 place
 python scripts/episodic/run_gradient_host.py --method eta --split design --stats $SB --tag _sweep $D \
     --arms eta+place_b1 eta+place_b2 eta+place_b3 eta+place_b4 eta+place_b5 eta+place_b6 eta+place_b7 eta+place_b8 eta+place_b9 \
     eta+place_b10 eta+place_b11 eta+place_b12                                                                               # E25
-# what to align at a site (the report's Section F, the two-level map): the two-level map and its one-part variants
+# what to align at a site (the report's Section G, the two-level map): the two-level map and its one-part variants
 python scripts/episodic/run_forward_only.py --split design --arms $HIER --stats $HB --tag _hier $D                           # E26
 
 # [T] streams (one host and one set of EMA statistics per stream, no resets)
@@ -187,6 +189,8 @@ python scripts/episodic/score_forward_only.py --runs runs/forward_only_design_vi
 python scripts/episodic/score_forward_only.py --runs runs/forward_only_heldout3_vits_rule.json $V --neo-from $O/forward_only_heldout3_vits.json --out $O/forward_only_heldout3_vits_rule.json  # R48
 for r in heldout_vitb_two_site:heldout heldout2_vitb_two_site:heldout2 heldout3_vitb:heldout3; do python scripts/episodic/score_forward_only.py --runs runs/forward_only_${r##*:}_vitb_rule.json $V --neo-from $O/forward_only_${r%%:*}.json --out $O/forward_only_${r##*:}_vitb_rule.json; done  # R49
 python scripts/episodic/score_forward_only.py --runs runs/forward_only_heldout3_vitb_cbar_rule.json $V --neo-from $O/forward_only_heldout3_vitb_cbar.json --out $O/forward_only_heldout3_vitb_cbar_rule.json  # R50
+python scripts/episodic/score_forward_only.py --runs runs/forward_only_design_vitb_rule.json $V --neo-from $O/forward_only_design_vitb_two_site.json --out $O/forward_only_design_vitb_rule.json  # R71 (E81)
+python scripts/episodic/score_forward_only.py --runs runs/forward_only_design_vitb_cbar_rule.json $V --neo-from $O/forward_only_design_vitb_cbar.json --out $O/forward_only_design_vitb_cbar_rule.json  # R72 (E82)
 python scripts/streams/score_streams.py --runs runs/streams_heldout4_vitb_rule.json $V --out $O/streams_heldout4_vitb_rule.json    # R51
 python scripts/episodic/score_forward_only.py --runs runs/forward_only_heldout4_vitb_rule_ctl.json $V --neo-from $O/forward_only_heldout4_vitb_exit.json --out $O/forward_only_heldout4_vitb_rule_ctl.json  # R66
 python scripts/episodic/score_forward_only.py --runs runs/forward_only_heldout4_vitb_cbar_rule_ctl.json $V --neo-from $O/forward_only_heldout4_vitb_cbar_exit.json --out $O/forward_only_heldout4_vitb_cbar_rule_ctl.json  # R67
@@ -315,7 +319,7 @@ python scripts/episodic/run_forward_only.py --split heldout4 --cells clean $CBAR
     --imagenet-val $IMAGENET_VAL --imagenet-c $IMAGENET_C_BAR --cache-dir cache --out-dir runs                                        # E70 (the pooled 192-per-cell C-bar pick)
 python scripts/episodic/score_forward_only.py --runs runs/forward_only_heldout4_vitb_cbar_rule_p192.json $V --neo-from $O/forward_only_heldout4_vitb_cbar_exit.json --out $O/forward_only_heldout4_vitb_cbar_rule_p192.json   # R57
 
-# the time columns of Table 1 and Table S5 (an idle GPU, the shared one measures the contention): every row of Table 1 in one run,
+# the time columns of Table 1 and Table S6 (an idle GPU, the shared one measures the contention): every row of Table 1 in one run,
 # then PEA and FOA (time_others.py, the timm 1.0.15 environment of E15 E16); score_timing.py gives ms per batch and the ratio to NEO
 python scripts/cost/time_batches.py --arms neo tok_k16_fp32_stats32 pair_k16_fp32_stats32 exit_b5b9_k16_fp32_stats32 rule_t6_b4b11_k16_fp32_stats32 \
     rule_t6_b4_k16_fp32_stats32 rule_t6_b11_k16_fp32_stats32 rule_t6_b4b11_random_k16_fp32_stats32 eta sar --repeats 3 --stats $SB --tag _ablations $D   # C6

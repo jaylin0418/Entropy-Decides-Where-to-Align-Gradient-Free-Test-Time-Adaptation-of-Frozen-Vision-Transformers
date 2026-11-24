@@ -1,5 +1,5 @@
 Official FOA code (Niu et al., "Test-Time Model Adaptation with Only Forward Passes", ICML 2024), used by
-`scripts/episodic/run_foa.py` (the FOA rows of the five-host table and the FOA settings in the supplement).
+`scripts/episodic/run_foa.py` (the FOA rows of Table S6 and the FOA settings in the supplement).
 
 - Upstream: https://github.com/mr-eggplant/FOA, commit `004b02dab6a7c02afce1caa606afac525dd74f7e`.
 - Licence: NTUITIVE Dual License Agreement, non-commercial use only. The licence restricts distribution, so this

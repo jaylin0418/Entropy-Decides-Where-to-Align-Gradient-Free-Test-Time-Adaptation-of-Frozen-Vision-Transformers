@@ -36,7 +36,7 @@ def fmt(x, spec):
         q = Decimal(1).scaleb(-int(spec[-2]))
         return str(Decimal(repr(x)).quantize(q, rounding=ROUND_HALF_UP))
     s = format(x, spec)
-    return re.sub(r'^-(0(\.0+)?)$', r'+\1' if '+' in spec else r'\1', s)   # no negative zero
+    return re.sub(r'^[+-](0(\.0+)?)$', r'\1', s)   # a zero prints without a sign
 
 
 def put(key, x, spec='.2f'):
@@ -785,6 +785,7 @@ def rule():
         for q, r in rc['theta'].items():
             tag = q.replace('.', '').replace('nat', '')
             put(f'rc.theta.q{tag}.theta', r['theta'], '.2f'); put(f'rc.theta.q{tag}.gain', r['gain'], '+.2f'); put(f'rc.theta.q{tag}.unsure', r['unsure'], '.0f')
+        put('rc.theta.below.maxdiff', max(abs(rc['theta'][q]['gain'] - rc['theta']['0.65']['gain']) for q in ('0.0', '0.3', '0.4', '0.5', '0.6')), '.2f')   # Section 3.4
         pd = rc['pairs_dev']
         put('rc.pairs.n', pd['n'], 'd'); put('rc.pairs.pick.gain', pd['pick_gain'], '+.2f'); put('rc.pairs.pick.rank', pd['pick_rank'], 'd'); put('rc.pairs.best', pd['best'].replace('|', ' and '), 's')
         put('rc.pairs.best.gain', pd['best_gain'], '+.2f'); put('rc.pairs.mean', pd['mean'], '+.2f'); put('rc.pairs.median', pd['median'], '+.2f'); put('rc.pairs.worst', pd['worst'].replace('|', ' and '), 's')

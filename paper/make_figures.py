@@ -168,7 +168,7 @@ def fx(x):                                                    # figure x (in) ->
 # ---------- (a) calibration
 fig.text(fx(0.02), 1.60 / H, '(a) calibration: once, from a few hundred unlabeled images', ha='left', va='center', color=C['host_dark'])
 fig.patches.append(FancyBboxPatch((fx(0.02), 0.62 / H), 0.74 / W, 0.56 / H, boxstyle='round,pad=0,rounding_size=0.006', transform=fig.transFigure, fc='#ececec', ec=C['host'], lw=0.8))
-fig.text(fx(0.39), 0.90 / H, 'run the 13\nplacements\npx + block $k$', ha='center', va='center', linespacing=1.05)
+fig.text(fx(0.39), 0.90 / H, 'run the 13\ncandidates\npx + block $k$', ha='center', va='center', linespacing=1.05)
 fig.patches.append(FancyArrowPatch((fx(0.76), 0.90 / H), (fx(0.86), 0.90 / H), transform=fig.transFigure, arrowstyle='-|>', mutation_scale=6, lw=0.7, color=C['host_dark'], shrinkA=0, shrinkB=0))
 ks = list(range(1, 13))
 a1 = fig.add_axes([fx(1.06), 0.40 / H, 0.98 / W, 0.96 / H])
@@ -272,8 +272,8 @@ for ax, (title, lf) in zip(axes.flat, PANELS):
     ax.plot(xs, acc, marker='o', ms=2.2, lw=0.9, color=C['ink']); ax.scatter([kbest], [acc[kbest]], marker='*', s=55, color=C['ink'], zorder=5)
     ax2 = ax.twinx(); ax2.plot(xs, ent, marker='s', ms=2.0, lw=0.9, color=C['accent'], ls='--'); ax2.scatter([kpick], [ent[kpick]], marker='o', s=60, facecolors='none', edgecolors=C['accent'], linewidths=1.0, zorder=5)
     ax2.tick_params(axis='y', colors=C['accent'], length=2); ax2.spines['right'].set_visible(True); ax2.spines['right'].set_color(C['accent'])
-    rho = lf['trunk_spearman_confidence_accuracy']; rho = 0.0 if abs(rho) < 0.005 else rho   # no negative zero
-    ax.set_title(f"{title}, $\\rho$ {rho:+.2f}", loc='left', pad=2)
+    rho = lf['trunk_spearman_confidence_accuracy']; rho_s = '0.00' if abs(rho) < 0.005 else f'{rho:+.2f}'   # a zero without a sign, as in the tables
+    ax.set_title(f"{title}, $\\rho$ {rho_s}", loc='left', pad=2)
     ax.locator_params(axis='y', nbins=4); ax2.locator_params(axis='y', nbins=3)
     ax.set_xticks([0, 3, 6, 9, 12]); ax.set_xticklabels(['px', '3', '6', '9', '12']); ax.tick_params(length=2)
     ax.grid(True, axis='y', color=C['grid'], lw=0.5); ax.set_axisbelow(True)
