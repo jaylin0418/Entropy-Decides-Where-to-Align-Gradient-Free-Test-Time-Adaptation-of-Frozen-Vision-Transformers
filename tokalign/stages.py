@@ -2,7 +2,7 @@
 
 * ``TokAlign``   whitening--recoloring of the 16x16x3 pixel patches toward clean statistics (Eq. 1-2 of the paper),
                  applied before the patch embedding.
-* ``LayerAlign`` the same map on the patch tokens at the output of one block (block 6 in the two-site method), as a
+* ``LayerAlign`` the same map on the patch tokens at the output of one block (block 6, the main block, on ImageNet-C), as a
                  forward hook; CLS untouched, statistics detached so a host's gradients flow through the map.
 * ``HierLayerAlign`` the hierarchical map at a block: the token covariance is split into the between-image part (the
                  covariance of the image means) and the within-image part (the covariance of the deviations from the

@@ -35,7 +35,7 @@ ARMS = {
     # the branch mixture: the pixel map, blocks 1 to 6 once, then blocks 7 to 12 with and without the block-6 map, the two
     # softmax outputs averaged per image with entropy weights (tokalign.aligner.branch_mixture); 1.5 forward passes
     'branch': dict(tok=True, mean=(), cov=(), headcov=False, place=(5,), branch=True),
-    # early-exit branches (tokalign.aligner.forward_exit): the pair is the trunk; images whose trunk entropy exceeds 1.5 nat also
+    # extra branches (tokalign.aligner.forward_exit): the main path is the trunk; images whose main-path entropy exceeds 1.5 nat also
     # run the extra sites (0-based blocks) and the outputs are mixed per image; '_gated' adds the spectral gate of the stack
     'exit_b9': dict(tok=True, mean=(), cov=(), headcov=False, place=(5,), exit_sites=(8,), exit_theta=1.5),
     'exit_b5b9': dict(tok=True, mean=(), cov=(), headcov=False, place=(5,), exit_sites=(4, 8), exit_theta=1.5),

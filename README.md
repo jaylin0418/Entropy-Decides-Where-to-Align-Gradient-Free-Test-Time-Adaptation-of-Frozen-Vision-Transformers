@@ -47,6 +47,7 @@ D="--imagenet-val $IMAGENET_VAL --imagenet-c $IMAGENET_C --cache-dir cache --out
 python scripts/compute_source_stats.py --model vitb --blocks --imagenet-val $IMAGENET_VAL --out stats/vitb_blocks.pt
 python scripts/episodic/run_forward_only.py --split design --arms neo tok headcov tok+headcov place_b6 tok+place_b6 tok+place_b6+headcov --stats stats/vitb_blocks.pt --tag _two_site $D
 python scripts/episodic/run_forward_only.py --split design --arms tok+place_b1 tok+place_b2 tok+place_b3 tok+place_b4 tok+place_b5 tok+place_b7 tok+place_b8 tok+place_b9 tok+place_b10 tok+place_b11 tok+place_b12 --stats stats/vitb_blocks.pt --tag _select $D
+# headcov arms: a covariance map at the head input, an earlier stage the report uses only for the source-image sensitivity (Section H)
 python scripts/analysis/site_choice.py --logits runs/logits --base forward_only_design_vitb_two_site --blocks forward_only_design_vitb_select --imagenet-val $IMAGENET_VAL --cells inc --out results/scores/site_choice_design_vitb.json
 python scripts/episodic/run_forward_only.py --split heldout4 --arms rule_t6_b4b11_gated --stats stats/vitb_blocks.pt --tag _rule $D
 python scripts/episodic/score_forward_only.py --runs runs/forward_only_heldout4_vitb_rule.json --imagenet-val $IMAGENET_VAL --neo-from results/scores/forward_only_heldout4_vitb_exit.json --out results/scores/forward_only_heldout4_vitb_rule.json
@@ -84,10 +85,10 @@ Top-1 % on the fourth held-out set, ViT-B/16, blocks 6 / 4, 11 calibrated on unl
 
 | | ImageNet-C | ImageNet-C-bar | clean | unsure | time |
 |---|---|---|---|---|---|
-| NEO | 62.09 | 67.11 | 84.10 | – | 1.00 |
-| + TokAlign | 64.11 | 67.95 | 84.10 | – | 1.03 |
-| + LayerAlign after block 6 (the main path) | 66.99 | 69.03 | 84.10 | – | 1.04 |
-| **+ branches 4, 11 on the unsure images (the calibrated cascade)** | **68.35** | **70.23** | 84.10 | 35 % | 1.49 |
+| NEO | 62.09 | 67.11 | 84.10 | 0% | 1.00 |
+| + TokAlign | 64.11 | 67.95 | 84.10 | 0% | 1.03 |
+| + LayerAlign after block 6 (the main path) | 66.99 | 69.03 | 84.10 | 0% | 1.04 |
+| **+ branches 4, 11 on the unsure images (the calibrated cascade)** | **68.35** | **70.23** | 84.10 | 35% | 1.49 |
 
 Gains over NEO on held-out cells, each model-shift pair calibrated anew on its own unlabeled dev images (report Table 3;
 ETA columns include NEO):
@@ -109,7 +110,8 @@ Ablations, controls, ImageNet-R, DeiT-S/16, the streams, the other methods and t
 ## Layout
 
 ```
-tokalign/        aligner.py (the maps at any placement and the cascade), stages.py, models.py, data.py, hosts.py (ETA, SAR)
+tokalign/        aligner.py (the maps at any placement and the cascade), runner.py (a stream of batches through a host),
+                 stages.py, models.py, data.py, hosts.py (ETA, SAR)
 scripts/         compute_source_stats.py, make_paper_numbers.py; episodic/ (run_*.py and score_*.py for the forward-only,
                  ETA, SAR, FOA and PEA runs), streams/, cost/, block_alignment/, analysis/ (site_choice.py: the calibration)
 reproduce_paper.sh, results/ (scores/, paper_numbers.json, number_inventory.csv), paper/ (numbers.tex, make_*.py, figures/, report/)

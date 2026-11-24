@@ -36,3 +36,6 @@ labelled-search cascade) and `rule_` (the calibrated cascade), and `trunk` in th
 | `mix_` arms | the control that runs the branches on every image |
 | `hier` | the two-level map of Section G, not kept |
 | `design` | the dev images |
+| `mean_30_cells` | the mean over the cells of the file, whatever their number (20 on ImageNet-C-bar, 3 on the natural shifts) |
+| `gate: {..., verdict}` in the per-cell few-image score files | an automatic check against a 1.5-point threshold written for every run, meaningless for a single cell |
+| `data/derived/course_two_site`, `scripts/cvpr/course*.sh`, GB10 | the directory, job scripts and machine of the research repository where the runs were made, named in the run records and in results/number_inventory.csv, not part of this repository |

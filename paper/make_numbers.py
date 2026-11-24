@@ -833,7 +833,7 @@ def across():
     ES = CA.get('etastack', {})
     def row(key, trunk, lo, hi, rho, neo, base, stack, eta=None, etaours=None, clean=None, eta_clean=None):
         put(f'ax.{key}.pick', f'{trunk}/{lo},{hi}', 's'); put(f'ax.{key}.rho', rho, '+.2f')
-        put(f'ax.{key}.base', base - neo, '+.2f'); put(f'ax.{key}.stack', stack - neo, '+.2f'); put(f'ax.{key}.stack.vsbase', round(stack, 2) - round(base, 2), '+.2f')
+        put(f'ax.{key}.base', base - neo, '+.2f'); put(f'ax.{key}.stack', stack - neo, '+.2f'); put(f'ax.{key}.stack.vsbase', round(stack - neo, 2) - round(base - neo, 2), '+.2f')   # the difference of the two printed gains
         put(f'ax.{key}.eta', eta - neo if eta is not None else float('nan'), '+.2f') if eta is not None else put(f'ax.{key}.eta', '--', 's')
         put(f'ax.{key}.etaours', etaours - neo, '+.2f') if etaours is not None else put(f'ax.{key}.etaours', '--', 's')
         if clean is not None:

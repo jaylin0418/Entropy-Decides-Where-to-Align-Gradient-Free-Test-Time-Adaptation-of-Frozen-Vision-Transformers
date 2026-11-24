@@ -272,7 +272,8 @@ for ax, (title, lf) in zip(axes.flat, PANELS):
     ax.plot(xs, acc, marker='o', ms=2.2, lw=0.9, color=C['ink']); ax.scatter([kbest], [acc[kbest]], marker='*', s=55, color=C['ink'], zorder=5)
     ax2 = ax.twinx(); ax2.plot(xs, ent, marker='s', ms=2.0, lw=0.9, color=C['accent'], ls='--'); ax2.scatter([kpick], [ent[kpick]], marker='o', s=60, facecolors='none', edgecolors=C['accent'], linewidths=1.0, zorder=5)
     ax2.tick_params(axis='y', colors=C['accent'], length=2); ax2.spines['right'].set_visible(True); ax2.spines['right'].set_color(C['accent'])
-    ax.set_title(f"{title}, $\\rho$ {lf['trunk_spearman_confidence_accuracy']:+.2f}", loc='left', pad=2)
+    rho = lf['trunk_spearman_confidence_accuracy']; rho = 0.0 if abs(rho) < 0.005 else rho   # no negative zero
+    ax.set_title(f"{title}, $\\rho$ {rho:+.2f}", loc='left', pad=2)
     ax.locator_params(axis='y', nbins=4); ax2.locator_params(axis='y', nbins=3)
     ax.set_xticks([0, 3, 6, 9, 12]); ax.set_xticklabels(['px', '3', '6', '9', '12']); ax.tick_params(length=2)
     ax.grid(True, axis='y', color=C['grid'], lw=0.5); ax.set_axisbelow(True)
