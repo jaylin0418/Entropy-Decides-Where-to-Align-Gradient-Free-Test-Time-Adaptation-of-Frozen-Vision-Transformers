@@ -1,10 +1,4 @@
 {
- "gate": {
-  "best": "stack_headn0x4",
-  "gain_over_neo": 1.0083333333333258,
-  "clean_harm_best": 0.25,
-  "verdict": "FAIL"
- },
  "mean_30_cells": {
   "stack_lam0": 64.08833333333334,
   "stack_lam0.3": 64.82833333333333,

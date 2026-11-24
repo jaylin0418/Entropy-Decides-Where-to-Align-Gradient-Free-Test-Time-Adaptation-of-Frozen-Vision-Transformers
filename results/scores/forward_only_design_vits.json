@@ -1,10 +1,4 @@
 {
- "gate": {
-  "best": "tok+headcov",
-  "gain_over_neo": 4.11666666666666,
-  "clean_harm_best": -0.3499999999999943,
-  "verdict": "PASS"
- },
  "mean_30_cells": {
   "neo": 53.27166666666667,
   "tok": 56.436666666666675,

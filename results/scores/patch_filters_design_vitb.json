@@ -1,25 +1,4 @@
 {
- "gate": {
-  "oracle_naive_gain": 2.3816666666666606,
-  "oracle_split_half_gain": 2.1816666666666666,
-  "noise_family_oracle_gain": 3.3999999999999964,
-  "winners": [
-   "coral",
-   "dct_match",
-   "identity",
-   "mean_only"
-  ],
-  "clean_harm": {
-   "identity": 0.0,
-   "mean_only": -0.04999999999999716,
-   "dct_match": -0.20000000000000284,
-   "dct_wiener": -0.20000000000000284,
-   "dct_shrink": -0.10000000000000853,
-   "coral": -0.04999999999999716,
-   "affine_only": -0.25
-  },
-  "verdict": "FAIL"
- },
  "mean_30_cells_neo": {
   "identity": 62.373333333333335,
   "mean_only": 62.39,

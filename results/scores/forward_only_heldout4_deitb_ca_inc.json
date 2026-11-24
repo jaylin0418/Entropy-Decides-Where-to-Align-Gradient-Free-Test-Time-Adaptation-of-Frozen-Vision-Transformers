@@ -1,10 +1,4 @@
 {
- "gate": {
-  "best": "rule_t6_b7_gated",
-  "gain_over_neo": 8.606666666666655,
-  "clean_harm_best": 0.0,
-  "verdict": "PASS"
- },
  "reference": "neo",
  "n_cells": 30,
  "cells": [

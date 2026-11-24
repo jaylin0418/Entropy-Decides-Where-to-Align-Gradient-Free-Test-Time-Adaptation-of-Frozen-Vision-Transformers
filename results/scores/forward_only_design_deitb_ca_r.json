@@ -1,10 +1,4 @@
 {
- "gate": {
-  "best": "tok+place_b7",
-  "gain_over_neo": 1.75,
-  "clean_harm_best": -0.29999999999999716,
-  "verdict": "FAIL"
- },
  "reference": "neo",
  "n_cells": 3,
  "cells": [

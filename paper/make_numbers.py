@@ -73,7 +73,7 @@ def build():
     put('u.peaviews.gain.abs', gain['peaviews'])
     put('u.sneo.gain.abs', gain['sneo']); put('u.seta.gain.abs', gain['seta'])
     noviews = ('neo', 'eta', 'sar', 'foa', 'pea')
-    put('u.range.lo', min(gain[h] for h in noviews), '.1f'); put('u.range.hi', max(gain[h] for h in noviews), '.1f')
+    put('u.range.lo', min(gain[h] for h in noviews), '+.1f'); put('u.range.hi', max(gain[h] for h in noviews), '+.1f')
     put('u.cleanmax', max(abs(c) for c in cdelta.values()))
 
     # ---------------- cost: wall-clock of NEO and ETA (design timing cells) and the MACs of one ViT-B/16 forward pass
@@ -154,7 +154,7 @@ def two_site():
             put(f'ts.sw.{host}.{s}', g[s], '+.1f')
         early, mid = [g[f'b{k}'] for k in (1, 2, 3)], [g[f'b{k}'] for k in (5, 6, 7, 8)]
         put(f'ts.sw.{host}.early.lo', min(early), '.1f'); put(f'ts.sw.{host}.early.hi', max(early), '.1f')
-        put(f'ts.sw.{host}.mid.lo', min(mid), '.1f'); put(f'ts.sw.{host}.mid.hi', max(mid), '.1f')
+        put(f'ts.sw.{host}.mid.lo', min(mid), '+.1f'); put(f'ts.sw.{host}.mid.hi', max(mid), '+.1f')
         best = max((s for s in SITES if s != 'pixel'), key=g.get)
         put(f'ts.sw.{host}.best.site', site_name(best), 's'); put(f'ts.sw.{host}.best', g[best], '+.1f')
         put(f'ts.sw.{host}.best.vs.b6', g[best] - g['b6'], '.1f')
@@ -209,14 +209,14 @@ def two_site():
         for k, a in HA.items():
             put(f'ts.{b}.ep.{k}', ep[a]); put(f'ts.{b}.cl.{k}', cl[a])
         for k in ('tok', 'b6', 'twosite', 'stack', 'stack2'):
-            put(f'ts.{b}.gain.{k}', ep[HA[k]] - ep['neo'], '.1f')
+            put(f'ts.{b}.gain.{k}', ep[HA[k]] - ep['neo'], '+.1f')
         put(f'ts.{b}.gain.stack2.over.stack', ep['tok+place_b6+headcov'] - ep['tok+headcov'], '.1f')
         put(f'ts.{b}.gain.twosite.over.tok', ep['tok+place_b6'] - ep['tok'], '.1f')
         put(f'ts.{b}.twosite.x.tok', (ep['tok+place_b6'] - ep['neo']) / (ep['tok'] - ep['neo']), '.1f')
         put(f'ts.{b}.gain.etab6', ep['eta+place_b6+neo'] - ep['eta+neo'], '.1f')
         put(f'ts.{b}.gain.etatok', ep['tok+eta+neo'] - ep['eta+neo'], '.1f')
         put(f'ts.{b}.gain.etatwosite', ep['tok+eta+place_b6+neo'] - ep['tok+eta+neo'], '.1f')
-        put(f'ts.{b}.gain.etatwosite.over.etaneo', ep['tok+eta+place_b6+neo'] - ep['eta+neo'], '.1f')
+        put(f'ts.{b}.gain.etatwosite.over.etaneo', ep['tok+eta+place_b6+neo'] - ep['eta+neo'], '+.1f')
         put(f'ts.{b}.stack2.vs.etaneo', ep['tok+place_b6+headcov'] - ep['eta+neo'], '+.1f')
         put(f'ts.{b}.clean.stack2', cl['tok+place_b6+headcov'] - cl['neo'], '+.2f'); put(f'ts.{b}.clean.twosite', cl['tok+place_b6'] - cl['neo'], '+.2f')
         put(f'ts.{b}.clean.b6', cl['place_b6'] - cl['neo'], '+.2f')
@@ -695,14 +695,15 @@ def rule():
         f = R['held4'][bench]
         if f is None:
             continue
-        pc, bpc = f['per_cell']['rule_t6_b4b11_gated'], base[bench]['per_cell']
+        pc, bpc = f['per_cell']['rule_t6_b4b11_gated'], base[bench]['per_cell']; mp = bpc.get('pair_gated', bpc['tok+place_b6'])   # the gated main path, as in Table 1
         g3 = lambda d, co: np.mean([d[f'{co}-{s}'] for s in (3, 5)])
         wins = 0
         for co in corrs:
-            put(f'{pre}.{co}.neo', g3(bpc['neo'], co), '.1f'); put(f'{pre}.{co}.pair', g3(bpc['tok+place_b6'], co), '.1f'); put(f'{pre}.{co}.stack', g3(pc, co), '.1f')
-            put(f'{pre}.{co}.gain', g3(pc, co) - g3(bpc['tok+place_b6'], co), '+.1f'); put(f'{pre}.{co}.routed', 100 * np.mean([f['routed_per_cell']['rule_t6_b4b11_gated'][f'{co}-{s}'] for s in (3, 5)]), '.0f')
-            wins += g3(pc, co) >= g3(bpc['tok+place_b6'], co)
+            put(f'{pre}.{co}.neo', g3(bpc['neo'], co), '.1f'); put(f'{pre}.{co}.pair', g3(mp, co), '.1f'); put(f'{pre}.{co}.stack', g3(pc, co), '.1f')
+            put(f'{pre}.{co}.gain', g3(pc, co) - g3(mp, co), '+.1f'); put(f'{pre}.{co}.routed', 100 * np.mean([f['routed_per_cell']['rule_t6_b4b11_gated'][f'{co}-{s}'] for s in (3, 5)]), '.0f')
+            wins += g3(pc, co) - g3(mp, co) > 0.005                             # a gain that prints above +0.0
         put(f'{pre}.wins', wins, 'd'); put(f'{pre}.n', len(corrs), 'd')
+    put('rl.h.cbar.gate.diff', base['cbar']['episodic']['pair_gated'] - base['cbar']['episodic']['tok+place_b6'], '+.2f')   # what the gate adds to the block-6 main path on C-bar
     put('rl.ss.inc.theta65', R['picks']['inc']['trunk_entropy_quantile']['0.65']); put('rl.ss.cbar.theta65', R['picks']['cbar_t6']['trunk_entropy_quantile']['0.65'])
     # the picks on the design images
     for key, pk in R['picks'].items():

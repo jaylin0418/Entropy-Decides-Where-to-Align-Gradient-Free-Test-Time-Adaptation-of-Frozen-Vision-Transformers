@@ -1,10 +1,4 @@
 {
- "gate": {
-  "best": "rule_t6_b3b9_gated",
-  "gain_over_neo": 6.260000000000005,
-  "clean_harm_best": 0.0,
-  "verdict": "PASS"
- },
  "reference": "neo from forward_only_heldout4_vitb_exit.json",
  "n_cells": 30,
  "cells": [

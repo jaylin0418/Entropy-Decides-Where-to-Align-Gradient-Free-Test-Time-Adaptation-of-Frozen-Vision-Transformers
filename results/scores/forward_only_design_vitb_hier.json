@@ -1,10 +1,4 @@
 {
- "gate": {
-  "best": "hier_px+hier_b6",
-  "gain_over_neo": 5.256666666666661,
-  "clean_harm_best": -0.20000000000000284,
-  "verdict": "PASS"
- },
  "reference": "neo from forward_only_design_vitb_two_site.json",
  "mean_30_cells": {
   "hier_px": 64.675,

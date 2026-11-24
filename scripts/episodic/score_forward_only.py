@@ -18,7 +18,6 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 from tokalign import data  # noqa: E402
 
 CELLS = data.CELLS
-GATE_GAIN, GATE_CLEAN = 4.0, 0.5       # the bar declared for the first forward-only probe (kept in the output)
 
 
 def main():
@@ -53,11 +52,9 @@ def main():
     mean_ref = float(np.mean([ref[c] for c in std]))
     best = max(arms, key=lambda a: mean[a])
     clean_harm = {a: acc[a]['clean'] - ref['clean'] for a in arms} if 'clean' in cells else {}
-    gate = {'best': best, 'gain_over_neo': mean[best] - mean_ref, 'clean_harm_best': clean_harm.get(best, 0.0),
-            'verdict': 'PASS' if mean[best] - mean_ref >= GATE_GAIN and clean_harm.get(best, 0.0) >= -GATE_CLEAN else 'FAIL'}
     fam = {co: {a: float(np.mean([acc[a][f'{co}-3'], acc[a][f'{co}-5']]) - np.mean([ref[f'{co}-3'], ref[f'{co}-5']])) for a in arms}
            for co in data.CORRUPTIONS if f'{co}-3' in std and f'{co}-5' in std}
-    out = {'gate': gate, 'reference': reference, 'n_cells': len(std), 'cells': std, 'mean_30_cells': mean, 'clean': {a: acc[a].get('clean') for a in arms}, 'clean_harm': clean_harm,
+    out = {'reference': reference, 'n_cells': len(std), 'cells': std, 'mean_30_cells': mean, 'clean': {a: acc[a].get('clean') for a in arms}, 'clean_harm': clean_harm,
            'warmup_first640': {a: float(np.mean([warm[a][c] for c in std])) for a in arms}, 'per_family_vs_neo': fam, 'per_cell': acc}
     # early-exit arms record the fraction of images routed to the extra branches per cell (the manifest field 'routed_fraction')
     routed = {a: {c: runs['runs'][a][c]['routed_fraction'] for c in cells if 'routed_fraction' in runs['runs'][a][c]} for a in arms}

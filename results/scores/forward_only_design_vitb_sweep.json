@@ -1,10 +1,4 @@
 {
- "gate": {
-  "best": "place_b5",
-  "gain_over_neo": 2.694999999999979,
-  "clean_harm_best": -0.10000000000000853,
-  "verdict": "FAIL"
- },
  "reference": "neo from forward_only_design_vitb_two_site.json",
  "mean_30_cells": {
   "place_b1": 57.39833333333333,

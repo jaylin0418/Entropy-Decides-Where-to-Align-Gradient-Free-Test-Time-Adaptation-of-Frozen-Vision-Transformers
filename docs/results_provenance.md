@@ -6,6 +6,10 @@ Which score files and which steps of `reproduce_paper.sh` stand behind every tab
 `paper/numbers.tex`, the `results/paper_numbers.json` path or formula, the scored file and command that produced it, the
 steps of `reproduce_paper.sh` that regenerate it, and its status. Per table and figure:
 
+The held-out plans in this directory quote the numbers of their time: the ImageNet-C-bar gain against the main path
+without its gate (+1.24, 70.23 against 68.99) and the first timing run (412 ms, 1.51x, NEO 273 ms). The report uses the
+gated main path of the same run (+1.20, 69.03) and the later timing run (405 ms, 1.49x, 271 ms, step C6).
+
 | table / figure | `paper_numbers.json` keys | scores (`results/scores/`) | steps |
 |---|---|---|---|
 | Table 1, the calibrated cascade on `heldout4` (with its ablations and the random control); Table 2, the calibration from few images (from the saved dev predictions, and the small-sample held-out runs) | `rule/held4/*`, `rule/random`, `rule/timing`, `rule/fewshot/*`, `exit/held4/*` | `forward_only_heldout4_vitb_{rule,cbar_rule,rule_abl,cbar_rule_abl,rule_small,cbar_rule_small,rule_random,cbar_rule_random,exit,cbar_exit}`, `forward_only_heldout4_vitb_fewshot{,_k10,_k1}_<cell>`, `timing_design_vitb_ablations` | S5 E38 E39 E52–E57 E64 E65 E69 C6 → R39 R45 R46 R56 R64 → P1 P2 P4 |

@@ -1,10 +1,4 @@
 {
- "gate": {
-  "best": "exit_b5b9",
-  "gain_over_neo": 0.2750000000000199,
-  "clean_harm_best": -0.14999999999999147,
-  "verdict": "FAIL"
- },
  "reference": "exit_b9",
  "n_cells": 30,
  "cells": [

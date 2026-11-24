@@ -47,6 +47,7 @@ D="--imagenet-val $IMAGENET_VAL --imagenet-c $IMAGENET_C --cache-dir cache --out
 python scripts/compute_source_stats.py --model vitb --blocks --imagenet-val $IMAGENET_VAL --out stats/vitb_blocks.pt
 python scripts/episodic/run_forward_only.py --split design --arms neo tok headcov tok+headcov place_b6 tok+place_b6 tok+place_b6+headcov --stats stats/vitb_blocks.pt --tag _two_site $D
 python scripts/episodic/run_forward_only.py --split design --arms tok+place_b1 tok+place_b2 tok+place_b3 tok+place_b4 tok+place_b5 tok+place_b7 tok+place_b8 tok+place_b9 tok+place_b10 tok+place_b11 tok+place_b12 --stats stats/vitb_blocks.pt --tag _select $D
+# --split design is the report's dev split and the _two_site tag its main-path run (docs/file_names.md maps every name)
 # headcov arms: a covariance map at the head input, an earlier stage the report uses only for the source-image sensitivity (Section H)
 python scripts/analysis/site_choice.py --logits runs/logits --base forward_only_design_vitb_two_site --blocks forward_only_design_vitb_select --imagenet-val $IMAGENET_VAL --cells inc --out results/scores/site_choice_design_vitb.json
 python scripts/episodic/run_forward_only.py --split heldout4 --arms rule_t6_b4b11_gated --stats stats/vitb_blocks.pt --tag _rule $D

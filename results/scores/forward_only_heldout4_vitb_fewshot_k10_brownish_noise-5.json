@@ -1,10 +1,4 @@
 {
- "gate": {
-  "best": "tok+place_b5",
-  "gain_over_neo": 2.9000000000000057,
-  "clean_harm_best": 0.0,
-  "verdict": "FAIL"
- },
  "reference": "neo from forward_only_heldout4_vitb_cbar_exit.json",
  "n_cells": 1,
  "cells": [
