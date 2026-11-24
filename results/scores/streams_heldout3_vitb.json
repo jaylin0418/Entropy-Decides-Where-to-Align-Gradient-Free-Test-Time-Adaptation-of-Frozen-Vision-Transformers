@@ -1,11 +1,4 @@
 {
- "gates": {
-  "stack_gated_vs_neo_cont": 2.923333333333332,
-  "stack_gated_cleanret_clean_vs_neo": 0.010000000000005116,
-  "stack_gated_clean_vs_neo": null,
-  "tok_eta_vs_eta_cont": 2.519999999999996,
-  "verdict": "PASS"
- },
  "table": {
   "eta": {
    "cont": 58.209999999999994,

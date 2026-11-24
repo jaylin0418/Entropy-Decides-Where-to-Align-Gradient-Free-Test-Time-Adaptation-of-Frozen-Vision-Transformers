@@ -1,5 +1,7 @@
 # Pre-registration — three supplementary tests of the two-site stack (ViT-B/16)
 
+> Table, figure and section numbers in this plan are those of the report draft at the time it was declared. The plan is kept as declared.
+
 Declared 2026-11-09 14:00 MST, before any of the runs below. Everything is frozen; held-out images are scored once. The
 method is the pooled two-site stack of `docs/heldout_test_plan_two_site.md` (TokAlign at the pixels, LayerAlign after
 block 6, NEO, head covariance, spectral gate), unchanged. These tests answer three questions a reviewer would ask: does the

@@ -1,4 +1,4 @@
-> Historical document, committed before the held-out images were used. Script and file names refer to the original research codebase; in this repository the corresponding entry points are `scripts/evaluate.py` and `scripts/stream.py` (see README).
+> Historical document, committed before the held-out images were used. Script and file names refer to the original research codebase; in this repository the corresponding entry points are `scripts/episodic/run_forward_only.py` and `scripts/streams/run_streams.py` (see README).
 
 # Pre-registration — SPA held-out test: closed-form tokenizer alignment and the forward-only stack (ViT-B/16 on ImageNet-C)
 

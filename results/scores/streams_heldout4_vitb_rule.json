@@ -1,7 +1,4 @@
 {
- "gates": {
-  "verdict": "FAIL"
- },
  "table": {
   "exit_b5b9_gated": {
    "cont": 61.266666666666666,

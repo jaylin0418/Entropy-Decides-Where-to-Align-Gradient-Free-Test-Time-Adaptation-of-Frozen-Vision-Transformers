@@ -96,7 +96,7 @@ def rule_arm(name):
     """Arm of the rule-chosen second-opinion stack, named by its blocks (1-based): rule_t<T>_b<A>[b<B>][_gated] is the pixel map,
     the map after block T (the trunk), NEO, and second opinions after blocks A and B for images whose trunk entropy exceeds
     1.5 nat; '_random' routes 35 % of the images at random instead (control); '_gated' adds the spectral gate. rule_t6_b5b9_gated
-    is the labelled-search stack of the report (exit_b5b9_gated). rule_t<T>_views[_gated] is the views control: the same routed
+    is the labeled-search stack of the report (exit_b5b9_gated). rule_t<T>_views[_gated] is the views control: the same routed
     images run the main path on two more views (flip, center crop) instead of two more blocks."""
     m = RULE_ARM.match(name)
     if not m:

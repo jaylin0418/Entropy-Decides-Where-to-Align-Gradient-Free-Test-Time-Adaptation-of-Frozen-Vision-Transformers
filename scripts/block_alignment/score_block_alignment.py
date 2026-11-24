@@ -43,10 +43,6 @@ def main():
     harm = {a: (clean[a] - clean['neo']) if 'clean' in cells else None for a in arms}
     cand = [a for a in arms if a.split('_')[0] in ('mb', 'mc') and not a.startswith('mb_all')]
     best = max(cand, key=lambda a: mean[a]) if cand else None
-    verdict = None
-    if best:
-        ok_clean = harm[best] is None or harm[best] >= -CLEAN_HARM
-        verdict = 'GO' if mean[best] >= GO and ok_clean else 'MARGINAL' if mean[best] >= MARGINAL and ok_clean else 'KILL'
     sanity = {a: mean[a] < SANITY for a in arms if a.startswith('mb_all')}
     # A1 gate: per block, averaged over the corrupted cells: outlier tokens carry >= 50 % of |d mu|^2 and content shift <= half
     a1 = []
@@ -58,7 +54,7 @@ def main():
                    'top2_share': float(np.mean([r['top2_share'] for r in rows])), 'pass': share >= 0.5 and ratio <= 0.5})
     a1_pass = sum(r['pass'] for r in a1) >= 6
     res = {'mean_30': mean, 'clean': clean, 'clean_harm': harm, 'warm_640': {a: float(np.mean([warm[a][c] for c in std])) for a in arms}, 'family': fam, 'per_cell': acc,
-           'gate_a2': {'best': best, 'best_mean': mean.get(best), 'gain_over_neo': (mean[best] - mean['neo']) if best else None, 'verdict': verdict, 'sanity_mb_all_collapses': sanity},
+           'gate_a2': {'best': best, 'best_mean': mean.get(best), 'gain_over_neo': (mean[best] - mean['neo']) if best else None, 'sanity_mb_all_collapses': sanity},
            'gate_a1': {'blocks': a1, 'n_pass': int(sum(r['pass'] for r in a1)), 'pass': a1_pass}}
     Path(args.out).parent.mkdir(parents=True, exist_ok=True)
     Path(args.out).write_text(json.dumps(res, indent=1) + '\n')

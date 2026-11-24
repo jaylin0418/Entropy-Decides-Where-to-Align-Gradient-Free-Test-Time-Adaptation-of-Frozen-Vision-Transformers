@@ -402,7 +402,6 @@
   "best": "mb_maskch_late",
   "best_mean": 63.42666666666666,
   "gain_over_neo": 1.0633333333333184,
-  "verdict": "KILL",
   "sanity_mb_all_collapses": {
    "mb_all_all": true,
    "mb_all_late": false

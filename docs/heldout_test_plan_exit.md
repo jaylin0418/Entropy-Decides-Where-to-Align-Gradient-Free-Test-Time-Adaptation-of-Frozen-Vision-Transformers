@@ -1,5 +1,7 @@
 # Pre-registration — adaptive site choice per image: the gated early-exit stack (ViT-B/16, heldout4)
 
+> Table, figure and section numbers in this plan are those of the report draft at the time it was declared. The plan is kept as declared.
+
 Declared 2026-11-10 03:53 MST (commit c66d432; the draft said 04:00, corrected to the commit time), before any image of `heldout4 = perm[42000:44000]` was decoded or passed through a model by any
 run of this project. Everything below is frozen; the slice is scored once, for ImageNet-C and ImageNet-C-bar.
 

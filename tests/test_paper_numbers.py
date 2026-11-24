@@ -1,5 +1,5 @@
 """CPU tests of the paper pipeline (no model, no data): the committed scores rebuild results/paper_numbers.json exactly,
-paper/numbers.tex and results/number_inventory.csv are up to date with it, every \\pn key used in the two papers is defined,
+paper/numbers.tex and results/number_inventory.csv are up to date with it, every \\pn key used in the report is defined,
 the site-selection analysis rebuilds its committed score file, and the paper-run implementation (tokalign/aligner.py)
 computes the same TokAlign map, block-site map and gate scores as the library (tokalign/stages.py)."""
 import importlib.util

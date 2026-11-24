@@ -1,6 +1,5 @@
-"""Writes paper/numbers.tex: every result number printed in the course report (paper/report/report.tex) and the long
-paper (paper/paper.tex) as a macro \\pn{<key>}, formatted from results/paper_numbers.json. Differences, ranges and
-counts are computed here from the stored values; the format of each number is the one the papers print. Hyper-
+"""Writes paper/numbers.tex: every result number printed in the course report (paper/report/report.tex) as a macro \\pn{<key>}, formatted from results/paper_numbers.json. Differences, ranges and
+counts are computed here from the stored values; the format of each number is the one the report prints. Hyper-
 parameters, data sizes and numbers quoted from other papers stay literal in the .tex files (see
 results/number_inventory.csv for the source of every number).
 Usage: python3 paper/make_numbers.py
@@ -178,7 +177,7 @@ def two_site():
     dz = [zco(co, 'b6') - zco(co, 'pixel') for co in CORR]
     dg = [fam_gain(sw['frozen_per_cell']['b6'], sw['neo_per_cell'], co) - fam_gain(sw['frozen_per_cell']['pixel'], sw['neo_per_cell'], co) for co in CORR]
     put('ts.dr.spearman', spearman(dz, dg), '+.2f')
-    put('ts.dr.pixelmax.n', sum(zco(co, 'pixel') > zco(co, 'b6') for co in CORR), 'd')
+    put('ts.dr.pixelmax.n', sum(zco(co, 'pixel') >= max(zco(co, s) for s in SITES) for co in CORR), 'd')   # the pixels are the placement of the largest drift
     put('ts.dr.b6max.names', join_names([co for co in CORR if zco(co, 'b6') > zco(co, 'pixel')]) or 'none', 's')
     put('ts.dr.agree.n', sum((a > 0) == (b > 0) for a, b in zip(dz, dg)), 'd')
     zat = lambda co, s: np.mean([dr['z_spec_first_k_after_tok'][f'{co}-{sev}'][s] for sev in (3, 5)])
@@ -584,7 +583,7 @@ def early_exit():
 
 
 def rule():
-    """The rule-chosen second-opinion stack: held-out results that exist (gains against the pair, NEO and the labelled 5+9 stack of
+    """The rule-chosen second-opinion stack: held-out results that exist (gains against the pair, NEO and the labeled 5+9 stack of
     the same slice), the rule's picks and the sample-size analysis. Prefix rl."""
     R = v('rule'); E = v('exit')
     base = {'inc': E['held4']['inc'], 'cbar': E['held4']['cbar']}
@@ -660,7 +659,7 @@ def rule():
         t = R['streams']['table']
         for a, key in (('neo', 'neo'), ('pair_gated', 'pairg'), ('exit_b5b9_gated', 'b5b9g'), ('rule_t6_b4b11_gated', 'b4b11')):
             put(f'rl.st.cont.{key}', t[a]['cont']); put(f'rl.st.cr.{key}', t[a]['cleanret_clean'])
-        put('rl.st.cont.gain', round(t['rule_t6_b4b11_gated']['cont'], 2) - round(t['pair_gated']['cont'], 2), '+.2f'); put('rl.st.cont.gainneo', t['rule_t6_b4b11_gated']['cont'] - t['neo']['cont'], '+.2f')
+        put('rl.st.cont.gain', t['rule_t6_b4b11_gated']['cont'] - t['pair_gated']['cont'], '+.2f'); put('rl.st.cont.gainneo', t['rule_t6_b4b11_gated']['cont'] - t['neo']['cont'], '+.2f')
         put('rl.st.cr.d', t['rule_t6_b4b11_gated']['cleanret_clean'] - t['neo']['cleanret_clean'], '+.2f')
     if R.get('streams_eta') is not None:                            # ETA and SAR (alone, with NEO applied to the recorded head input, and ETA with the main path inside) on the same streams
         te = R['streams_eta']['table']; t = R['streams']['table']
@@ -835,7 +834,7 @@ def across():
     ES = CA.get('etastack', {})
     def row(key, trunk, lo, hi, rho, neo, base, stack, eta=None, etaours=None, clean=None, eta_clean=None):
         put(f'ax.{key}.pick', f'{trunk}/{lo},{hi}', 's'); put(f'ax.{key}.rho', rho, '+.2f')
-        put(f'ax.{key}.base', base - neo, '+.2f'); put(f'ax.{key}.stack', stack - neo, '+.2f'); put(f'ax.{key}.stack.vsbase', round(stack - neo, 2) - round(base - neo, 2), '+.2f')   # the difference of the two printed gains
+        put(f'ax.{key}.base', base - neo, '+.2f'); put(f'ax.{key}.stack', stack - neo, '+.2f'); put(f'ax.{key}.stack.vsbase', stack - base, '+.2f')
         put(f'ax.{key}.eta', eta - neo if eta is not None else float('nan'), '+.2f') if eta is not None else put(f'ax.{key}.eta', '--', 's')
         put(f'ax.{key}.etaours', etaours - neo, '+.2f') if etaours is not None else put(f'ax.{key}.etaours', '--', 's')
         if clean is not None:
@@ -843,7 +842,7 @@ def across():
         es = ES.get(key)                                   # ETA with the calibrated stack inside, same cells
         if es is not None:
             arm = f'tok+eta+rule_t{trunk}_b{lo}b{hi}+neo'
-            put(f'ax.{key}.etastack', es['episodic'][arm] - neo, '+.2f'); put(f'ax.{key}.etastack.vsetaours', round(es['episodic'][arm], 2) - round(etaours, 2), '+.2f') if etaours is not None else None
+            put(f'ax.{key}.etastack', es['episodic'][arm] - neo, '+.2f'); put(f'ax.{key}.etastack.vsetaours', es['episodic'][arm] - etaours, '+.2f') if etaours is not None else None
             put(f'ax.{key}.etastack.abs', es['episodic'][arm]); put(f'ax.{key}.etastack.routed', 100 * es['routed'].get(arm, float('nan')), '.0f')
             if eta_clean is not None:                      # the clean cell against ETA with NEO on the same split (claim M4)
                 put(f'ax.{key}.etastack.cleand', es['clean'][arm] - eta_clean, '+.2f'); put(f'ax.{key}.etastack.cleand.abs', abs(es['clean'][arm] - eta_clean), '.2f')

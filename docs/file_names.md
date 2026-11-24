@@ -2,7 +2,7 @@
 
 The run and score scripts were ported from the research codebase with their computation unchanged. The run records and
 the documents in `docs/` use the names on the right; the arm names in the code keep the prefixes `exit_` (the
-labelled-search cascade) and `rule_` (the calibrated cascade), and `trunk` in the score files means the main block.
+labeled-search cascade) and `rule_` (the calibrated cascade), and `trunk` in the score files means the main block.
 
 | now | at the time of the runs (research codebase) |
 |---|---|
@@ -20,7 +20,7 @@ labelled-search cascade) and `rule_` (the calibrated cascade), and `trunk` in th
 | `results/scores/timing_design_vitb` | `results/spa/bench_summary_e5c.json` |
 | `results/scores/forward_only_design_vitb_ablations`, `patch_filters_design_vitb` | `results/spa/spa1_e6.json`, `results/wiener/wr1.json` |
 | `results/scores/block_alignment_design_vitb` | `results/regprobe/probe_a.json` |
-| the where-to-align, labelled-search, calibrated-cascade and model-dataset runs | made with this repository's scripts (research job scripts `scripts/cvpr/course*.sh`), outputs under `data/derived/course_two_site/` |
+| the where-to-align, labeled-search, calibrated-cascade and model-dataset runs | made with this repository's scripts (research job scripts `scripts/cvpr/course*.sh`), outputs under `data/derived/course_two_site/` |
 | `--split heldout` / `heldout2` / `heldout3` / `heldout4` | the first to fourth held-out sets of the report |
 
 ## The code's terms against the report's
@@ -31,7 +31,7 @@ labelled-search cascade) and `rule_` (the calibrated cascade), and `trunk` in th
 | `trunk`, `t<b>` | the main block b |
 | `second opinion`, `so`, `b<e>b<l>`, `shallower` / `deeper` | the two extra branches after blocks e < l (a1 < a2 in the report) |
 | `routed`, `routed_fraction`, `exit_theta` | the unsure images, their share, and the threshold theta |
-| `exit_` arms (`exit_b5b9_gated`) | the cascade with the blocks of the labelled dev search (5 and 9), a comparison only |
+| `exit_` arms (`exit_b5b9_gated`) | the cascade with the blocks of the labeled dev search (5 and 9), a comparison only |
 | `rule_` arms (`rule_t6_b4b11_gated`) | the calibrated cascade |
 | `mix_` arms | the control that runs the branches on every image |
 | `hier` | the two-level map of Section G, not kept |

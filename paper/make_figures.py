@@ -1,4 +1,4 @@
-"""Figures for the course report and the long paper, drawn from results/paper_numbers.json only (no recomputation):
+"""Figures for the course report, drawn from results/paper_numbers.json only (no recomputation):
 the depth curve and the drift-by-depth map of the where-to-align study, the frontier, the gate, the continual stream and
 the gain-against-drift scatter of the pixel-site stage.
 
@@ -116,7 +116,7 @@ cb = fig.colorbar(im, ax=ax, pad=0.02, fraction=0.05); cb.set_label(f'drift z (f
 ax.legend(loc='lower left', bbox_to_anchor=(0.0, 1.0), borderaxespad=0.0, handletextpad=0.3)
 save(fig, 'drift_depth')
 
-# ---------- Figure (supplement): why these two blocks (design cells, saved logits): the calibrated picks 4 and 11 (solid), the labelled search 5 and 9 (dashed)
+# ---------- Figure (supplement): why these two blocks (design cells, saved logits): the calibrated picks 4 and 11 (solid), the labeled search 5 and 9 (dashed)
 SO = {b: D['exit']['site_choice'][b]['second_opinions'] for b in ('inc', 'cbar')}
 cand = ['px'] + [f'px+b{k}' for k in range(1, 13) if k != 6]
 xpos = {'px': 0, **{f'px+b{k}': k for k in range(1, 13)}}

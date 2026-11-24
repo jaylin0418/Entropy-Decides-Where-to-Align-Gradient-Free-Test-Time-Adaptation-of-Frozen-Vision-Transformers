@@ -175,7 +175,7 @@ def framework(r, clean, pick, trunk_entropy, theta, routed_run):
     fig.text(3.045 / FULL, (yg + 0.18) / H, 'spectral gate: DCT power of the same patches, no model call\n'
              f'$g_{{\\mathrm{{spec}}}}$ = {spec:.2f} > 0.4, $g_{{\\mathrm{{mean}}}}$ = {shift:.2f} < 0.3: gate {"on" if on else "off"} for this batch',
              ha='center', va='center', color=C['accent'], linespacing=1.15)
-    fig.text(5.00 / FULL, (yg + 0.18) / H, 'grey: frozen network or NEO\ngreen: TokAlign, blue: LayerAlign,\ngate and extra branches (dashed)', ha='left', va='center', color=C['ink'], linespacing=1.15)
+    fig.text(5.00 / FULL, (yg + 0.18) / H, 'gray: frozen network or NEO\ngreen: TokAlign, blue: LayerAlign,\ngate and extra branches (dashed)', ha='left', va='center', color=C['ink'], linespacing=1.15)
     # the trunk: the pair (schematic: no token values are computed here)
     yt, bh = 1.55, 0.38
     fig.patches.append(FancyArrowPatch(path=MPath([(6.35 / FULL, y0 / H), (6.35 / FULL, 2.12 / H), (0.38 / FULL, 2.12 / H), (0.38 / FULL, (yt + bh) / H)]),

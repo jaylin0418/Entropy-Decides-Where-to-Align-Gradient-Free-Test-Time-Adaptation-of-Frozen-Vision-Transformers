@@ -1,5 +1,7 @@
 # Pre-registration — slice variance of the two-site stack (ViT-B/16, two further held-out slices)
 
+> Table, figure and section numbers in this plan are those of the report draft at the time it was declared. The plan is kept as declared.
+
 Declared 2026-11-09 18:58 MST, written before the queue was launched (18:58:48); no run had started. Everything below is frozen; each slice is scored once.
 
 ## Purpose

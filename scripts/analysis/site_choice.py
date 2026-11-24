@@ -122,7 +122,7 @@ def main():
     # label-free choice of the blocks by the prediction entropy (low entropy = high confidence), the same quantity that routes and
     # weights the second opinions: (1) the trunk block as the one whose pixel-plus-block arm has the lowest mean entropy on the
     # unlabeled images; (2) the second opinions as the set (one or two sites besides the trunk) whose routed mixture has the lowest
-    # mean entropy on the routed images; both compared with the labelled choice
+    # mean entropy on the routed images; both compared with the labeled choice
     from scipy.stats import spearmanr
     trunk_ent = {a: float(np.mean([entropy(P[c][a]).mean() for c in corrupted])) for a in arms}
     trunk_acc = {a: fixed[a] for a in arms}

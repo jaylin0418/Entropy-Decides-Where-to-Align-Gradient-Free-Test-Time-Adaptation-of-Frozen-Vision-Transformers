@@ -1,7 +1,8 @@
 # Entropy Decides Where to Align: Gradient-Free Test-Time Adaptation of Frozen Vision Transformers
 
 Code and data behind the report [Entropy Decides Where to Align](paper/report/report.pdf) (Jie Lin, University of British
-Columbia, 2026; 4 pages plus supplement). Every number, table and figure in the report is generated from this repository.
+Columbia, 2026; 4 pages plus supplement). Every number, table and figure in the report is generated from this repository (one input, the unadapted model's
+accuracy in Section H, is a score file carried over from the research codebase, see docs/file_names.md).
 
 <p align="center"><img src="paper/figures/framework.png" width="720"></p>
 

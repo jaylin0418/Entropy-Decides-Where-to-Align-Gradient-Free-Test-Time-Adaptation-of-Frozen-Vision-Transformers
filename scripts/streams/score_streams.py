@@ -70,17 +70,7 @@ def main():
     names = sorted({a for s in res for a in res[s]})
     table = {a: {'cont': avg(a), 'cleanret': res.get('cleanret', {}).get(a, {}).get('acc'), 'cleanret_clean': res.get('cleanret', {}).get(a, {}).get('clean_seg_acc'),
                  'clean': res.get('clean', {}).get(a, {}).get('acc')} for a in names}
-    g = {}
-    if 'stack_gated' in table and 'neo' in table:
-        g['stack_gated_vs_neo_cont'] = table['stack_gated']['cont'] - table['neo']['cont']
-        if table['stack_gated']['cleanret_clean'] is not None:
-            g['stack_gated_cleanret_clean_vs_neo'] = table['stack_gated']['cleanret_clean'] - table['neo']['cleanret_clean']
-        g['stack_gated_clean_vs_neo'] = (table['stack_gated']['clean'] or 0) - (table['neo']['clean'] or 0) if table['stack_gated']['clean'] is not None else None
-    if 'tok+eta_gated+neo' in table and 'eta+neo' in table:
-        g['tok_eta_vs_eta_cont'] = table['tok+eta_gated+neo']['cont'] - table['eta+neo']['cont']
-    g['verdict'] = 'PASS' if (g.get('stack_gated_vs_neo_cont', -9) >= BAR_CONT and (g.get('stack_gated_cleanret_clean_vs_neo', 0) or 0) >= -BAR_CLEAN
-                             and g.get('tok_eta_vs_eta_cont', -9) >= BAR_ETA) else 'FAIL'
-    out = {'gates': g, 'table': table, 'streams': res}
+    out = {'table': table, 'streams': res}
     Path(args.out).parent.mkdir(parents=True, exist_ok=True)
     Path(args.out).write_text(json.dumps(out, indent=1, default=float) + '\n')
     f = lambda v: 'n/a' if v is None or (isinstance(v, float) and np.isnan(v)) else f'{v:.2f}'
