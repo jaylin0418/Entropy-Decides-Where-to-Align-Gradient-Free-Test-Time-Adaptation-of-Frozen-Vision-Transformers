@@ -1,5 +1,5 @@
 """Builds results/paper_numbers.json, the single source of every number in the report, from the scored run outputs
-in results/scores/ (written by the score_* scripts, the analysis scripts and the FlexiViT replay), including the
+in results/scores/ (written by the score_* scripts and the analysis scripts), including the
 where-to-align study (main-path dev run, depth sweeps, drift by depth, site selection, heldout3 of both backbones). Nothing is computed
 here except means of scored values and the selection of the reported arms. paper/make_numbers.py turns the result into
 paper/numbers.tex and paper/make_figures.py into the figures.

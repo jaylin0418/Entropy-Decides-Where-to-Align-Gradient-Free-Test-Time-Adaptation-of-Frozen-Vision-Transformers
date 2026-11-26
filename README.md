@@ -9,7 +9,7 @@ accuracy in Section H, is a score file carried over from the research codebase, 
 A frozen vision transformer is corrected without labels or gradients by one closed-form whitening-and-recoloring map
 (CORAL with a source prior), placed at the pixel patches (TokAlign) or after block *k* (LayerAlign), with NEO re-centering
 the head input. The model's prediction entropy decides where to align: it picks the main block and two branch blocks from
-unlabeled target images (a few hundred per shift suffice), and at test time an image whose entropy exceeds a threshold also runs the two branches,
+unlabeled target images (a few hundred per shift come close, report Table 2), and at test time an image whose entropy exceeds a threshold also runs the two branches,
 whose predictions are averaged with the main path. On held-out ImageNet-C the calibrated cascade adds +1.36 points to the
 main path (+6.26 over NEO) at 1.49× NEO's time in a cheaper timed variant (no gate, map refreshed every 16 batches, report Section H), and +1.20 on ImageNet-C-bar with blocks chosen on ImageNet-C alone.
 

@@ -676,6 +676,8 @@ def rule():
             put(f'rl.cost.{key}.ms', '--', 's'); put(f'rl.cost.{key}.x', '--', 's')
         else:
             put(f'rl.cost.{key}.ms', t['ms_per_batch'], '.0f'); put(f'rl.cost.{key}.x', t['x_neo'])
+    if R.get('timing_others'):
+        put('rl.cost.others.neo.ms', R['timing_others']['neo']['ms_per_batch'], '.0f')   # the NEO reference of the PEA / FOA timing run
     for a, key in (('pea', 'pea'), ('pea_aug', 'peaviews'), ('foa', 'foa')):
         t = (R.get('timing_others') or {}).get(a)
         if t is None:
@@ -764,7 +766,7 @@ def rule():
     # first three blocks, the threshold, the pick among every pair, the entropy a pick saves against TokAlign alone. Prefix rc.
     rc = R.get('review')
     if rc is not None:
-        put('rc.bootstrap', rc['bootstrap_draws'], 'd')
+        put('rc.bootstrap', rc['bootstrap_draws'], ',d')
         for key, r in rc['pairs'].items():
             put(f'rc.{key}.gain', r['gain'], '+.2f'); put(f'rc.{key}.ci.lo', r['ci_images'][0], '+.2f'); put(f'rc.{key}.ci.hi', r['ci_images'][1], '+.2f')
             put(f'rc.{key}.cic.lo', r['ci_cells'][0], '+.2f'); put(f'rc.{key}.cic.hi', r['ci_cells'][1], '+.2f'); put(f'rc.{key}.n', r['n_cells'], 'd')

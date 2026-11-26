@@ -4,7 +4,7 @@ Convention: a map costs one d x d multiply per token (0.66 % of a forward pass),
 u of the images (the branch after a block a1 below the main block b re-runs blocks a1+1..12, the branch after a block a2 above it re-runs blocks b+1..12,
 each with its own map), a backward pass counts as two forward passes (ETA: one forward and one backward, SAR: two of each),
 PEA makes two passes with a map after every block (times three views with augmentation), and FOA runs its population of 27
-prompts plus the unprompted model, 28 forward passes per batch."""
+sampled prompts plus the best one, 28 forward passes per batch."""
 VITB_GMACS = 17.56
 MAP = 196 * 768 ** 2 / (VITB_GMACS * 1e9)   # one map, in forward passes
 

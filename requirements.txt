@@ -1,4 +1,4 @@
-# Tested with Python 3.12.3, torch 2.9.0 (CUDA 13.0), torchvision 0.24.0, timm 0.4.12, numpy 2.1.0, Pillow 12.3.0, scipy 1.16.2.
+# Tested with Python 3.12.3, torch 2.9.0 (CUDA 13.0), torchvision 0.24.0, timm 0.4.12, numpy 2.1.0, Pillow 12.3.0, scipy 1.16.2, tqdm 4.70.1.
 # timm 0.4.12 is pinned because its default weights for vit_base/small_patch16_224 are the augreg checkpoints used in the paper.
 torch>=2.0
 torchvision>=0.15
@@ -6,6 +6,7 @@ timm==0.4.12
 numpy>=1.24
 Pillow>=9.0
 scipy>=1.10
+tqdm>=4.0   # PEA's official code (third_party/pea/pea_vit.py)
 # optional: tests and figures
 pytest
 matplotlib
