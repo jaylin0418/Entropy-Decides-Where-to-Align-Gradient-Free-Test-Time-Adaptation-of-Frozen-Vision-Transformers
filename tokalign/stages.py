@@ -266,7 +266,7 @@ def dct_basis(n: int = P) -> np.ndarray:
 class Stack:
     """One object per stream. ``tokenizer(x)`` maps a normalized batch before the model; ``head(h)`` maps the recorded
     head input after it. ``arm`` is a set over {'tok', 'headcov', 'gate'}; NEO always runs in ``head``. ``place`` lists
-    the blocks (1-based) whose output patch tokens get the same alignment as hooks on ``model`` (the two-site method:
+    the blocks (1-based) whose output patch tokens get the same alignment as hooks on ``model`` (the main path:
     ``'tok' in arm`` and ``place=(6,)``); they follow the gate. ``place_mode='hier'`` uses the hierarchical map at
     those blocks (``HierLayerAlign``; 'within' / 'between' for its one-part variants), ``None`` the pooled map."""
 

@@ -142,7 +142,7 @@ def spearman(x, y):
 
 
 def two_site():
-    """The where-to-align study: depth sweep, drift by depth, two-site design run and site selection, heldout3 results."""
+    """The where-to-align study: depth sweep, drift by depth, main-path dev run and site selection, heldout3 results."""
     T = v('two_site')
     cells = [c for c in T['design_vitb']['per_cell']['neo'] if c != 'clean']
     fam_gain = lambda per_cell, base, co: np.mean([per_cell[f'{co}-{s}'] - base[f'{co}-{s}'] for s in (3, 5)])
@@ -185,7 +185,7 @@ def two_site():
     for co in CORR:
         put(f'ts.dr.{co}.pixel', zco(co, 'pixel'), '.0f'); put(f'ts.dr.{co}.b6', zco(co, 'b6'), '.0f')
         put(f'ts.dr.{co}.best', site_name(best_site[co]).replace('the pixels', 'pixels'), 's')
-    # ---- two-site design run and site selection (design cells)
+    # ---- main-path dev run and site selection (design cells)
     d, sel = T['design_vitb'], T['selection_vitb']
     DA = {'neo': 'neo', 'tok': 'tok', 'hc': 'headcov', 'stack': 'tok+headcov', 'b6': 'place_b6', 'twosite': 'tok+place_b6', 'stack2': 'tok+place_b6+headcov'}
     for k, a in DA.items():
@@ -288,7 +288,7 @@ def two_site():
 
 def hier():
     """What to align at a site: the two-level map and its one-part variants on the design cells, against the pooled arms of
-    the two-site design run, and the decomposition of the token statistics at the pixels and at block 6."""
+    the main-path dev run, and the decomposition of the token statistics at the pixels and at block 6."""
     H, T = v('hier'), v('two_site')
     ep, cl, pc = H['design_vitb']['episodic'], H['design_vitb']['clean'], H['design_vitb']['per_cell']
     pep, pcl, ppc = T['design_vitb']['episodic'], T['design_vitb']['clean'], T['design_vitb']['per_cell']
@@ -381,7 +381,7 @@ def robust():
 
 
 def extra():
-    """The wall-clock run with the two-site stack: ms per batch, ratio to NEO and six-cell top-1 of every timed arm."""
+    """The wall-clock run with the main path with the head map: ms per batch, ratio to NEO and six-cell top-1 of every timed arm."""
     wc = v('extra/timing')
     for k, a in (('neo', 'neo'), ('stack', 'stack_k16_fp32_stats32'), ('twosite16', 'twosite_k16_fp32_stats32'), ('twosite1', 'twosite_k1'),
                  ('eta', 'eta'), ('etatwosite', 'eta+twosite')):
@@ -488,7 +488,7 @@ def early_exit():
     put('ex.cost.b5b9.over.pair', E['timing']['exit_b5b9_k16_fp32_stats32']['ms_per_batch'] / E['timing']['pair_k16_fp32_stats32']['ms_per_batch'])
     put('ex.cost.b9.over.pair', E['timing']['exit_b9_k16_fp32_stats32']['ms_per_batch'] / E['timing']['pair_k16_fp32_stats32']['ms_per_batch'])
     put('ex.theta', 1.5, '.1f')
-    # the cost of a set of second opinions in forward passes of the pair, from the blocks each branch runs at the routed share of
+    # the cost of a set of extra branches in forward passes of the pair, from the blocks each branch runs at the routed share of
     # ImageNet-C (a branch at block k<6 runs blocks k+1..12, a branch at k>6 blocks 7..12, the pixel-only branch blocks 7..12)
     SCi, SCb = E['site_choice']['inc'], E['site_choice']['cbar']; f_r = SCi['controls']['routed_fraction']
     nblk = lambda a: 6 if a == 'px' else (12 - int(a[4:]) if int(a[4:]) < 6 else 6)
@@ -536,7 +536,7 @@ def early_exit():
         put(f'ex.vs.h.clean.{k}', V['held3']['clean'][a] - VS3['clean']['neo'], '+.2f')
     put('ex.vs.h.pair', VS3['episodic']['tok+place_b6']); put('ex.vs.h.neo', VS3['episodic']['neo'])
     put('ex.vs.h.routed.b5b9g', 100 * V['held3']['routed_mean']['exit_b5b9_gated'], '.0f'); put('ex.vs.d.routed.b5b9g', 100 * V['design']['routed_mean']['exit_b5b9_gated'], '.0f')
-    # the second-opinion stack on streams (heldout4, scored once): continual cont5 and the clean segments of cleanret
+    # the cascade on streams (heldout4, scored once): continual cont5 and the clean segments of cleanret
     ST = E['streams']['table']
     for k, a in (('neo', 'neo'), ('pairg', 'pair_gated'), ('b5b9g', 'exit_b5b9_gated')):
         put(f'ex.st.cont.{k}', ST[a]['cont']); put(f'ex.st.cr.{k}', ST[a]['cleanret_clean'])
@@ -583,7 +583,7 @@ def early_exit():
 
 
 def rule():
-    """The rule-chosen second-opinion stack: held-out results that exist (gains against the pair, NEO and the labeled 5+9 stack of
+    """The rule-chosen cascade: held-out results that exist (gains against the pair, NEO and the labeled 5+9 stack of
     the same slice), the rule's picks and the sample-size analysis. Prefix rl."""
     R = v('rule'); E = v('exit')
     base = {'inc': E['held4']['inc'], 'cbar': E['held4']['cbar']}
@@ -682,6 +682,13 @@ def rule():
             put(f'rl.cost.{key}.ms', '--', 's'); put(f'rl.cost.{key}.x', '--', 's')
         else:
             put(f'rl.cost.{key}.ms', t['ms_per_batch'], '.0f'); put(f'rl.cost.{key}.x', t['x_neo'])
+    # the timed setting (map refreshed every 16 batches, float32) against the reported one (every batch, float64) on the six timing cells
+    TCELLS = ('gaussian_noise-5', 'defocus_blur-3', 'snow-5', 'contrast-5', 'pixelate-3', 'jpeg_compression-5')   # scripts/cost/time_batches.py CELLS
+    dpc, tpc = R['slices']['design']['per_cell']['rule_t6_b4b11_gated'], v('two_site/design_vitb/per_cell')['tok+place_b6']
+    cfg = {'cascade': float(np.mean([dpc[c] for c in TCELLS])), 'pair': float(np.mean([tpc[c] for c in TCELLS]))}
+    timed = {'cascade': R['timing']['rule_t6_b4b11_k16_fp32_stats32']['acc_6cells'], 'pair': R['timing']['pair_k16_fp32_stats32']['acc_6cells']}
+    for k in ('cascade', 'pair'):
+        put(f'cost.cfg.{k}.acc', cfg[k]); put(f'cost.timed.{k}.acc', timed[k]); put(f'cost.cfg.{k}.d', cfg[k] - timed[k], '.2f')
     # analytic compute per batch in forward passes (paper/compute_cost.py), with the unsure shares of the held-out runs
     from compute_cost import VITB_GMACS as GM, forward_passes
     u = R['held4']['inc']['routed']['rule_t6_b4b11_gated']; ua = R['held4']['inc_abl']['routed']
@@ -774,7 +781,7 @@ def rule():
         put('rc.corr.half.max', max(half(k) for k in corr), '.2f'); put('rc.nat.half.max', max(half(k) for k in nat), '.2f'); put('rc.nat.half.min', min(half(k) for k in nat), '.2f')
         put('rc.corr.saved.min', min(rc['pairs'][k]['entropy_saved_vs_px'] for k in corr), '.2f'); put('rc.corr.saved.max', max(rc['pairs'][k]['entropy_saved_vs_px'] for k in corr), '.2f')
         miss = [k for k in nat if rc['pairs'][k]['gap'] < -0.2]; hit = [k for k in nat if k not in miss]   # a miss: more than 0.2 points from the best block (Fig S3)
-        put('rc.nat.miss.saved', ', '.join(f"{rc['pairs'][k]['entropy_saved_vs_px']:.2f}" for k in miss), 's'); put('rc.nat.hit.saved.min', min(rc['pairs'][k]['entropy_saved_vs_px'] for k in hit), '.2f')
+        sv = [f"{rc['pairs'][k]['entropy_saved_vs_px']:.2f}" for k in miss]; put('rc.nat.miss.saved', ', '.join(sv[:-1]) + ' and ' + sv[-1] if len(sv) > 1 else sv[0], 's'); put('rc.nat.hit.saved.min', min(rc['pairs'][k]['entropy_saved_vs_px'] for k in hit), '.2f')
         put('rc.nat.hit.saved.max', max(rc['pairs'][k]['entropy_saved_vs_px'] for k in hit), '.2f'); put('rc.nat.miss.n', len(miss), 'd')
         for b, r in rc['table1'].items():
             put(f'rc.t1.{b}.gain', r['gain'], '+.2f'); put(f'rc.t1.{b}.ci.lo', r['ci_images'][0], '+.2f'); put(f'rc.t1.{b}.ci.hi', r['ci_images'][1], '+.2f')
@@ -828,7 +835,7 @@ def models_datasets():
 
 def across():
     """One row per model-dataset pair for the cross-model table, all on the same held-out images: the calibration picks, the
-    signal's rank correlation, and the gains over NEO of the base path, the calibrated stack, ETA (+NEO) and ETA with the base
+    signal's rank correlation, and the gains over NEO of the main path, the calibrated stack, ETA (+NEO) and ETA with the base
     path's alignment inside. Prefix ax.<pair>."""
     R, E, CA, TS = v('rule'), v('exit'), v('ca'), v('two_site')
     ES = CA.get('etastack', {})
@@ -859,7 +866,7 @@ def across():
     s = TS['held3_vits']['episodic']; lfs = R['vits']['pick_t6']
     row('vits_inc', 6, 4, 11, lfs['trunk_spearman_confidence_accuracy'], s['neo'], s['tok+place_b6'], R['vits']['held3']['episodic']['rule_t6_b4b11_gated'], s['eta+neo'], s['tok+eta+place_b6+neo'],
         eta_clean=TS['held3_vits']['clean']['eta+neo'])
-    # ViT-B/16 on ImageNet-C-bar: heldout4, its own calibration (trunk 7) and the base path of that trunk
+    # ViT-B/16 on ImageNet-C-bar: heldout4, its own calibration (trunk 7) and the main path of that trunk
     c = R['held4']['cbar']['episodic']; cb = E['held4']['cbar']['episodic']; lfc = E['site_choice']['cbar']['label_free']
     ec = CA.get('eta_vitb_cbar', {}).get('episodic')
     row('vitb_cbar', 7, 5, 11, lfc['trunk_spearman_confidence_accuracy'], cb['neo'], c['tok+place_b7'], c['rule_t7_b5b11_gated'],

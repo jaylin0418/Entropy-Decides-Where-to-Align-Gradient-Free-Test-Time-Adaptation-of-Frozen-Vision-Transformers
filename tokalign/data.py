@@ -11,7 +11,7 @@ Splits: a fixed permutation of the 50,000 validation indices (seed 20261019).
   source   perm[46000:49000]  3,000 clean images for the source statistics (labels never used)
   heldout  perm[36000:38000]  ViT-B/16 pre-registered held-out test
   heldout2 perm[38000:40000]  ViT-S/16 pre-registered held-out test
-  heldout3 perm[40000:42000]  pre-registered held-out test of the two-site alignment (both backbones); never
+  heldout3 perm[40000:42000]  pre-registered held-out test of the main path (both backbones); never
                               decoded or passed through a model before docs/heldout_test_plan_two_site.md
   heldout4 perm[42000:44000]  reserved for the pre-registered test of the adaptive-site method (v2); never decoded or passed
                               through a model before its plan is committed

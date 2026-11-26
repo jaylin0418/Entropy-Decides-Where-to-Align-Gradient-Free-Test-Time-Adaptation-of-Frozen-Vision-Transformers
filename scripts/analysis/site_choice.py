@@ -94,9 +94,9 @@ def main():
                 'entropy_routing_b9_only': mean_acc(lambda c: routed(c, H[c] > THETA, arms=[TR, 'px+b9'])),
                 'entropy_routing_b5_only': mean_acc(lambda c: routed(c, H[c] > THETA, arms=[TR, 'px+b5'])),
                 'oracle_routing_trunk_errors': mean_acc(lambda c: routed(c, P[c][TR].argmax(1) != Y[c]))}
-    # why these sites: every candidate second opinion (pixel site plus one block other than 6) on the images the trunk is unsure
+    # why these sites: every candidate extra branch (pixel site plus one block other than 6) on the images the trunk is unsure
     # of: its own accuracy, its agreement with the trunk, the share it rescues (trunk wrong, site right) and harms (trunk right,
-    # site wrong), and the gain of the routed mixture with the trunk; then every pair of second opinions and, for the pairs
+    # site wrong), and the gain of the routed mixture with the trunk; then every pair of extra branches and, for the pairs
     # named, the overlap of what they rescue on the trunk's errors
     cat = lambda f: np.concatenate([f(c) for c in corrupted])
     yy = cat(lambda c: Y[c]); tp = cat(lambda c: P[c][TR].argmax(1)); rt = cat(lambda c: H[c] > THETA); tr = tp == yy
@@ -120,8 +120,8 @@ def main():
     second_opinions = {'trunk_acc_routed': float(tr[rt].mean() * 100), 'trunk_acc_kept': float(tr[~rt].mean() * 100), 'per_site': per_site,
                        'pairs': pairs, 'rescue_overlap_on_trunk_errors': overlap}
     # label-free choice of the blocks by the prediction entropy (low entropy = high confidence), the same quantity that routes and
-    # weights the second opinions: (1) the trunk block as the one whose pixel-plus-block arm has the lowest mean entropy on the
-    # unlabeled images; (2) the second opinions as the set (one or two sites besides the trunk) whose routed mixture has the lowest
+    # weights the extra branches: (1) the trunk block as the one whose pixel-plus-block arm has the lowest mean entropy on the
+    # unlabeled images; (2) the extra branches as the set (one or two sites besides the trunk) whose routed mixture has the lowest
     # mean entropy on the routed images; both compared with the labeled choice
     from scipy.stats import spearmanr
     trunk_ent = {a: float(np.mean([entropy(P[c][a]).mean() for c in corrupted])) for a in arms}

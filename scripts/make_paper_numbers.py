@@ -1,6 +1,6 @@
 """Builds results/paper_numbers.json, the single source of every number in the report, from the scored run outputs
 in results/scores/ (written by the score_* scripts, the analysis scripts and the FlexiViT replay), including the
-where-to-align study (two-site design run, depth sweeps, drift by depth, site selection, heldout3 of both backbones). Nothing is computed
+where-to-align study (main-path dev run, depth sweeps, drift by depth, site selection, heldout3 of both backbones). Nothing is computed
 here except means of scored values and the selection of the reported arms. paper/make_numbers.py turns the result into
 paper/numbers.tex and paper/make_figures.py into the figures.
 
@@ -74,14 +74,14 @@ TS_SITES = ('pixel',) + tuple(f'b{k}' for k in range(1, 13))
 
 
 def two_site(eta_design):
-    """Where to align: the two-site study on the course checkpoint (design sweep and drift, heldout3 for both backbones)."""
+    """Where to align: the where-to-align study on the course checkpoint (design sweep and drift, heldout3 for both backbones)."""
     d = load('forward_only_design_vitb_two_site')
     sw, swe = load('forward_only_design_vitb_sweep'), load('eta_design_vitb_sweep')
     h3, e3, s3 = load('forward_only_heldout3_vitb'), load('eta_heldout3_vitb'), load('streams_heldout3_vitb')
     h3s, e3s = load('forward_only_heldout3_vits'), load('eta_heldout3_vits')
     dr, sel = load('drift_by_depth_design_vitb'), load('site_selection_design_vitb')
     cells = [c for c in d['per_cell']['neo'] if c != 'clean']
-    # the alignment at one site alone, per cell: the pixel site is TokAlign, block k the arm place_bk (the two-site run holds b6)
+    # the alignment at one site alone, per cell: the pixel site is TokAlign, block k the arm place_bk (the main-path run holds b6)
     frozen_cell = {s: (d if s in ('pixel', 'b6') else sw)['per_cell']['tok' if s == 'pixel' else f'place_{s}'] for s in TS_SITES}
     eta_cell = {s: eta_design['per_cell']['tok+eta+neo'] if s == 'pixel' else swe['per_cell'][f'eta+place_{s}+neo'] for s in TS_SITES}
     gain = lambda a, base: float(np.mean([a[c] - base[c] for c in cells]))
@@ -112,7 +112,7 @@ def two_site(eta_design):
 
 def hier():
     """What to align at a site: the two-level (between-image / within-image) map and its one-part variants on the design
-    cells (scored against the NEO arm of the two-site design run), and the label-free decomposition of the token statistics
+    cells (scored against the NEO arm of the main-path dev run), and the label-free decomposition of the token statistics
     at every site into the two parts (per cell: mean over the batches of each statistic, and its z against the clean batches)."""
     h, dec = load('forward_only_design_vitb_hier'), load('decompose_by_depth_design_vitb')
     stat = lambda field: {c: {s: {col: dec['cells'][c][s][col][field] for col in dec['columns']} for s in dec['sites']} for c in dec['cells']}
@@ -148,7 +148,7 @@ def early_exit():
 
 
 def rule():
-    """The rule-chosen second-opinion stack (docs/heldout_test_plan_rule.md): the held-out runs that exist so far, the design
+    """The rule-chosen cascade (docs/heldout_test_plan_rule.md): the held-out runs that exist so far, the design
     analyses of the rule (picks per benchmark and trunk, and how many unlabeled images the rule needs)."""
     def fo(name):
         if not (SCORES / f'{name}.json').exists():
@@ -251,8 +251,8 @@ def models_datasets():
 
 
 def extra():
-    """Supplementary tests of the two-site stack (docs/heldout_test_plan_extra.md): the wall-clock run with the two-site
-    arms (six timing cells, one run), the per-cell accuracies of the SAR design run with the two-site arms (its means and clean
+    """Supplementary tests of the main path with the head map (docs/heldout_test_plan_extra.md): the wall-clock run with the two-site
+    arms (six timing cells, one run), the per-cell accuracies of the SAR design run with the main-path arms (its means and clean
     accuracies are under design_vitb with the other hosts), the heldout3 SAR run (scored once), and the ImageNet-C-bar runs (ten
     corruptions disjoint from ImageNet-C, design and heldout3 splits)."""
     t, s, h = load('timing_design_vitb_extra'), load('sar_design_vitb'), load('sar_heldout3_vitb')

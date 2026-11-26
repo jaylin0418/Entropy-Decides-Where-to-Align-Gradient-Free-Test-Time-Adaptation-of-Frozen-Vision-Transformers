@@ -49,7 +49,7 @@ def seg_name(key, short=False):
     if cell == 'clean':
         return 'clean'
     name, sev = cell.rsplit('-', 1)
-    name = {'gaussian_noise': 'gauss.', 'shot_noise': 'shot', 'impulse_noise': 'impulse', 'defocus_blur': 'defocus',
+    name = {'gaussian_noise': 'Gauss.', 'shot_noise': 'shot', 'impulse_noise': 'impulse', 'defocus_blur': 'defocus',
             'glass_blur': 'glass', 'motion_blur': 'motion', 'zoom_blur': 'zoom', 'elastic_transform': 'elastic',
             'jpeg_compression': 'JPEG'}.get(name, name)
     if short:
@@ -68,9 +68,9 @@ fig, (ax, axe) = plt.subplots(2, 1, figsize=(COL, 2.30), layout='constrained', s
 ax.axhline(0, color=C['zero'], lw=0.6)
 ax.plot(xs, [sw['frozen_gain'][s] for s in SITES], marker='o', ms=3.5, lw=1.0, color=C['accent'], label='frozen ViT with NEO')
 ax.plot(xs, [sw['eta_gain'][s] for s in SITES], marker='s', ms=3.2, lw=1.0, color=C['host_dark'], ls='--', label='ETA with NEO')
-ax.set_ylabel('mean gain (pt)'); ax.legend(loc='lower center', ncol=2, handlelength=1.6, columnspacing=1.2, borderaxespad=0.1)  # below the dip at block 1, where no curve runs
+ax.set_ylabel('mean gain (pt)'); ax.legend(loc='lower right', ncol=2, handlelength=1.6, columnspacing=1.2, borderaxespad=0.1)  # right of the dip at block 1, below the curves
 ax.grid(True, axis='y', color=C['grid'], lw=0.5); ax.set_axisbelow(True); ax.set_title('(a) one map at one placement: gain over no map, 30 cells', loc='left')
-lo = min(min(sw['frozen_gain'].values()), min(sw['eta_gain'].values())); ax.set_ylim(min(-10, lo - 0.5), 6)
+lo = min(min(sw['frozen_gain'].values()), min(sw['eta_gain'].values())); ax.set_ylim(lo - 1.5, 6)
 # (b) the calibration signal: mean prediction entropy of the pixel-plus-block arms (no labels), lowest at the most accurate block
 arms = ['px'] + [f'px+b{k}' for k in range(1, 13)]
 for b, col, ls, mk, lab in (('inc', C['accent'], '-', 'o', 'ImageNet-C'), ('cbar', C['host_dark'], '--', 's', r'ImageNet-$\overline{\mathrm{C}}$')):
@@ -166,12 +166,12 @@ fig = plt.figure(figsize=(W, H))
 def fx(x):                                                    # figure x (in) -> fraction
     return x / W
 # ---------- (a) calibration
-fig.text(fx(0.02), 1.60 / H, '(a) calibration: once, from a few hundred unlabeled images', ha='left', va='center', color=C['host_dark'])
+fig.text(fx(0.02), 1.60 / H, '(a) calibration: once, from unlabeled images', ha='left', va='center', color=C['host_dark'])
 fig.patches.append(FancyBboxPatch((fx(0.02), 0.62 / H), 0.74 / W, 0.56 / H, boxstyle='round,pad=0,rounding_size=0.006', transform=fig.transFigure, fc='#ececec', ec=C['host'], lw=0.8))
 fig.text(fx(0.39), 0.90 / H, 'run the 13\ncandidates\npx + block $k$', ha='center', va='center', linespacing=1.05)
 fig.patches.append(FancyArrowPatch((fx(0.76), 0.90 / H), (fx(0.86), 0.90 / H), transform=fig.transFigure, arrowstyle='-|>', mutation_scale=6, lw=0.7, color=C['host_dark'], shrinkA=0, shrinkB=0))
 ks = list(range(1, 13))
-a1 = fig.add_axes([fx(1.06), 0.40 / H, 0.98 / W, 0.96 / H])
+a1 = fig.add_axes([fx(1.06), 0.40 / H, 0.88 / W, 0.96 / H])
 ent = [LFI['trunk_mean_entropy'][f'px+b{k}'] for k in ks]; kt = ks[int(np.argmin(ent))]
 a1.plot([0] + ks, [LFI['trunk_mean_entropy']['px']] + ent, marker='o', ms=2.6, lw=0.9, color=LAY)   # the 13 placements: px, then px + block k
 a1.scatter([kt], [min(ent)], marker='o', s=60, facecolors='none', edgecolors=LAY, linewidths=1.0, zorder=4)
@@ -179,8 +179,8 @@ a1.annotate(f'main = {kt}', (kt, min(ent)), xytext=(0.30, 0.90), textcoords='axe
             arrowprops=dict(arrowstyle='-', color=LAY, lw=0.6, shrinkA=0, shrinkB=5))
 a1.set_title('mean entropy', loc='left', pad=2); a1.set_xticks([0, 6, 12]); a1.set_xticklabels(['px', '6', '12']); a1.set_yticks([]); a1.set_xlabel('placement', labelpad=1)
 a1.grid(True, axis='y', color=C['grid'], lw=0.5)
-fig.patches.append(FancyArrowPatch((fx(2.08), 0.90 / H), (fx(2.18), 0.90 / H), transform=fig.transFigure, arrowstyle='-|>', mutation_scale=6, lw=0.7, color=C['host_dark'], shrinkA=0, shrinkB=0))
-a2 = fig.add_axes([fx(2.36), 0.40 / H, 0.98 / W, 0.96 / H])
+fig.patches.append(FancyArrowPatch((fx(1.97), 0.90 / H), (fx(2.07), 0.90 / H), transform=fig.transFigure, arrowstyle='-|>', mutation_scale=6, lw=0.7, color=C['host_dark'], shrinkA=0, shrinkB=0))
+a2 = fig.add_axes([fx(2.36), 0.40 / H, 0.84 / W, 0.96 / H])
 me = LFI['second_opinion_mixture_entropy']
 others = [k for k in ks if k != kt]
 M = np.full((len(others), len(others)), np.nan)
@@ -194,6 +194,7 @@ a2.add_patch(Rectangle((others.index(pb) - 0.5, others.index(pa) - 0.5), 1, 1, f
 a2.annotate(f'branches = {pa}, {pb}', (others.index(pb), others.index(pa)), xytext=(0.04, 0.10), textcoords='axes fraction', ha='left', va='center', color=LAY,
             arrowprops=dict(arrowstyle='-', color=LAY, lw=0.6, shrinkA=0, shrinkB=4))
 a2.set_title('entropy of the 3-way average', loc='left', pad=2)
+a2.text(0.04, 0.30, 'darker:\nlower', transform=a2.transAxes, ha='left', va='center', color=C['host_dark'], linespacing=1.0)
 a2.set_xticks([others.index(k) for k in (1, 12)]); a2.set_xticklabels(['1', '12']); a2.set_yticks([others.index(k) for k in (1, 12)]); a2.set_yticklabels(['1', '12'])
 a2.set_xlabel('deeper block', labelpad=1); a2.set_ylabel('shallower block', labelpad=1)
 for a_ in (a1, a2):
@@ -219,7 +220,7 @@ fig.text(tx(0.01), (YM + BH / 2) / H, 'branch,\nblock 11', ha='left', va='center
 fig.text(tx(0.01), (YB + BH / 2) / H, 'branch,\nblock 4', ha='left', va='center', linespacing=1.0)
 NEO0, NEO1, HX0, HX1, MX0, MX1 = 2.20, 2.48, 2.54, 2.88, 2.54, 3.12
 fbox(0.40, 0.60, YT, 'gate', fc=LAY_FILL, ec=LAY); farrow(0.60, YT + BH / 2, 0.66, YT + BH / 2)
-fbar(0.66, YT, TOK); fbox(0.73, 0.92, YT, 'px'); farrow(0.92, YT + BH / 2, 0.98, YT + BH / 2)
+fbar(0.66, YT, TOK); fbox(0.73, 0.92, YT, 'emb.'); farrow(0.92, YT + BH / 2, 0.98, YT + BH / 2)
 fbox(0.98, 1.27, YT, '1–4'); farrow(1.27, YT + BH / 2, 1.33, YT + BH / 2)
 fbox(1.33, 1.55, YT, '5–6'); fbar(1.56, YT, LAY); fbox(1.63, 2.14, YT, '7–12'); farrow(2.14, YT + BH / 2, NEO0, YT + BH / 2)
 fbox(NEO0, NEO1, YT, 'NEO', fc='white'); farrow(NEO1, YT + BH / 2, HX0, YT + BH / 2)
@@ -298,7 +299,8 @@ for b, col, mk, lab in (('inc', C['accent'], 'o', 'ImageNet-C'), ('cbar', C['hos
         d = pooled[str(n)]; pick = '{}/{},{}'.format(*(x[4:] for x in (d['trunk'], d['shallower'], d['deeper'])))
         if pick != prev:
             below = b == 'cbar' and n == 640                        # the one label that would sit on the curve if written above its point
-            b1.annotate(pick, (n, d['gain_over_pair']), xytext=(0, -9 if below else 5), textcoords='offset points', ha='center', va='top' if below else 'bottom', fontsize=FS, color=col)
+            b1.annotate(pick, (n, d['gain_over_pair']), xytext=(0, -9 if below else 5), textcoords='offset points', ha='center', va='top' if below else 'bottom', fontsize=FS, color=col,
+                        bbox=dict(boxstyle='square,pad=0.08', fc='white', ec='none'))   # the dotted full-sample line passes behind the label
         prev = pick
     per = SS[b]['per_cell_first_k_batches']; Ks = sorted(int(k) for k in per)
     b2.plot([per[str(k)]['images_per_cell'] for k in Ks], [per[str(k)]['gain_over_pair'] for k in Ks], marker=mk, ms=3, lw=1.0, color=col, label=lab)

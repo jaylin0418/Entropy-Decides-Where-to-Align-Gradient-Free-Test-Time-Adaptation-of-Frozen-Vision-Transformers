@@ -1,7 +1,7 @@
 """Stream runs (GPU; no labels): one model, one host and one set of running statistics for a whole stream, EMA
 statistics, the spectral gate, no resets. Streams: continual (cont5, cont3, alt), clean-return, clean, recurring
 (recur0-2) and per-batch mixed. Arms: NEO-EMA, the ungated and gated stack, ETA or SAR (one instance per stream) with
-and without gated TokAlign, the per-image tokenizer variant, and the two-site arms (block-6 site added, gated). Records logits, head input and the gate flags;
+and without gated TokAlign, the per-image tokenizer variant, and the main-path arms (block-6 site added, gated). Records logits, head input and the gate flags;
 manifest <out-dir>/streams_<split>_<model><tag>.json. (Research name: scripts/spa/probe_streams.py.)
 
     python scripts/streams/run_streams.py --split heldout --stats stats/vitb.pt --imagenet-val $IMAGENET_VAL \\
@@ -35,13 +35,13 @@ ARMS = {
     'sar': dict(tok=False, mean=(), cov=(), head='none', eta='sar', **EMA),
     'tok+sar_gated': dict(tok=True, mean=(), cov=(), head='none', eta='sar', gate=GATE, **EMA),
     'tokimg+headcov_gated': dict(tok=True, tok_mode='image', mean=(), cov=(), headcov=True, eta=False, gate=GATE, **EMA),
-    # two-site arms: TokAlign's map also on the patch tokens after block 6 (0-based 5), same EMA, same gate
+    # main-path arms: TokAlign's map also on the patch tokens after block 6 (0-based 5), same EMA, same gate
     'twosite_gated': dict(tok=True, mean=(), cov=(), headcov=True, eta=False, gate=GATE, place=(5,), **EMA),
     'twosite+eta_gated': dict(tok=True, mean=(), cov=(), head='none', eta=True, gate=GATE, place=(5,), **EMA),
     # hierarchical (within/between-image) alignment at block 6 behind the pooled pixel map, gated, EMA statistics
     'hier_gated': dict(tok=True, mean=(), cov=(), headcov=True, eta=False, gate=GATE, place=(5,), place_mode='hier', **EMA),
     'hier+eta_gated': dict(tok=True, mean=(), cov=(), head='none', eta=True, gate=GATE, place=(5,), place_mode='hier', **EMA),
-    # v2: the pair without the head stage, gated, and the second-opinion stack (tokalign.aligner.forward_exit), gated, EMA statistics
+    # v2: the pair without the head stage, gated, and the cascade (tokalign.aligner.forward_exit), gated, EMA statistics
     'pair_gated': dict(tok=True, mean=(), cov=(), headcov=False, eta=False, gate=GATE, place=(5,), **EMA),
     'exit_b5b9_gated': dict(tok=True, mean=(), cov=(), headcov=False, eta=False, gate=GATE, place=(5,), exit_sites=(4, 8), exit_theta=1.5, **EMA),
 }
@@ -68,7 +68,7 @@ def streams(smoke, n_seg=N_EVAL):
 
 
 def rule_arm(name):
-    """Stream arm of the rule-chosen second-opinion stack, named as in run_forward_only.py (rule_t<T>_b<A>b<B>_gated), with the
+    """Stream arm of the rule-chosen cascade, named as in run_forward_only.py (rule_t<T>_b<A>b<B>_gated), with the
     stream statistics (EMA) and the gate."""
     from scripts.episodic.run_forward_only import rule_arm as episodic_rule_arm
     a = episodic_rule_arm(name)
@@ -127,7 +127,7 @@ def main():
                 batch_cells.append(cell)
                 x = models.to_input(imgs[s:e], dev)
                 tap.h = None
-                if cfg.get('exit_sites'):                         # second-opinion stack: the aligner runs the model itself
+                if cfg.get('exit_sites'):                         # cascade: the aligner runs the model itself
                     out = al.forward_exit(model, x); tap.h = al.last_h
                 else:
                     if cfg['tok']:

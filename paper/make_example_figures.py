@@ -11,7 +11,7 @@ Selection rules (fixed, no hand-picking):
           16 batches = 1,024 images, as in the episodic run up to and including that batch
   patches the patch of the clean image with the lowest pixel standard deviation (flat) and the highest (textured)
 The network rows of the framework figure are schematic; its inset is the entropy of the trunk's (pair's) predictions on the
-2,000 design images of the cell, from the saved logits of the design run, with the routed share of the second-opinion run.
+2,000 design images of the cell, from the saved logits of the design run, with the unsure share of the cascade run.
 Displayed pixels are clipped to [0, 1] for display only. The drift and gain panels read results/paper_numbers.json
 (two_site/drift_vitb and two_site/held3_vitb), nothing is recomputed there.
 
@@ -55,7 +55,7 @@ plt.rcParams.update({
     'xtick.color': C['ink'], 'ytick.color': C['ink'], 'text.color': C['ink'], 'axes.labelcolor': C['ink'],
     'xtick.major.width': 0.6, 'ytick.major.width': 0.6, 'legend.frameon': False})
 ROWS = [('gaussian_noise-5', 'Gaussian noise 5'), ('zoom_blur-5', 'zoom blur 5'), ('contrast-5', 'contrast 5')]
-THETA = 1.5                          # the routing threshold of the second-opinion stack (nat)
+THETA = 1.5                          # the routing threshold of the cascade (nat)
 BATCH, IMAGE_BATCH = 64, 16          # the shown image is the first of batch 16 (split order)
 
 
@@ -175,7 +175,7 @@ def framework(r, clean, pick, trunk_entropy, theta, routed_run):
     fig.text(3.045 / FULL, (yg + 0.18) / H, 'spectral gate: DCT power of the same patches, no model call\n'
              f'$g_{{\\mathrm{{spec}}}}$ = {spec:.2f} > 0.4, $g_{{\\mathrm{{mean}}}}$ = {shift:.2f} < 0.3: gate {"on" if on else "off"} for this batch',
              ha='center', va='center', color=C['accent'], linespacing=1.15)
-    fig.text(5.00 / FULL, (yg + 0.18) / H, 'gray: frozen network or NEO\ngreen: TokAlign, blue: LayerAlign,\ngate and extra branches (dashed)', ha='left', va='center', color=C['ink'], linespacing=1.15)
+    fig.text(4.95 / FULL, (yg + 0.18) / H, 'gray: frozen network, NEO\ngreen: TokAlign\nblue: LayerAlign, the gate,\nextra branches (dashed)', ha='left', va='center', color=C['ink'], linespacing=1.15)
     # the trunk: the pair (schematic: no token values are computed here)
     yt, bh = 1.55, 0.38
     fig.patches.append(FancyArrowPatch(path=MPath([(6.35 / FULL, y0 / H), (6.35 / FULL, 2.12 / H), (0.38 / FULL, 2.12 / H), (0.38 / FULL, (yt + bh) / H)]),
@@ -212,7 +212,7 @@ def framework(r, clean, pick, trunk_entropy, theta, routed_run):
     fig.text(1.79 / FULL, 1.40 / H, 'unmapped tokens after block 6', ha='left', va='center', color=C['accent'])
     # the confidence-weighted average
     xm, wm = 4.43, 0.88
-    box(fig, xm, y5, wm, y9 + bb - y5, H, 'confidence-\nweighted average\n$w_a\\propto e^{-H_a}$\n(main path, block 11,\nblock 4)', ours=True)
+    box(fig, xm, y5, wm, y9 + bb - y5, H, 'confidence-\nweighted average\n$w_a\\propto e^{-H_a}$\nof the three', ours=True)
     arrow(fig, 4.33, y9 + bb / 2, xm, y9 + bb / 2, H)
     arrow(fig, 2.93, y5 + bb / 2, xm, y5 + bb / 2, H)
     fig.patches.append(FancyArrowPatch((4.76 / FULL, yt / H), (4.76 / FULL, (y9 + bb) / H), transform=fig.transFigure,

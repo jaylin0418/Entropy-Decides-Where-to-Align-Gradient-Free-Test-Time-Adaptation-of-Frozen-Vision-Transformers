@@ -1,6 +1,6 @@
 """Compute the source statistics once (no labels): mean and covariance of the 16x16x3 patches and of the head input,
 from 3,000 clean ImageNet validation images (split 'source'). With --blocks also, for every block's output, the mean and
-covariance of the patch tokens (``patch_mu`` / ``patch_cov``; the block-site alignment of the two-site method reads block 6)
+covariance of the patch tokens (``patch_mu`` / ``patch_cov``; the block-site alignment of the main path reads block 6)
 and of all 197 tokens (``blk_mu`` / ``blk_cov``; only the multi-block alignment arms of the smoke test use them).
 Always also the within-image and between-image parts of the patch covariance (``tok_cov_within`` / ``tok_cov_between``
 at the pixel site and, with --blocks, ``patch_cov_within`` / ``patch_cov_between`` per block): the covariance of the

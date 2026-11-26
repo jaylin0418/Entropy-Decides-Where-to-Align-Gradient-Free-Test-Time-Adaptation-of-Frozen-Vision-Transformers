@@ -6,7 +6,7 @@ It also holds the variants used only in ablations and negative results: per-bloc
 DCT-diagonal tokenizer, map refresh every k batches and float32 statistics (cost table).
 
 An arm is a dict: ``tok`` (TokAlign in front of the model), ``place`` (0-based blocks whose output patch tokens get
-TokAlign's map: same shrinkage, same prior strength, same running statistics, CLS untouched; the two-site method is
+TokAlign's map: same shrinkage, same prior strength, same running statistics, CLS untouched; the main path is
 ``tok`` with ``place=(5,)``, block 6), ``mean`` / ``cov`` (blocks whose output tokens are re-centered / whitened toward
 the source with the batch prior of the multi-block study), ``headcov`` (head covariance stage), ``head`` ('neo' or 'none'),
 ``gate`` ({'spec': 0.4, 'mean': 0.3} or absent), the EMA rates ``ema_tok`` / ``ema_head`` / ``ema_headcov`` (absent =
@@ -423,12 +423,12 @@ class Aligner:
 
 
 class HostStack(torch.nn.Module):
-    """The second-opinion stack as the forward of a gradient host (ETA, SAR). The host's forward runs the base path with
+    """The cascade as the forward of a gradient host (ETA, SAR). The host's forward runs the main path with
     gradients (the pixel map is applied by the runner; the map after the base block here), so the host adapts its LayerNorm
-    parameters on the base path's logits exactly as it does with the pair inside it. Alongside, without gradients and with the
-    same current weights, the images whose NEO-corrected base-path entropy exceeds ``exit_theta`` run the second opinions of
+    parameters on the main path's logits exactly as it does with the pair inside it. Alongside, without gradients and with the
+    same current weights, the images whose NEO-corrected main-path entropy exceeds ``exit_theta`` run the extra branches of
     ``exit_sites`` and the three predictions are averaged by confidence (``branch_mixture``), as ``forward_exit`` does.
-    After each batch: ``h`` the base path's head input (B, d), ``mix`` the log of the averaged probabilities for the routed
+    After each batch: ``h`` the main path's head input (B, d), ``mix`` the log of the averaged probabilities for the routed
     rows (B, C; NaN elsewhere) and ``routed`` (B,) bool; the scorer uses ``mix`` for the routed rows and NEO for the rest."""
 
     def __init__(self, model, al):

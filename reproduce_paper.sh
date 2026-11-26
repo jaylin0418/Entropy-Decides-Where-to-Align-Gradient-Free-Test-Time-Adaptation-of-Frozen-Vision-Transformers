@@ -291,7 +291,7 @@ for m in vitb vits; do
       --imagenet-val $IMAGENET_VAL --imagenet-c $IMAGENET_C --cache-dir cache --out-dir runs                                          # E75
   python scripts/episodic/score_gradient_host.py --runs runs/eta_heldout3_${m}_stack.json --stats stats/${m}_blocks.pt $V --no-headcov --out $O/eta_heldout3_${m}_stack.json   # R62
 done
-for pair in deitb:inc deitb:r deitb:sketch deits:inc deits:r deits:sketch vitb:sketch vits:sketch; do
+for pair in deitb:inc deitb:r deitb:sketch deits:inc deits:r deits:sketch vitb:r vitb:sketch vits:r vits:sketch; do
   m=${pair%%:*}; ds=${pair##*:}; split=$(heldsplit $ds)
   read -r T A1 A2 TH < <(python -c "import json; c=json.load(open('$O/calib_${m}_$ds.json')); print(c['trunk'], c['shallower'], c['deeper'], c['theta'])")
   python scripts/episodic/run_gradient_host.py --method eta --model $m --split $split $(dsflag $ds) --arms tok+eta+rule_t${T}_b${A1}b${A2} --exit-theta $TH --stats stats/${m}_blocks.pt --tag _ca_${ds}_stack \
@@ -328,9 +328,9 @@ $PY_TIMM1 scripts/cost/time_others.py --repeats 2 --stats $SB $D                
 python scripts/cost/score_timing.py --runs runs/timing_design_vitb_others.json $V --out $O/timing_design_vitb_others.json         # R65
 
 # [P] numbers, figures and the report
+python scripts/analysis/review_checks.py --logits runs/logits --imagenet-val $IMAGENET_VAL --scores results/scores --out results/scores/review_checks.json  # A15 (CPU, labels only to score: intervals of the held-out gains, the correlation without blocks 1-3, the threshold, every pair of branch blocks, Table S5)
 python scripts/make_paper_numbers.py                                                                            # P1
 python paper/make_numbers.py && python paper/make_figures.py                                                    # P2
 python paper/make_example_figures.py --imagenet-val $IMAGENET_VAL --imagenet-c $IMAGENET_C --cache-dir cache --stats stats/vitb.pt --logits runs/logits  # P5 (CPU, model-free; Figure S1 from the design images)
-python scripts/analysis/review_checks.py --logits runs/logits --imagenet-val $IMAGENET_VAL --scores results/scores --out results/scores/review_checks.json  # A15 (CPU, labels only to score: intervals of the held-out gains, the correlation without blocks 1-3, the threshold, every pair of branch blocks, Table S5)
 python scripts/analysis/number_inventory.py                                                                     # P3 (results/number_inventory.csv)
 (cd paper/report && pdflatex report && bibtex report && pdflatex report && pdflatex report)                     # P4

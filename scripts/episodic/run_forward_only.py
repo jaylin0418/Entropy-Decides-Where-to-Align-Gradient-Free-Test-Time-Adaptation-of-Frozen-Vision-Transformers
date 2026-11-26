@@ -1,4 +1,4 @@
-"""Episodic forward-only runs (GPU; no labels): NEO, TokAlign, the head covariance stage, the stack, the two-site arms
+"""Episodic forward-only runs (GPU; no labels): NEO, TokAlign, the head covariance stage, the stack, the main-path arms
 (TokAlign plus the same alignment after block 6), their ablations and the multi-block alignment arms, one stream per cell (statistics reset per cell). Saves the logits of every (arm, cell)
 under <out-dir>/logits/ and a manifest <out-dir>/forward_only_<split>_<model><tag>.json, which
 scripts/episodic/score_forward_only.py scores. (Research name: scripts/spa/probe_online.py.)
@@ -28,7 +28,7 @@ ARMS = {
     'tok': dict(tok=True, mean=(), cov=(), headcov=False),
     'headcov': dict(tok=False, mean=(), cov=(), headcov=True),
     'tok+headcov': dict(tok=True, mean=(), cov=(), headcov=True),
-    # the two-site method: TokAlign's map also on the patch tokens after block 6 (0-based 5); block 6 alone for reference
+    # the main path: TokAlign's map also on the patch tokens after block 6 (0-based 5); block 6 alone for reference
     'place_b6': dict(tok=False, mean=(), cov=(), headcov=False, place=(5,)),
     'tok+place_b6': dict(tok=True, mean=(), cov=(), headcov=False, place=(5,)),
     'tok+place_b6+headcov': dict(tok=True, mean=(), cov=(), headcov=True, place=(5,)),
@@ -93,8 +93,8 @@ RULE_ARM = re.compile(r'^rule_t(\d+)_(?:b(\d+)(?:b(\d+))?|(views))(_random)?(_ga
 
 
 def rule_arm(name):
-    """Arm of the rule-chosen second-opinion stack, named by its blocks (1-based): rule_t<T>_b<A>[b<B>][_gated] is the pixel map,
-    the map after block T (the trunk), NEO, and second opinions after blocks A and B for images whose trunk entropy exceeds
+    """Arm of the rule-chosen cascade, named by its blocks (1-based): rule_t<T>_b<A>[b<B>][_gated] is the pixel map,
+    the map after block T (the trunk), NEO, and extra branches after blocks A and B for images whose trunk entropy exceeds
     1.5 nat; '_random' routes 35 % of the images at random instead (control); '_gated' adds the spectral gate. rule_t6_b5b9_gated
     is the labeled-search stack of the report (exit_b5b9_gated). rule_t<T>_views[_gated] is the views control: the same routed
     images run the main path on two more views (flip, center crop) instead of two more blocks."""

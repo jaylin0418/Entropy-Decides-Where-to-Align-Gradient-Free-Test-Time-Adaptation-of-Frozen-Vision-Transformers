@@ -29,9 +29,9 @@ ERUN = 'run with this repository\'s scripts on the course checkpoint (GPU, 2026-
 CRUN = ('run with this repository\'s scripts on the course checkpoint on ImageNet-C-bar (the authors\' archive; GPU, 2026-11-09, '
         'data/derived/course_two_site, tag _cbar; the heldout3 run scored once); scored file committed')
 SRUN = ('run with this repository\'s scripts on the course checkpoint (GPU, 2026-11-09, data/derived/course_two_site; the six arms of the earlier SAR '
-        'run came out identical to the earlier scored file, the two-site arms were added); scored file committed')
+        'run came out identical to the earlier scored file, the main-path arms were added); scored file committed')
 TS = [  # (key prefix, value path or formula, scored files, run commands, steps, status)
-    ('cost.ex.', 'extra/timing/<arm>/{ms_per_batch, x_neo, acc_6cells} (six timing cells, one run, two-site arms)', 'timing_design_vitb_extra',
+    ('cost.ex.', 'extra/timing/<arm>/{ms_per_batch, x_neo, acc_6cells} (six timing cells, one run, main-path arms)', 'timing_design_vitb_extra',
      'time_batches.py --arms neo stack_k16_fp32_stats32 twosite_k16_fp32_stats32 twosite_k1 eta eta+twosite --tag _extra; score_timing.py', 'S5 C2 R31 P1 P2', ERUN),
     ('cb.d.', 'extra/cbar/design/{episodic, clean, per_cell} (20 ImageNet-C-bar cells; per-corruption rows = mean of severities 3 and 5)', 'forward_only_design_vitb_cbar',
      'run_forward_only.py --split design --arms neo tok place_b6 tok+place_b6 --cells clean <ImageNet-C-bar cells> --imagenet-c $IMAGENET_C_BAR --tag _cbar; score_forward_only.py', 'S5 E28 R33 P1 P2', CRUN),
@@ -79,11 +79,15 @@ TS = [  # (key prefix, value path or formula, scored files, run commands, steps,
      "run with this repository's scripts on the course checkpoint (GPU, 2026-11-16, data/derived/course_two_site, tags _ablations _others, the GPU idle); scored files committed"),
     ('ca.', 'ca/<model>_<dataset>: the calibrated cascade on ViT-S/16, DeiT-B/16 and DeiT-S/16 and on ImageNet-C-bar, ImageNet-R and ImageNet-Sketch (dev sweep, label-free calibration, held-out run, ETA on the same cells; docs/heldout_test_plan_models_datasets.md)',
      'forward_only_design_<model>_ca_<dataset>, site_choice_design_<model>_ca_<dataset>{,_t6}, calib_<model>_<dataset>, forward_only_<split>_<model>_ca_<dataset>, eta_<split>_<model>_ca_<dataset>',
-     'scripts/cvpr/course_ca.sh (research repository): compute_source_stats.py --blocks; run_forward_only.py --split design --dataset r|sketch --arms neo tok place_b6 tok+place_b1..b12; site_choice.py; run_forward_only.py --split heldout|heldout4 --exit-theta; run_gradient_host.py --method eta', 'S5 E66 R53 P1 P2',
+     'scripts/cvpr/course_ca.sh (research repository): compute_source_stats.py --blocks; run_forward_only.py --split design --dataset r|sketch --arms neo tok place_b6 tok+place_b1..b12; site_choice.py; run_forward_only.py --split heldout|heldout4 --exit-theta; run_gradient_host.py --method eta', 'S5 E66 R53 E76 R63 P1 P2',
      "run with this repository's scripts on the course checkpoint (GPU, 2026-11-11, data/derived/course_two_site, tags _ca_inc _ca_r _ca_sketch; held-out cells scored once); scored file committed"),
     ('ax.', 'the cross-model table: per pair the gains over NEO of the main path, the calibrated cascade and ETA on the same held-out cells (from two_site/held3_*, rule/*, ca/*)', 'forward_only_heldout3_{vitb,vits}, forward_only_heldout4_vitb_cbar_rule, forward_only_heldout{,4}_<model>_ca_<dataset>, eta_heldout{3,4,}_*',
      'paper/make_numbers.py (across)', 'P1 P2', "computed by paper/make_numbers.py from the committed scores (CPU)"),
-    ('abl.src3000', 'design_vitb/ablation/src3000: the tok+headcov arm of the dev run with the 3,000-image source statistics (the reference of the src50 / src300 sensitivity)', 'forward_only_design_vitb (arm tok+headcov)',
+    ('cost.cfg.', 'the six timing cells (scripts/cost/time_batches.py CELLS): mean top-1 of the cascade (rule/slices/design/per_cell) and the main path (two_site/design_vitb/per_cell) in the reported setting, against rule/timing/<arm>/acc_6cells of the timed setting', 'forward_only_design_vitb_rule; forward_only_design_vitb_two_site; timing_design_vitb_ablations',
+     'paper/make_numbers.py (rule)', 'S5 E19 R22 E81 R71 C6 R64 P1 P2', "computed by paper/make_numbers.py from the committed scores (CPU)"),
+    ('cost.timed.', 'rule/timing/<arm>/acc_6cells: top-1 of the timed setting (map refreshed every 16 batches, float32) on the six timing cells', 'timing_design_vitb_ablations',
+     'time_batches.py (C6); score_timing.py (R64)', 'S5 C6 R64 P1 P2', "computed by paper/make_numbers.py from the committed scores (CPU)"),
+    ('abl.src3000', 'design_vitb/ablation/src3000: the tok+headcov arm of the dev run with the 3,000-image source statistics (the reference of the src50 / src300 sensitivity)', 'forward_only_design_vitb',
      'run_forward_only.py --split design --arms tok+headcov (E1)', 'S1 E1 R1 P1 P2', "computed by paper/make_numbers.py from the committed scores (CPU)"),
     ('sg.', 'block 1 among the 13 placements on the eight corruption pairs (Section C.2): its rank by accuracy and by mean entropy from the label_free entries of exit/site_choice/{inc,cbar}, rule/vits/pick_t6 and ca/<pair>/signal', 'site_choice_design_vitb, site_choice_design_vitb_cbar_t7, site_choice_design_vits_rule, site_choice_design_{vits_cbar_ca,deitb_ca_inc,deitb_cbar_ca,deits_ca_inc,deits_cbar_ca}_t6',
      'paper/make_numbers.py (across)', 'P1 P2', "computed by paper/make_numbers.py from the committed scores (CPU)"),
@@ -164,23 +168,25 @@ LITERAL = {'66.3': ('quoted from another paper', 'FOA paper (66.3 % on 50,000-im
            '66.5': ('quoted from another paper', 'PEA paper, Table 1 (ViT-Base, ImageNet-C severity 5, continual, with augmentation)', 'citation'),
            '13.5': ('quoted from another paper', 'DDA (13.5 s per image)', 'citation'),
            '0.75': ('analytic cost', 'one 768x768 multiply per token and per image plus one eigendecomposition per refresh = about 0.12 GMACs per image = 0.75 % of 17.56 GMACs (scripts/analysis/frontier_and_drift.py MACS)', 'analytic'),
-           '1.5': ('setting', 'the threshold theta = 1.5 nat fixed by hand for the ViT-B/16 runs and ViT-S/16 on ImageNet-C before the quantile rule (run_forward_only.py --exit-theta 1.5)', 'setting'),
+           '1.5': ('setting', 'the threshold theta = 1.5 nat, chosen with blocks 5 and 9 by the labeled dev search over ImageNet-C and ImageNet-C-bar (docs/heldout_test_plan_exit.md) before the quantile rule, used for the ViT-B/16 runs and ViT-S/16 on ImageNet-C (run_forward_only.py --exit-theta 1.5)', 'setting'),
            '28': ('cost accounting', 'FOA 27+1 forwards per batch', 'setting'), '25': ('bound stated in words', '50,000 / 2,000 = 25 times more batches', 'setting')}
 COST_WORDS = ('forward-pass equivalents', 'forward passes', 'charged', 'MACs', 'multiply', 'multiplies')
+SIGNAL_FILES = '; '.join(['site_choice_design_vitb', 'site_choice_design_vitb_cbar', 'site_choice_design_vits_rule_t6']
+                         + sorted(p.stem for p in (ROOT / 'results' / 'scores').glob('site_choice_design_*_ca_*_t6.json')))
 FIG_DATA = [  # figures: what paper/make_figures.py draws (rows with line 0)
-    ('fig:whysites (Figure S5)', 'why two branches: agreement with the main path, single-branch gain per block, two-branch gains (exit/site_choice/*/second_opinions)', 'site_choice_design_vitb, site_choice_design_vitb_cbar', 'paper/make_figures.py', 'A6 A7 P1 P2',
+    ('fig:whysites (Figure S5)', 'why two branches: agreement with the main path, single-branch gain per block, two-branch gains (exit/site_choice/*/second_opinions)', 'exit/site_choice/{inc,cbar}/second_opinions', 'site_choice_design_vitb; site_choice_design_vitb_cbar', 'A6 A7 P1 P2',
      "computed by this repository's analysis script from the saved logits of the dev runs (CPU, model-free)"),
-    ('fig:framework (Figure S1)', 'one dev batch through the calibrated cascade: images, patches, covariances, gate scores, n (paper/figures/example_numbers.json); network rows schematic; inset = trunk entropy of the 2,000 dev images of the cell from the saved logits, routed share from forward_only_design_vitb_exit', 'dev images (cache), source statistics, saved logits of forward_only_design_vitb_two_site, forward_only_design_vitb_exit', 'paper/make_example_figures.py', 'S1 E19 E36 R39 P5',
+    ('fig:framework (Figure S1)', 'one dev batch through the calibrated cascade: images, patches, covariances, gate scores, n (paper/figures/example_numbers.json); network rows schematic; inset = trunk entropy of the 2,000 dev images of the cell from the saved logits, routed share from forward_only_design_vitb_exit', 'paper/figures/example_numbers.json (dev images, source statistics, saved logits)', 'forward_only_design_vitb_two_site; forward_only_design_vitb_exit', 'S1 E19 E36 R39 P5',
      'recomputed model-free on the CPU from the cached dev images with tokalign/stages.py (the same map the episodic run applied)'),
     ('fig:depth (Figure 1)', 'lines: mean gain at every placement, frozen ViT and ETA; per-family lines', 'two_site/sweep_vitb', 'forward_only_design_vitb_sweep; forward_only_design_vitb_two_site; eta_design_vitb_sweep; eta_design_vitb', 'S5 E19 E24 E25 R22 R24 R25 P1 P2', RUN),
     ('fig:drift (Figure S4)', 'heat map: z of the spectral drift per corruption and placement; markers: best placement per corruption', 'two_site/drift_vitb; two_site/sweep_vitb', 'drift_by_depth_design_vitb; forward_only_design_vitb_sweep; forward_only_design_vitb_two_site', 'S5 F9 E19 E24 R22 R24 R26 P1 P2', RUN),
     ('fig:depthfam (Figure S2)', 'lines: mean gain at every placement per corruption family, frozen ViT', 'two_site/sweep_vitb', 'forward_only_design_vitb_sweep; forward_only_design_vitb_two_site', 'S5 E19 E24 R22 R24 P1 P2', RUN),
-    ('fig:overview (Figure 2)', '(a) the calibration from the ImageNet-C design logits: mean entropy of the 13 placements, the entropy of the average with the main path per candidate block (exit/site_choice/inc/label_free); (b) one batch of the stack, schematic', 'site_choice_design_vitb', 'paper/make_figures.py', 'S5 E19 E34 A6 P1 P2',
+    ('fig:overview (Figure 2)', '(a) the calibration from the ImageNet-C design logits: mean entropy of the 13 placements, the entropy of the average with the main path per candidate block (exit/site_choice/inc/label_free); (b) one batch of the stack, schematic', 'exit/site_choice/inc/label_free', 'site_choice_design_vitb', 'S5 E19 E34 A6 P1 P2',
      "computed by this repository's analysis script from the saved logits of the dev runs (CPU, model-free)"),
     ('fig:frontier (Figure S7)', 'two scatters: top-1 on the six timing cells against compute in forward passes (paper/compute_cost.py) and against time per batch relative to NEO for NEO, TokAlign, the main path, the cascade, the random-image control, ETA, SAR, PEA, PEA with views and FOA (rule/timing, rule/timing_others)', 'timing_design_vitb_ablations, timing_design_vitb_others', 'timing_design_vitb_ablations; timing_design_vitb_others', 'S5 C6 R64 C7 R65 P1 P2', RUN),
-    ('fig:signalgrid (Figure S3)', 'per model-dataset pair: accuracy and mean entropy of the 13 placements on the dev images, the pick and the most accurate (exit/site_choice/*, rule/vits/pick_t6, ca/*/signal)', 'site_choice_design_vitb{,_cbar,_vits_rule_t6,_<model>_ca_<dataset>_t6}', 'site_choice.py', 'E19 E34 E35 E58 E66 A6 A7 A11 A13 P1 P2',
+    ('fig:signalgrid (Figure S3)', 'per model-dataset pair: accuracy and mean entropy of the 13 placements on the dev images, the pick and the most accurate (exit/site_choice/*, rule/vits/pick_t6, ca/*/signal)', 'exit/site_choice/{inc,cbar}/label_free, rule/vits/pick_t6, ca/<pair>/signal', SIGNAL_FILES, 'E19 E34 E35 E58 E66 A6 A7 A11 A13 P1 P2',
      "computed by this repository's analysis script from the saved logits of the dev runs (CPU, model-free)"),
-    ('fig:calib (Figure S6)', 'gain of the calibrated cascade over the pair against the number of calibration images, pooled per benchmark and per shift (rule/sample_size/{inc,cbar})', 'rule_sample_size_design_vitb{,_cbar}', 'rule_sample_size.py', 'E19 E28 E34 E35 A9 A10 P1 P2',
+    ('fig:calib (Figure S6)', 'gain of the calibrated cascade over the pair against the number of calibration images, pooled per benchmark and per shift (rule/sample_size/{inc,cbar})', 'rule/sample_size/{inc,cbar}', 'rule_sample_size_design_vitb; rule_sample_size_design_vitb_cbar', 'E19 E28 E34 E35 A9 A10 P1 P2',
      "computed by this repository's analysis script from the saved logits of the dev runs (CPU, model-free)"),
 ]
 STRIP = [r'(?<!\\)%.*', r'\\(?:cite[pt]?|label|[cC]ref|ref|bibliography|bibliographystyle|input|includegraphics(?:\[[^\]]*\])?|setlength\{[^}]*\}|icml\w+|usepackage(?:\[[^\]]*\])?|documentclass|newcommand|renewcommand|setcounter|multicolumn|cmidrule(?:\([^)]*\))?|begin|end|providecommand)\{[^}]*\}',
@@ -209,7 +215,7 @@ def old_provenance():
 def ts_provenance(key):
     for prefix, value, files, cmd, steps, status in TS:
         if key.startswith(prefix):
-            return {'value (results/paper_numbers.json path or formula)': value, 'research result file': 'results/scores/' + files.replace('; ', '.json; results/scores/') + '.json',
+            return {'value (results/paper_numbers.json path or formula)': value, 'research result file': result_files(files),
                     'research commands': cmd, 'steps here (reproduce_paper.sh)': steps, 'status': status}
     raise KeyError(key)
 
@@ -261,14 +267,21 @@ def rows_of(paper, path, M, prov):
     return rows
 
 
+def result_files(files):
+    """The scored files behind a row as results/scores/<name>.json paths: names separated by '; ' or ', ' (a comma inside braces
+    is a pattern, kept), parenthetical remarks dropped, no path when the row names no file."""
+    names = [n.strip() for n in re.split(r';\s*|,\s+', re.sub(r'\s*\([^)]*\)', '', files)) if n.strip()]
+    return '; '.join(f'results/scores/{n}.json' for n in names)
+
+
 def build():
     M, prov = macros(), old_provenance()
     rows = rows_of('report', TEX['report'], M, prov)
     for paper, figs in (('report', FIG_DATA),):
         for tf, printed, value, files, steps, status in figs:
             rows.append({'paper': paper, 'line': 0, 'section': 'figure data (paper/make_figures.py)', 'table_or_figure': tf, 'printed': printed, 'macro_key': '',
-                         'value (results/paper_numbers.json path or formula)': value, 'research result file': 'results/scores/' + files.replace('; ', '.json; results/scores/') + '.json',
-                         'research commands': 'paper/make_figures.py', 'steps here (reproduce_paper.sh)': steps, 'status': status})
+                         'value (results/paper_numbers.json path or formula)': value, 'research result file': result_files(files),
+                         'research commands': 'paper/make_example_figures.py' if 'framework' in tf else 'paper/make_figures.py', 'steps here (reproduce_paper.sh)': steps, 'status': status})
     return rows
 
 

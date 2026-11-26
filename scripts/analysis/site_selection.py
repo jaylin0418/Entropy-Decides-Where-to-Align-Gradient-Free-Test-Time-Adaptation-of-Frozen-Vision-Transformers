@@ -1,5 +1,5 @@
 """Which site to align, per cell (CPU; no model, no labels beyond the scored files): from the scored depth sweep, the
-two-site design run and the drift-by-depth scores of the same split, the mean accuracy of fixed sites, of the two-site
+main-path dev run and the drift-by-depth scores of the same split, the mean accuracy of fixed sites, of the two-site
 combination, of two online selection rules that pick the site from the drift of the first K batches, and of the per-cell
 oracles. Writes results/scores/site_selection_<split>_<model>.json.
 

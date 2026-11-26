@@ -1,8 +1,8 @@
-"""Wall-clock benchmark (GPU; no labels): CUDA-synchronised time per batch of 64 of NEO, the gated stack (and the two-site stack) with the maps
+"""Wall-clock benchmark (GPU; no labels): CUDA-synchronised time per batch of 64 of NEO, the gated stack (and the main path with the head map) with the maps
 refreshed every k batches (float64 or float32 eigendecompositions, float64 or float32 statistics), ETA and SAR, on six design
 cells; the first two batches of each cell are dropped. With --repeats R every arm is timed R times per cell, the order of the arms
 reversed on every second pass, and the batches of all passes are pooled, so that a busy spell of the shared GPU does not land on one arm. Arms rule_t<T>_b<A>[b<B>][_random]_k16_fp32_stats32 time the calibrated
-second-opinion stack, one second opinion alone and the random-routing control (rule_arm). Logits are saved so the accuracy of every variant is scored
+cascade, one extra branch alone and the random-routing control (rule_arm). Logits are saved so the accuracy of every variant is scored
 offline. Writes <out-dir>/timing_design_<model><tag>.json. (Research name: scripts/spa/bench_wallclock.py; the cost
 table is its single run with --arms neo stack_k1 stack_k16_fp32 stack_k16_fp32_stats32 eta.)
 
@@ -34,7 +34,7 @@ ARMS = {'neo': dict(tok=False, mean=(), cov=(), headcov=False),
         'sar': dict(tok=False, mean=(), cov=(), head='none', sar=True),
         # the pixel map alone (TokAlign in front of NEO) at the refresh settings of the timed stacks
         'tok_k16_fp32_stats32': dict(tok=True, mean=(), cov=(), headcov=False, refresh_every=16, fp32_eig=True, stats32=True),
-        # the two-site stack (pixel map, block-6 map, head covariance, gate) at the same refresh settings, and the two sites inside ETA
+        # the main path with the head map (pixel map, block-6 map, head covariance, gate) at the same refresh settings, and the two sites inside ETA
         'twosite_k1': dict(BASE, refresh_every=1, place=(5,)),
         'twosite_k16_fp32_stats32': dict(BASE, refresh_every=16, fp32_eig=True, stats32=True, place=(5,)),
         'eta+twosite': dict(tok=True, mean=(), cov=(), head='none', eta=True, place=(5,)),
@@ -48,7 +48,7 @@ ARMS = {'neo': dict(tok=False, mean=(), cov=(), headcov=False),
 
 
 def rule_arm(name):
-    """Timing arm of the rule-chosen second-opinion stack: rule_t<T>_b<A>b<B>_k16_fp32_stats32 (the settings of the other
+    """Timing arm of the rule-chosen cascade: rule_t<T>_b<A>b<B>_k16_fp32_stats32 (the settings of the other
     timed stacks: maps refreshed every 16 batches, float32 eigendecomposition, float32 statistics)."""
     from scripts.episodic.run_forward_only import rule_arm as episodic_rule_arm
     suffix = '_k16_fp32_stats32'

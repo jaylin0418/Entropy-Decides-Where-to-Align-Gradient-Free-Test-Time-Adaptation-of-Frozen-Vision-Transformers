@@ -1,6 +1,6 @@
 """Episodic runs of a gradient host (GPU; no labels): official ETA (EATA without the Fisher term) or SAR, fresh weights
-per cell, with (`tok+eta`, `tok+sar`) and without TokAlign in front, and with the block-6 site of the two-site method
-(`eta+place_b6`, `tok+eta+place_b6`), and with the calibrated second-opinion stack inside the host
+per cell, with (`tok+eta`, `tok+sar`) and without TokAlign in front, and with the block-6 site of the main path
+(`eta+place_b6`, `tok+eta+place_b6`), and with the calibrated cascade inside the host
 (`tok+eta+rule_t<T>_b<E>b<L>` with `--exit-theta`: tokalign.aligner.HostStack). Records per image the host's (pre-update)
 logits and the head input, so NEO and the head covariance stage are applied when scoring; for the stack also the
 confidence-weighted average of the routed rows. Manifest
@@ -42,8 +42,8 @@ STACK_ARM = re.compile(r'^tok\+(eta|sar)\+rule_t(\d+)_b(\d+)b(\d+)$')
 
 
 def stack_arm(name, theta):
-    """tok+<host>+rule_t<T>_b<E>b<L>: the pixel map and the map after block T inside the host, second opinions after blocks E
-    and L (1-based) for the images whose NEO-corrected base-path entropy exceeds theta (the calibrated quantile)."""
+    """tok+<host>+rule_t<T>_b<E>b<L>: the pixel map and the map after block T inside the host, extra branches after blocks E
+    and L (1-based) for the images whose NEO-corrected main-path entropy exceeds theta (the calibrated quantile)."""
     m = STACK_ARM.match(name)
     if not m:
         return None
@@ -104,7 +104,7 @@ def main():
             tap = models.HeadInput(model)
             al = Aligner(model, src, ARMS[arm], dev) if ARMS[arm] else None
             n_cls = len(natural.class_labels) if labels is not None else 1000
-            stack = HostStack(model, al) if al is not None and al.exit else None      # the stack inside the host: its forward is the base path
+            stack = HostStack(model, al) if al is not None and al.exit else None      # the stack inside the host: its forward is the main path
             hosted = stack if stack is not None else model
             host = hosts.SAR(hosted, BATCH, n_classes=n_cls) if args.method == 'sar' else hosts.ETA(hosted, BATCH, n_classes=n_cls)
             logits = np.zeros((n_eval, 1000), np.float16); h = np.zeros((n_eval, model.embed_dim), np.float16)

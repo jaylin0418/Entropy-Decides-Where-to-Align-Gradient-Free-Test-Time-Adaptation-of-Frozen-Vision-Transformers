@@ -27,7 +27,7 @@ labeled-search cascade) and `rule_` (the calibrated cascade), and `trunk` in the
 
 | in the code, docs/ and the score files | in the report |
 |---|---|
-| `two_site`, `base path`, `pair`, `pair_gated`, `tok+place_b<k>` | the main path (TokAlign, LayerAlign after the main block, NEO, gated) |
+| `two_site`, `base path`, `pair`, `pair_gated`, `tok+place_b<k>` | the main path (TokAlign, LayerAlign after the main block, NEO), gated in `pair_gated` and inside the cascade arms, ungated in `tok+place_b<k>` |
 | `trunk`, `t<b>` | the main block b |
 | `second opinion`, `so`, `b<e>b<l>`, `shallower` / `deeper` | the two extra branches after blocks e < l (a1 < a2 in the report) |
 | `routed`, `routed_fraction`, `exit_theta` | the unsure images, their share, and the threshold theta |
