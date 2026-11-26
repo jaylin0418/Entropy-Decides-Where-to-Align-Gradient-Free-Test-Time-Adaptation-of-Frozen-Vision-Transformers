@@ -1,4 +1,4 @@
-"""The online alignment code that produced every TokAlign number in the papers (hook-based; one object per stream).
+"""The online alignment code that produced every TokAlign number in the report (hook-based; one object per stream).
 
 ``stages.py`` is the same method as a small library API. This module is the implementation the paper's runs used,
 kept with its computation unchanged so that the run scripts under ``scripts/`` reproduce the reported numbers exactly.
@@ -211,7 +211,7 @@ class Aligner:
 
     def _place_hook(self, l):
         """TokAlign's map on the patch tokens after block l (statistics detached; a host's gradients flow through the map).
-        Off when the gate is off (statistics then not updated), as the tokenizer stage."""
+        Off when the gate is off, its statistics then not updated (the tokenizer stage updates its own even then)."""
         def hook(module, inputs, out):
             if not self.on:
                 return out

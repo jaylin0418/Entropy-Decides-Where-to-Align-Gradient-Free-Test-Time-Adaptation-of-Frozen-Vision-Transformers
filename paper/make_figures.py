@@ -68,7 +68,7 @@ fig, (ax, axe) = plt.subplots(2, 1, figsize=(COL, 2.30), layout='constrained', s
 ax.axhline(0, color=C['zero'], lw=0.6)
 ax.plot(xs, [sw['frozen_gain'][s] for s in SITES], marker='o', ms=3.5, lw=1.0, color=C['accent'], label='frozen ViT with NEO')
 ax.plot(xs, [sw['eta_gain'][s] for s in SITES], marker='s', ms=3.2, lw=1.0, color=C['host_dark'], ls='--', label='ETA with NEO')
-ax.set_ylabel('mean gain (pt)'); ax.legend(loc='lower right', ncol=2, handlelength=1.6, columnspacing=1.2, borderaxespad=0.1)  # right of the dip at block 1, below the curves
+ax.set_ylabel('mean gain (pt)'); ax.legend(loc='lower right', ncol=1, handlelength=1.6, borderaxespad=0.1)  # right of the dip at block 1, below the curves
 ax.grid(True, axis='y', color=C['grid'], lw=0.5); ax.set_axisbelow(True); ax.set_title('(a) one map at one placement: gain over no map, 30 cells', loc='left')
 lo = min(min(sw['frozen_gain'].values()), min(sw['eta_gain'].values())); ax.set_ylim(lo - 1.5, 6)
 # (b) the calibration signal: mean prediction entropy of the pixel-plus-block arms (no labels), lowest at the most accurate block
@@ -121,7 +121,7 @@ SO = {b: D['exit']['site_choice'][b]['second_opinions'] for b in ('inc', 'cbar')
 cand = ['px'] + [f'px+b{k}' for k in range(1, 13) if k != 6]
 xpos = {'px': 0, **{f'px+b{k}': k for k in range(1, 13)}}
 fig, (a1, a2, a3) = plt.subplots(1, 3, figsize=(FULL, 2.05), layout='constrained', gridspec_kw={'width_ratios': [1, 1, 1.05]})
-for ax_, key, ylab, ttl in ((a1, 'agree_routed', 'agreement with block 6 (%)', '(a) how often a placement agrees with block 6'),
+for ax_, key, ylab, ttl in ((a1, 'agree_routed', 'agreement with block 6 (%)', '(a) how often a branch agrees with block 6'),
                             (a2, 'gain_routed_mixture', 'gain over the main path (pt)', '(b) main path plus one extra branch')):
     for b, col, ls, mk, lab in (('inc', C['accent'], '-', 'o', 'ImageNet-C'), ('cbar', C['host_dark'], '--', 's', r'ImageNet-$\overline{\mathrm{C}}$')):
         xs_ = [xpos[a] for a in cand[:6]] + [6] + [xpos[a] for a in cand[6:]]                      # a gap at block 6 (the trunk)
@@ -175,9 +175,9 @@ a1 = fig.add_axes([fx(1.06), 0.40 / H, 0.88 / W, 0.96 / H])
 ent = [LFI['trunk_mean_entropy'][f'px+b{k}'] for k in ks]; kt = ks[int(np.argmin(ent))]
 a1.plot([0] + ks, [LFI['trunk_mean_entropy']['px']] + ent, marker='o', ms=2.6, lw=0.9, color=LAY)   # the 13 placements: px, then px + block k
 a1.scatter([kt], [min(ent)], marker='o', s=60, facecolors='none', edgecolors=LAY, linewidths=1.0, zorder=4)
-a1.annotate(f'main = {kt}', (kt, min(ent)), xytext=(0.30, 0.90), textcoords='axes fraction', ha='center', va='top', color=LAY,
+a1.annotate(f'main = {kt}', (kt, min(ent)), xytext=(0.58, 0.97), textcoords='axes fraction', ha='center', va='top', color=LAY,
             arrowprops=dict(arrowstyle='-', color=LAY, lw=0.6, shrinkA=0, shrinkB=5))
-a1.set_title('mean entropy', loc='left', pad=2); a1.set_xticks([0, 6, 12]); a1.set_xticklabels(['px', '6', '12']); a1.set_yticks([]); a1.set_xlabel('placement', labelpad=1)
+a1.set_title('mean entropy', loc='left', pad=2); a1.set_xticks([0, 6, 12]); a1.set_xticklabels(['px', '6', '12']); a1.set_yticks([]); a1.set_xlabel('candidate', labelpad=1)
 a1.grid(True, axis='y', color=C['grid'], lw=0.5)
 fig.patches.append(FancyArrowPatch((fx(1.97), 0.90 / H), (fx(2.07), 0.90 / H), transform=fig.transFigure, arrowstyle='-|>', mutation_scale=6, lw=0.7, color=C['host_dark'], shrinkA=0, shrinkB=0))
 a2 = fig.add_axes([fx(2.36), 0.40 / H, 0.84 / W, 0.96 / H])
@@ -328,8 +328,8 @@ pts = [  # (label, compute key, timing entry, colour, marker, filled, label plac
     ('main path', 'pair', TM['pair_k16_fp32_stats32'], C['accent'], 'o', True, ('data', 1.3, 64.6), ('data', 1.3, 64.6)),
     ('cascade', 'b4b11', TM['rule_t6_b4b11_k16_fp32_stats32'], C['accent'], 'o', True, ('data', 1.9, 68.4), ('data', 2.0, 68.4)),
     ('random images', 'random', TM['rule_t6_b4b11_random_k16_fp32_stats32'], C['accent'], 'o', False, ('data', 2.0, 66.4), ('data', 2.1, 66.4)),
-    ('ETA with NEO', 'eta', TM['eta'], C['host_dark'], 's', True, ('offset', 0, -8), ('offset', 0, -8)),
-    ('SAR with NEO', 'sar', TM['sar'], C['host_dark'], 's', True, ('offset', 7, -3), ('offset', 7, -3)),
+    ('ETA', 'eta', TM['eta'], C['host_dark'], 's', True, ('offset', 0, -8), ('offset', 0, -8)),
+    ('SAR', 'sar', TM['sar'], C['host_dark'], 's', True, ('offset', 7, -3), ('offset', 7, -3)),
     ('PEA', 'pea', TO['pea'], C['host_dark'], 'o', True, ('offset', 0, 6), ('offset', 0, 6)),
     ('PEA with views', 'peaviews', TO['pea_aug'], C['host_dark'], 'o', True, ('offset', 0, -8), ('offset', 0, -8)),
     ('FOA', 'foa', TO['foa'], C['host_dark'], 'o', True, ('offset', 0, 6), ('offset', 0, 6)),

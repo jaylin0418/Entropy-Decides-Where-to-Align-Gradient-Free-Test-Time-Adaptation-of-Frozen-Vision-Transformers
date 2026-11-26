@@ -547,7 +547,7 @@ def early_exit():
     for bench, key in (('inc', 'inc'), ('cb', 'cbar')):
         sc = E['site_choice'][key]
         put(f'sc.{bench}.oracle.gain', sc['oracle_gain'], '+.2f'); put(f'sc.{bench}.choice.gain', sc['per_cell_entropy_choice_gain'], '+.2f')
-        put(f'sc.{bench}.choice.gainneo', sc['per_cell_entropy_choice'] - sc['fixed_mean']['neo'], '+.2f')
+        put(f'sc.{bench}.choice.gainneo', sc['per_cell_entropy_choice'] - sc['fixed_mean']['neo'], '+.2f'); put(f'sc.{bench}.kwarmup', sc['k_warmup'], 'd')   # batches the per-cell choice reads
         put(f'sc.{bench}.choice', sc['per_cell_entropy_choice']); put(f'sc.{bench}.oracle', sc['oracle_per_cell'])
         for name, m in sc['per_image_mixtures'].items():
             put(f'sc.{bench}.mix.{name}.full', m['full'] - sc['pair'], '+.2f'); put(f'sc.{bench}.mix.{name}.exit', m['early_exit'] - sc['pair'], '+.2f')
@@ -710,6 +710,7 @@ def rule():
             wins += g3(pc, co) - g3(mp, co) > 0.005                             # a gain that prints above +0.0
         put(f'{pre}.wins', wins, 'd'); put(f'{pre}.n', len(corrs), 'd')
     put('rl.h.cbar.gate.diff', base['cbar']['episodic']['pair_gated'] - base['cbar']['episodic']['tok+place_b6'], '+.2f')   # what the gate adds to the block-6 main path on C-bar
+    put('rl.pick.cbar_t7.theta65', R['picks']['cbar_t7']['trunk_entropy_quantile']['0.65'])   # the C-bar quantile with block 7 as the main block
     put('rl.ss.inc.theta65', R['picks']['inc']['trunk_entropy_quantile']['0.65']); put('rl.ss.cbar.theta65', R['picks']['cbar_t6']['trunk_entropy_quantile']['0.65'])
     # the picks on the design images
     for key, pk in R['picks'].items():

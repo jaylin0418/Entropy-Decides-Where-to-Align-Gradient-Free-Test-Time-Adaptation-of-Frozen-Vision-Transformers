@@ -141,7 +141,7 @@ def early_exit():
                      '_run': 'run_forward_only.py --model vits --arms tok+place_b6 neo pair_gated exit_b9_gated exit_b5b9_gated (design) and pair_gated exit_b9_gated exit_b5b9_gated (heldout3, scored once), sites and threshold from ViT-B/16, 2026-11-10'},
             'streams': {**pick(load('streams_heldout4_vitb_exit'), ('table',)),
                         '_run': 'run_streams.py --split heldout4 --arms neo pair_gated exit_b5b9_gated --streams cont5 cleanret --tag _exit (EMA statistics, gate), scored once, 2026-11-10'},
-            'site_choice': {k: pick(load(f'site_choice_design_vitb{sfx}'), ('pair', 'oracle_per_cell', 'oracle_gain', 'per_cell_entropy_choice', 'per_cell_entropy_choice_gain', 'chosen_arm_counts', 'per_image_mixtures', 'fixed_mean', 'controls', 'second_opinions', 'label_free')) for k, sfx in (('inc', ''), ('cbar', '_cbar'))},
+            'site_choice': {k: pick(load(f'site_choice_design_vitb{sfx}'), ('pair', 'oracle_per_cell', 'oracle_gain', 'per_cell_entropy_choice', 'per_cell_entropy_choice_gain', 'chosen_arm_counts', 'per_image_mixtures', 'fixed_mean', 'controls', 'second_opinions', 'label_free', 'k_warmup')) for k, sfx in (('inc', ''), ('cbar', '_cbar'))},
             '_run': 'run_forward_only.py --arms exit_b9 exit_b5b9 exit_b5b9_gated pair_gated (design, tag _exit / _cbar_exit) and --arms neo tok place_b6 '
                     'tok+place_b6 tok+place_b6+headcov pair_gated exit_b9_gated exit_b5b9_gated --split heldout4 (scored once), 2026-11-10; the pixel-plus-one-block '
                     'design runs tok+place_b1..b12 (tag _select / _cbar_select, 2026-11-09/10); time_batches.py --tag _exit'}

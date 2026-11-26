@@ -1,6 +1,6 @@
 # Pre-registration — dynamic use of the two sites: the block-6 branch mixture and the warm-up gate (ViT-B/16)
 
-> Table, figure and section numbers in this plan are those of the report draft at the time it was declared. The plan is kept as declared.
+> Table, figure and section numbers in this plan are those of the report draft at the time it was declared. The plan is kept as declared, and outputs it names that the report does not use are not in this repository.
 
 Declared 2026-11-09 21:50 MST (commit 01bdedd; the draft said 22:10, corrected to the commit time), before any held-out logit was read by the rules below. Everything is frozen; the held-out
 slices are scored once, from the per-image logits that the earlier held-out runs saved (no new forward pass, no re-run).

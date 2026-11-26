@@ -10659,7 +10659,8 @@
      "routed_share_at_theta": 0.3521166666666667,
      "second_opinion_spearman_confidence_gain": 0.5226860254187992,
      "second_opinion_spearman_disagreement_gain": -0.0957295441351532
-    }
+    },
+    "k_warmup": 3
    },
    "cbar": {
     "pair": 68.72749999999999,
@@ -11082,7 +11083,8 @@
      "routed_share_at_theta": 0.32967499999999994,
      "second_opinion_spearman_confidence_gain": 0.6767425095713705,
      "second_opinion_spearman_disagreement_gain": -0.024827673435236935
-    }
+    },
+    "k_warmup": 3
    }
   },
   "_run": "run_forward_only.py --arms exit_b9 exit_b5b9 exit_b5b9_gated pair_gated (design, tag _exit / _cbar_exit) and --arms neo tok place_b6 tok+place_b6 tok+place_b6+headcov pair_gated exit_b9_gated exit_b5b9_gated --split heldout4 (scored once), 2026-11-10; the pixel-plus-one-block design runs tok+place_b1..b12 (tag _select / _cbar_select, 2026-11-09/10); time_batches.py --tag _exit"

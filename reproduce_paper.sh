@@ -11,8 +11,8 @@
 # two-level (between-image / within-image) alignment and the decomposition of the token statistics on the design cells, and
 # about 3.6 GPU-hours for the SAR runs with the main-path arms (E14 dev, E27 heldout3), 35 minutes for the two ImageNet-C-bar runs
 # (E28 E29, mostly image decoding), 10 minutes for the main-path timing run (C2) and 3.3 GPU-hours for the two further held-out
-# slices (E30 E31 forward-only 46 minutes each, E32 E33 ETA 53 minutes each), and for the cascade and its calibration about 5.5 GPU-hours
-# (E34 88 minutes, E35 107 minutes, E36 44 minutes, E37 26 minutes, E38 65 minutes, E39 42 minutes, E40 to E43 40 minutes, C3 C4 20 minutes, E44 to E47 about 2 hours).
+# slices (E30 E31 forward-only 46 minutes each, E32 E33 ETA 53 minutes each), and several more GPU-hours for the cascade and its
+# calibration (E34 to E39, E44 to E80), whose per-step times are in their run records.
 # Steps [S] [E] [T] [C] [F] need a GPU unless marked CPU; [R] and [A] are CPU only; [P] builds the report. Step labels are stable
 # (gaps are steps of the earlier studies that the report no longer uses); results/number_inventory.csv names the steps behind every number.
 set -euo pipefail
@@ -61,13 +61,13 @@ python scripts/episodic/run_forward_only.py --model vits --split heldout3 --arms
 python scripts/episodic/run_gradient_host.py --method eta --model vits --split heldout3 --arms $TWOETA --stats $SS $D       # E23
 python scripts/episodic/run_gradient_host.py --method sar --split heldout3 --arms sar tok+sar sar+place_b6 tok+sar+place_b6 --stats $SB $D  # E27 (SAR with the two sites, heldout3)
 CBARCELLS=$(python -c "from tokalign import data; print(' '.join(data.CBAR_CELLS))"); DBAR="--imagenet-val $IMAGENET_VAL --imagenet-c $IMAGENET_C_BAR --cache-dir cache --out-dir runs"
-python scripts/episodic/run_forward_only.py --split design   --arms $FWD4 --cells clean $CBARCELLS --stats $SB --tag _cbar $DBAR   # E28 (ImageNet-C-bar, ten corruptions never seen)
+python scripts/episodic/run_forward_only.py --split design   --arms $FWD4 --cells clean $CBARCELLS --stats $SB --tag _cbar $DBAR   # E28 (ImageNet-C-bar, ten other corruptions)
 python scripts/episodic/run_forward_only.py --split heldout3 --arms $FWD4 --cells clean $CBARCELLS --stats $SB --tag _cbar $DBAR   # E29
 for sl in heldout heldout2; do                                                                                                  # E30 E31 (forward-only) E32 E33 (ETA): the heldout3 arms on the two other held-out slices
   python scripts/episodic/run_forward_only.py --split $sl --arms $TWO --stats $SB --tag _two_site $D
   python scripts/episodic/run_gradient_host.py --method eta --split $sl --arms $TWOETA --stats $SB --tag _two_site $D
 done
-# v2: the pixel site plus one block for every block (design), the early-exit arms (design), the pre-registered heldout4 test
+# the cascade study: the pixel site plus one block for every block (design), the early-exit arms (design), the pre-registered heldout4 test
 PXB="tok+place_b1 tok+place_b2 tok+place_b3 tok+place_b4 tok+place_b5 tok+place_b7 tok+place_b8 tok+place_b9 tok+place_b10 tok+place_b11 tok+place_b12"
 PB="place_b1 place_b2 place_b3 place_b4 place_b5 place_b7 place_b8 place_b9 place_b10 place_b11 place_b12"
 EXIT="exit_b9 exit_b5b9 exit_b5b9_gated pair_gated"
@@ -206,6 +206,17 @@ python scripts/analysis/site_choice.py --logits runs/logits --base forward_only_
 python scripts/analysis/site_choice.py --logits runs/logits --base forward_only_design_vitb_cbar --blocks forward_only_design_vitb_cbar_select $V --cells cbar --trunk 7 --out $O/site_choice_design_vitb_cbar_t7.json  # A8 (the rule's own trunk on ImageNet-C-bar)
 python scripts/analysis/rule_sample_size.py --logits runs/logits --base forward_only_design_vitb_two_site --blocks forward_only_design_vitb_select $V --cells inc --out $O/rule_sample_size_design_vitb.json        # A9 (how many unlabeled images the rule needs)
 python scripts/analysis/rule_sample_size.py --logits runs/logits --base forward_only_design_vitb_cbar --blocks forward_only_design_vitb_cbar_select $V --cells cbar --out $O/rule_sample_size_design_vitb_cbar.json  # A10
+python - <<'PY'   # A16 (CPU): the blocks E52 to E82 run (6 / 4, 11 and 7 / 5, 11, the 320-image 5 / 3, 7 and 7 / 5, 9, the 192-image 7 / 5, 8) are the calibration's outputs
+import json
+O = 'results/scores'; b = lambda a: int(a[4:])
+def full(f):
+    lf = json.load(open(f'{O}/{f}.json'))['label_free']; return (b(lf['trunk_pick_by_entropy']), *sorted(b(x) for x in lf['second_opinion_pick_pair'].split('|')))
+def pooled(f, n):
+    d = json.load(open(f'{O}/{f}.json'))['pooled_first_n_per_cell'][n]; return tuple(b(d[k]) for k in ('trunk', 'shallower', 'deeper'))
+assert full('site_choice_design_vitb') == (6, 4, 11) and full('site_choice_design_vitb_cbar_t7') == (7, 5, 11)
+assert pooled('rule_sample_size_design_vitb', '320') == (5, 3, 7) and pooled('rule_sample_size_design_vitb_cbar', '320') == (7, 5, 9)
+assert pooled('rule_sample_size_design_vitb_cbar', '192') == (7, 5, 8)
+PY
 python scripts/episodic/score_gradient_host.py --runs runs/eta_design_vitb_sweep.json --stats $SB $V --out $O/eta_design_vitb_sweep.json  # R25
 python scripts/analysis/score_drift_by_depth.py --runs runs/drift_by_depth_design_vitb.json --out $O/drift_by_depth_design_vitb.json  # R26
 python scripts/analysis/site_selection.py --two-site $O/forward_only_design_vitb_two_site.json --sweep $O/forward_only_design_vitb_sweep.json \

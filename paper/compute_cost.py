@@ -1,5 +1,5 @@
 """Analytic compute per batch of every timed method, in units of one ViT-B/16 forward pass (17.56 GMACs per image, 196 patch
-tokens of d = 768), shared by paper/make_numbers.py (the compute column of Table S6) and paper/make_figures.py (Figure S7).
+tokens of d = 768), shared by paper/make_numbers.py (the compute column of Table S6; the gate's DCT projection is not counted) and paper/make_figures.py (Figure S7).
 Convention: a map costs one d x d multiply per token (0.66 % of a forward pass), the extra branches run only on the unsure share
 u of the images (the branch after a block a1 below the main block b re-runs blocks a1+1..12, the branch after a block a2 above it re-runs blocks b+1..12,
 each with its own map), a backward pass counts as two forward passes (ETA: one forward and one backward, SAR: two of each),

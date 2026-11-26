@@ -8,9 +8,9 @@ FROZEN_ARMS_CBAR: rule_t6_b4b11_gated rule_t7_b5b11_gated tok+place_b7
 
 ## The question
 
-The second-opinion stack of the report uses blocks 5 and 9, chosen from labelled design images under a compute budget
+The second-opinion stack of the report uses blocks 5 and 9, chosen from labeled design images under a compute budget
 (`docs/heldout_test_plan_exit.md`). This test asks whether the same stack still gains when every block is chosen by an
-unlabeled signal, the prediction entropy, with no labels and no search over labelled gains:
+unlabeled signal, the prediction entropy, with no labels and no search over labeled gains:
 
 1. **Trunk.** Over the arms "pixel map + the map after block k" (k = 1..12), the trunk is the block whose arm has the lowest
    mean prediction entropy on unlabeled images (`site_choice.py`, `label_free.trunk_pick_by_entropy`).
@@ -25,7 +25,7 @@ Arms are named `rule_t<T>_b<A>b<B>_gated` (trunk block T, second opinions after 
 
 ## What the rule picked on the design images (CPU, saved logits; no held-out image used)
 
-| design images | trunk (rule 1) | earlier, later (rule 3) | routed-mixture gain over the pair of that trunk | best labelled pair |
+| design images | trunk (rule 1) | earlier, later (rule 3) | routed-mixture gain over the pair of that trunk | best labeled pair |
 |---|---|---|---|---|
 | ImageNet-C, ViT-B/16 (`site_choice_design_vitb.json`) | block 6 (= the most accurate) | 4, 11 | +1.21 | 3+9: +1.30 |
 | ImageNet-C-bar, ViT-B/16, own trunk (`site_choice_design_vitb_cbar_t7.json`) | block 7 (= the most accurate) | 5, 11 | +1.09 over the block-7 pair (69.48) | 4+10: +1.29 |
@@ -125,13 +125,13 @@ calibrated stack (simulation +1.21 / implemented design / held-out +1.36).
 **Verdict: PASS** (all five claims hold).
 
 Reported either way, as declared: the ImageNet-C-bar own calibration `rule_t7_b5b11_gated` 70.40 (+1.41 over the block-6 pair,
-+0.79 over `tok+place_b7` at 69.61); every rule arm beats the labelled-search stack `exit_b5b9_gated` of the same slice
++0.79 over `tok+place_b7` at 69.61); every rule arm beats the labeled-search stack `exit_b5b9_gated` of the same slice
 (ImageNet-C 68.03, ImageNet-C-bar 70.13, ViT-S/16 61.85) by +0.32, +0.10 / +0.27 and +0.38. Addendum 1 (ablation,
 heldout4): earlier only +0.71 (ImageNet-C) / +0.60 (ImageNet-C-bar), later only +0.80 / +1.02, both +1.36 / +1.24;
 ViT-S/16 earlier only +1.30, later only +0.61, both +1.67. Addendum 2: R4 and R5 above; the small-sample stacks route 36 % and
 26 % of the images. The ViT-S/16 sweep picked trunk 6 (the most accurate block is 5, 61.05 vs 60.86) with Spearman +0.94
 between the mean entropy and the accuracy of the pixel-plus-block versions, and the second opinions 4 and 11 (simulated +1.67
-against +1.79 for the best labelled pair, 4 and 9). Addenda 3 and 4 (timing, streams, the other slices, the random-routing
+against +1.79 for the best labeled pair, 4 and 9). Addenda 3 and 4 (timing, streams, the other slices, the random-routing
 control, the design split) are appended below as their runs finish.
 
 **Addendum 3, outcome (2026-11-11 02:53 MST).** Timing (design timing cells): NEO 273 ms per batch, the pair 285 (1.04×),
