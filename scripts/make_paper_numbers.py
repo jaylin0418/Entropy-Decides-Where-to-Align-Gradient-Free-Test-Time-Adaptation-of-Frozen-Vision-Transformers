@@ -228,7 +228,7 @@ def models_datasets():
             pair['second_opinions'] = pick(pk, ('second_opinion_pick_shallower', 'second_opinion_pick_deeper', 'second_opinion_pick_pair_gain', 'second_opinion_best', 'second_opinion_best_gain'))
             for k in ('held', 'eta'):
                 if (SCORES / f"{names[k]}.json").exists():
-                    f = load(names[k]); pair[k] = {'episodic': f['mean_30_cells'], 'clean': f['clean'], 'per_cell': f['per_cell'], 'routed': f.get('routed_fraction_mean', {}), 'n_cells': f['n_cells']}
+                    f = load(names[k]); pair[k] = {'episodic': f['mean_30_cells'], 'clean': f['clean'], 'per_cell': f['per_cell'], 'routed': f.get('routed_fraction_mean', {}), 'routed_per_cell': f.get('routed_fraction', {}), 'n_cells': f['n_cells']}
             out[f'{model}_{ds}'] = pair
     # ETA with the calibrated stack inside (addendum 3) and ETA on ImageNet-C-bar for ViT-B/16 (addendum 4), on the held-out cells
     # of each pair's row in the across-models table (ViT-B/16 and ViT-S/16 on ImageNet-C: heldout3, their ETA comparison's split)

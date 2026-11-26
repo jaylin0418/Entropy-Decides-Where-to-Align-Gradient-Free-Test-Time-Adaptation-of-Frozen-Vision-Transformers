@@ -1,4 +1,4 @@
-"""Frozen timm ViTs with the official augreg (ImageNet-21k -> ImageNet-1k) weights, plus a hook that records the head
+"""Frozen timm ViTs (the official augreg ImageNet-21k -> ImageNet-1k weights, or DeiT), plus a hook that records the head
 input (the CLS token after the final LayerNorm). Tested with timm 0.4.12, whose default weights for these names are the
 augreg checkpoints used in the paper; with timm >= 0.9 the explicit ``.augreg_in21k_ft_in1k`` tag is used."""
 from __future__ import annotations

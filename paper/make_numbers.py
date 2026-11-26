@@ -72,7 +72,7 @@ def build():
     put('u.peaviews.gain.abs', gain['peaviews'])
     put('u.sneo.gain.abs', gain['sneo']); put('u.seta.gain.abs', gain['seta'])
     noviews = ('neo', 'eta', 'sar', 'foa', 'pea')
-    put('u.range.lo', min(gain[h] for h in noviews), '+.1f'); put('u.range.hi', max(gain[h] for h in noviews), '+.1f')
+    put('u.range.lo', min(gain[h] for h in noviews), '+.2f'); put('u.range.hi', max(gain[h] for h in noviews), '+.2f')
     put('u.cleanmax', max(abs(c) for c in cdelta.values()))
 
     # ---------------- cost: wall-clock of NEO and ETA (design timing cells) and the MACs of one ViT-B/16 forward pass
@@ -151,7 +151,7 @@ def two_site():
         g = T['sweep_vitb'][f'{host}_gain']
         for s in SITES:
             put(f'ts.sw.{host}.{s}', g[s], '+.1f')
-        early, mid = [g[f'b{k}'] for k in (1, 2, 3)], [g[f'b{k}'] for k in (5, 6, 7, 8)]
+        early, mid = [g[f'b{k}'] for k in (1, 2, 3)], [g[f'b{k}'] for k in (4, 5, 6, 7, 8)]
         put(f'ts.sw.{host}.early.lo', min(early), '.1f'); put(f'ts.sw.{host}.early.hi', max(early), '.1f')
         put(f'ts.sw.{host}.mid.lo', min(mid), '+.1f'); put(f'ts.sw.{host}.mid.hi', max(mid), '+.1f')
         best = max((s for s in SITES if s != 'pixel'), key=g.get)
@@ -208,7 +208,7 @@ def two_site():
         for k, a in HA.items():
             put(f'ts.{b}.ep.{k}', ep[a]); put(f'ts.{b}.cl.{k}', cl[a])
         for k in ('tok', 'b6', 'twosite', 'stack', 'stack2'):
-            put(f'ts.{b}.gain.{k}', ep[HA[k]] - ep['neo'], '+.1f')
+            put(f'ts.{b}.gain.{k}', ep[HA[k]] - ep['neo'], '+.2f')
         put(f'ts.{b}.gain.stack2.over.stack', ep['tok+place_b6+headcov'] - ep['tok+headcov'], '.1f')
         put(f'ts.{b}.gain.twosite.over.tok', ep['tok+place_b6'] - ep['tok'], '.1f')
         put(f'ts.{b}.twosite.x.tok', (ep['tok+place_b6'] - ep['neo']) / (ep['tok'] - ep['neo']), '.1f')
@@ -842,9 +842,10 @@ def across():
     path's alignment inside. Prefix ax.<pair>."""
     R, E, CA, TS = v('rule'), v('exit'), v('ca'), v('two_site')
     ES = CA.get('etastack', {})
+    gains = {}                                                        # the branch gain (cascade - main path) of every row
     def row(key, trunk, lo, hi, rho, neo, base, stack, eta=None, etaours=None, clean=None, eta_clean=None):
         put(f'ax.{key}.pick', f'{trunk}/{lo},{hi}', 's'); put(f'ax.{key}.rho', rho, '+.2f')
-        put(f'ax.{key}.base', base - neo, '+.2f'); put(f'ax.{key}.stack', stack - neo, '+.2f'); put(f'ax.{key}.stack.vsbase', stack - base, '+.2f')
+        put(f'ax.{key}.base', base - neo, '+.2f'); put(f'ax.{key}.stack', stack - neo, '+.2f'); put(f'ax.{key}.stack.vsbase', stack - base, '+.2f'); gains[key] = stack - base
         put(f'ax.{key}.eta', eta - neo if eta is not None else float('nan'), '+.2f') if eta is not None else put(f'ax.{key}.eta', '--', 's')
         put(f'ax.{key}.etaours', etaours - neo, '+.2f') if etaours is not None else put(f'ax.{key}.etaours', '--', 's')
         if clean is not None:
@@ -893,6 +894,23 @@ def across():
         row(key, T, cfg['shallower'], cfg['deeper'], sig['trunk_spearman_confidence_accuracy'], h['neo'], h[f'tok+place_b{T}'], h[cfg['arm']],
             eta['eta+neo'] if eta else None, eta[f'tok+eta+place_b{T}+neo'] if eta else None, p['held']['clean'][cfg['arm']] - p['held']['clean']['neo'],
             eta_clean=p['eta']['clean']['eta+neo'] if eta else None)
+    # ImageNet-C-bar: the gated cascade against the ungated main path of Table 3. A cell where no image is routed is one where the
+    # gate never opens (the cascade is then NEO); the branch gain without those cells, and the largest loss on them (prefix gs.)
+    gopen, gloss = {}, []
+    def gate_split(key, casc, main, routed):
+        cells = [c for c in casc if c != 'clean']; shut = [c for c in cells if routed[c] == 0]
+        gopen[key] = float(np.mean([casc[c] - main[c] for c in cells if c not in shut])); gloss.extend(main[c] - casc[c] for c in shut)
+        put(f'gs.{key}.gain.open', gopen[key], '+.2f'); put(f'gs.{key}.shut.n', len(shut), 'd')
+    r4, e4 = R['held4']['cbar']['per_cell'], E['held4']['cbar']['per_cell']
+    gate_split('vitb_cbar', r4['rule_t7_b5b11_gated'], r4['tok+place_b7'], R['held4']['cbar']['routed_per_cell']['rule_t7_b5b11_gated'])
+    for key in ('vits_cbar', 'deitb_cbar', 'deits_cbar'):
+        p = CA[key]; pc = p['held']['per_cell']; T = p['calib']['trunk']
+        gate_split(key, pc[p['calib']['arm']], pc[f'tok+place_b{T}'], p['held']['routed_per_cell'][p['calib']['arm']])
+    put('gs.maxloss', max(gloss), '.2f')
+    for sev in (3, 5):                                              # what the gate costs the block-6 main path of Table 1 on caustic refraction
+        c = f'caustic_refraction-{sev}'; put(f'gs.vitb_b6.caustic{sev}', e4['tok+place_b6'][c] - e4['pair_gated'][c], '.1f')
+    adj = [gains['deitb_inc'], gopen['vits_cbar'], gopen['deitb_cbar']]; non = [gains['vitb_inc'], gains['vits_inc'], gopen['vitb_cbar']]   # Table 3's six corruption rows, gate-open cells
+    put('gs.adj.lo', min(adj), '+.2f'); put('gs.adj.hi', max(adj), '+.2f'); put('gs.non.lo', min(non), '+.2f'); put('gs.non.hi', max(non), '+.2f')
 
 
 def render(numbers):

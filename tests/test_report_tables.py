@@ -24,7 +24,7 @@ def value(cell, num):
     """The number in a table cell (None for text, a share with \\%, or a dash) and whether the cell is bold."""
     bold = '\\textbf{' in cell or '\\underline{' in cell
     c = re.sub(r'\\pn\{([^}]+)\}', lambda m: num[m.group(1)], cell)
-    c = c.replace('\\textbf{', '').replace('\\underline{', '').replace('\\ensuremath{-}', '-').replace('$-$', '-').replace('}', '').replace('$', '').strip()
+    c = c.replace('\\textbf{', '').replace('\\boldmath', '').replace('\\underline{', '').replace('\\ensuremath{-}', '-').replace('$-$', '-').replace('}', '').replace('$', '').strip()
     if '\\%' in cell or c in ('', '--'):
         return None, bold
     return (float(c) if NUM.match(c) else None), bold

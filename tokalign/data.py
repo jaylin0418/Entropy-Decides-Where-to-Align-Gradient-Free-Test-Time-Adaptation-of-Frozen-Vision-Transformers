@@ -13,11 +13,11 @@ Splits: a fixed permutation of the 50,000 validation indices (seed 20261019).
   heldout2 perm[38000:40000]  ViT-S/16 pre-registered held-out test
   heldout3 perm[40000:42000]  pre-registered held-out test of the main path (both backbones); never
                               decoded or passed through a model before docs/heldout_test_plan_two_site.md
-  heldout4 perm[42000:44000]  reserved for the pre-registered test of the adaptive-site method (v2); never decoded or passed
+  heldout4 perm[42000:44000]  reserved for the pre-registered test of the cascade; never decoded or passed
                               through a model before its plan is committed
 Further index sets used by single experiments:
-  source_extended  perm[46000:50000]  the source images plus 1,000 more: patch statistics of the filter study and the
-                                      gate calibration (4,000 clean images)
+  source_extended  perm[46000:50000]  the source images plus 1,000 more: patch statistics of the filter study
+                                      (4,000 clean images)
   design_extended  perm[2000:4000] then perm[46000:50000]  6,000 images per cell: FOA on 6,000-image streams and the
                                       head-input dumps of the source-eigenbasis study
   pea_source       perm[10000:30000]  20,000 clean images for PEA's own source statistics (never evaluated)

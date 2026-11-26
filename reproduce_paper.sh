@@ -88,6 +88,23 @@ python scripts/episodic/run_forward_only.py --split heldout4 --arms $CTL --stats
 python scripts/episodic/run_forward_only.py --split heldout4 --arms $CTL --cells clean $CBARCELLS --stats $SB --tag _cbar_exitctl $DBAR  # E49
 python scripts/episodic/run_forward_only.py --model vits --split design --arms tok+place_b6 neo pair_gated exit_b9_gated exit_b5b9_gated --stats $SS --tag _exit $D  # E50 (ViT-S/16)
 python scripts/episodic/run_forward_only.py --model vits --split heldout3 --arms pair_gated exit_b9_gated exit_b5b9_gated --stats $SS --tag _exit $D        # E51
+# the calibration of the headline ViT-B/16 blocks (CPU, from the dev logits above), checked before the held-out runs that use them
+python scripts/analysis/site_choice.py --logits runs/logits --base forward_only_design_vitb_two_site --blocks forward_only_design_vitb_select $V --cells inc --out $O/site_choice_design_vitb.json        # A6
+python scripts/analysis/site_choice.py --logits runs/logits --base forward_only_design_vitb_cbar --blocks forward_only_design_vitb_cbar_select $V --cells cbar --out $O/site_choice_design_vitb_cbar.json  # A7
+python scripts/analysis/site_choice.py --logits runs/logits --base forward_only_design_vitb_cbar --blocks forward_only_design_vitb_cbar_select $V --cells cbar --trunk 7 --out $O/site_choice_design_vitb_cbar_t7.json  # A8 (the rule's own trunk on ImageNet-C-bar)
+python scripts/analysis/rule_sample_size.py --logits runs/logits --base forward_only_design_vitb_two_site --blocks forward_only_design_vitb_select $V --cells inc --out $O/rule_sample_size_design_vitb.json        # A9 (how many unlabeled images the rule needs)
+python scripts/analysis/rule_sample_size.py --logits runs/logits --base forward_only_design_vitb_cbar --blocks forward_only_design_vitb_cbar_select $V --cells cbar --out $O/rule_sample_size_design_vitb_cbar.json  # A10
+python - <<'PY'   # A16 (CPU): the blocks E52 to E82 run (6 / 4, 11 and 7 / 5, 11, the 320-image 5 / 3, 7 and 7 / 5, 9, the 192-image 7 / 5, 8) are the calibration's outputs
+import json
+O = 'results/scores'; b = lambda a: int(a[4:])
+def full(f):
+    lf = json.load(open(f'{O}/{f}.json'))['label_free']; return (b(lf['trunk_pick_by_entropy']), *sorted(b(x) for x in lf['second_opinion_pick_pair'].split('|')))
+def pooled(f, n):
+    d = json.load(open(f'{O}/{f}.json'))['pooled_first_n_per_cell'][n]; return tuple(b(d[k]) for k in ('trunk', 'shallower', 'deeper'))
+assert full('site_choice_design_vitb') == (6, 4, 11) and full('site_choice_design_vitb_cbar_t7') == (7, 5, 11)
+assert pooled('rule_sample_size_design_vitb', '320') == (5, 3, 7) and pooled('rule_sample_size_design_vitb_cbar', '320') == (7, 5, 9)
+assert pooled('rule_sample_size_design_vitb_cbar', '192') == (7, 5, 8)
+PY
 # the rule-chosen (calibrated) second-opinion stack, docs/heldout_test_plan_rule.md: arms named rule_t<T>_b<A>b<B>_gated
 python scripts/episodic/run_forward_only.py --split heldout4 --arms rule_t6_b4b11_gated --stats $SB --tag _rule $D                                        # E52 (R1, scored once)
 python scripts/episodic/run_forward_only.py --split heldout4 --arms rule_t6_b4b11_gated rule_t7_b5b11_gated tok+place_b7 --cells clean $CBARCELLS --stats $SB --tag _cbar_rule --imagenet-val $IMAGENET_VAL --imagenet-c $IMAGENET_C_BAR --cache-dir cache --out-dir runs  # E53 (R2)
@@ -202,22 +219,6 @@ python scripts/episodic/score_forward_only.py --runs runs/forward_only_heldout4_
 python scripts/episodic/score_forward_only.py --runs runs/forward_only_design_vits_exit.json $V --out $O/forward_only_design_vits_exit.json
 python scripts/episodic/score_forward_only.py --runs runs/forward_only_heldout3_vits_exit.json $V --neo-from $O/forward_only_heldout3_vits.json --out $O/forward_only_heldout3_vits_exit.json
 # analyses from the saved logits (CPU): which block per cell or per image, the calibration, the sample-size study
-python scripts/analysis/site_choice.py --logits runs/logits --base forward_only_design_vitb_two_site --blocks forward_only_design_vitb_select $V --cells inc --out $O/site_choice_design_vitb.json        # A6
-python scripts/analysis/site_choice.py --logits runs/logits --base forward_only_design_vitb_cbar --blocks forward_only_design_vitb_cbar_select $V --cells cbar --out $O/site_choice_design_vitb_cbar.json  # A7
-python scripts/analysis/site_choice.py --logits runs/logits --base forward_only_design_vitb_cbar --blocks forward_only_design_vitb_cbar_select $V --cells cbar --trunk 7 --out $O/site_choice_design_vitb_cbar_t7.json  # A8 (the rule's own trunk on ImageNet-C-bar)
-python scripts/analysis/rule_sample_size.py --logits runs/logits --base forward_only_design_vitb_two_site --blocks forward_only_design_vitb_select $V --cells inc --out $O/rule_sample_size_design_vitb.json        # A9 (how many unlabeled images the rule needs)
-python scripts/analysis/rule_sample_size.py --logits runs/logits --base forward_only_design_vitb_cbar --blocks forward_only_design_vitb_cbar_select $V --cells cbar --out $O/rule_sample_size_design_vitb_cbar.json  # A10
-python - <<'PY'   # A16 (CPU): the blocks E52 to E82 run (6 / 4, 11 and 7 / 5, 11, the 320-image 5 / 3, 7 and 7 / 5, 9, the 192-image 7 / 5, 8) are the calibration's outputs
-import json
-O = 'results/scores'; b = lambda a: int(a[4:])
-def full(f):
-    lf = json.load(open(f'{O}/{f}.json'))['label_free']; return (b(lf['trunk_pick_by_entropy']), *sorted(b(x) for x in lf['second_opinion_pick_pair'].split('|')))
-def pooled(f, n):
-    d = json.load(open(f'{O}/{f}.json'))['pooled_first_n_per_cell'][n]; return tuple(b(d[k]) for k in ('trunk', 'shallower', 'deeper'))
-assert full('site_choice_design_vitb') == (6, 4, 11) and full('site_choice_design_vitb_cbar_t7') == (7, 5, 11)
-assert pooled('rule_sample_size_design_vitb', '320') == (5, 3, 7) and pooled('rule_sample_size_design_vitb_cbar', '320') == (7, 5, 9)
-assert pooled('rule_sample_size_design_vitb_cbar', '192') == (7, 5, 8)
-PY
 python scripts/episodic/score_gradient_host.py --runs runs/eta_design_vitb_sweep.json --stats $SB $V --out $O/eta_design_vitb_sweep.json  # R25
 python scripts/analysis/score_drift_by_depth.py --runs runs/drift_by_depth_design_vitb.json --out $O/drift_by_depth_design_vitb.json  # R26
 python scripts/analysis/site_selection.py --two-site $O/forward_only_design_vitb_two_site.json --sweep $O/forward_only_design_vitb_sweep.json \

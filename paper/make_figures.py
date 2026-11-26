@@ -308,7 +308,7 @@ for b, col, mk, lab in (('inc', C['accent'], 'o', 'ImageNet-C'), ('cbar', C['hos
 b1.set_xscale('log'); b1.set_xticks([64, 128, 192, 320, 640, 1280, 2000]); b1.set_xticklabels(['64', '128', '192', '320', '640', '1280', '2000']); b1.minorticks_off()
 b1.set_xlabel('calibration images per cell, one choice per benchmark'); b1.set_ylabel('gain over the main path (pt)'); b1.set_title('(a) one calibration for a whole benchmark', loc='left')
 b2.set_xscale('log'); b2.set_xticks([64, 128, 192, 320, 640]); b2.set_xticklabels(['64', '128', '192', '320', '640']); b2.minorticks_off()
-b2.set_xlabel('calibration images per shift (the first batches of 64)'); b2.set_title('(b) one calibration per shift', loc='left')
+b2.set_xlabel('calibration images per cell (the first batches of 64)'); b2.set_title('(b) one calibration per cell', loc='left')
 for b in (b1, b2):
     b.grid(True, axis='y', color=C['grid'], lw=0.5); b.set_axisbelow(True)
 ylo, yhi = b1.get_ylim(); b1.set_ylim(ylo, yhi + 0.3 * (yhi - ylo))   # room above the curves for the legend

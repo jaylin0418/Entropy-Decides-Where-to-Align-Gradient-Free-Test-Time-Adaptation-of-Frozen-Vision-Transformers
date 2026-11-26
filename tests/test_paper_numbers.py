@@ -168,7 +168,7 @@ def test_extra_timing_run_has_the_two_site_arms():
 
 
 def test_sar_design_run_has_the_two_site_arms():
-    """The SAR design run with the two-site arms (report Table S9): twelve arms on 30 cells, the two sites at least 0.3 points
+    """The SAR design run with the two-site arms (the SAR rows of the report, Section E.4): twelve arms on 30 cells, the two sites at least 0.3 points
     above TokAlign+SAR and within 0.5 points of SAR on the clean cell (the design bar of docs/heldout_test_plan_extra.md)."""
     P = json.loads((ROOT / 'results' / 'paper_numbers.json').read_text())
     pc, d = P['extra']['sar_design']['per_cell'], P['design_vitb']
@@ -179,7 +179,7 @@ def test_sar_design_run_has_the_two_site_arms():
 
 
 def test_sar_heldout_run_has_the_two_site_arms():
-    """The heldout3 SAR run (report Table S9, lower block): the same twelve arms on 30 cells, the two sites at least 0.3 points
+    """The heldout3 SAR run (the SAR rows of the report, Section E.4): the same twelve arms on 30 cells, the two sites at least 0.3 points
     above TokAlign+SAR (the margin of docs/heldout_test_plan_extra.md, as for ETA)."""
     H = json.loads((ROOT / 'results' / 'paper_numbers.json').read_text())['extra']['sar_held3']
     assert H['n_cells'] == 30 and len(H['per_cell']) == 12 and set(H['episodic']) == set(H['per_cell'])
@@ -187,7 +187,7 @@ def test_sar_heldout_run_has_the_two_site_arms():
 
 
 def test_imagenet_c_bar_runs_cover_the_ten_corruptions():
-    """ImageNet-C-bar (report Table S10): both splits run the four forward-only arms on the 20 cells of tokalign.data.CBAR_CELLS
+    """ImageNet-C-bar (the ImageNet-C-bar rows of the report): both splits run the four forward-only arms on the 20 cells of tokalign.data.CBAR_CELLS
     plus clean, and the design run meets the bar of docs/heldout_test_plan_extra.md (pair >= NEO + 1.0 and >= best single + 0.3)."""
     from tokalign import data
     CB = json.loads((ROOT / 'results' / 'paper_numbers.json').read_text())['extra']['cbar']
